@@ -1,0 +1,23 @@
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "env": {
+    "OPENAI_API_KEY": {
+      "description": "Your OpenAI API key (starts with sk-)",
+      "required": true
+    },
+    "OPENAI_ASSISTANT_ID": {
+      "description": "Your OpenAI Assistant ID (starts with asst_)",
+      "required": true
+    },
+    "NEXT_PUBLIC_APP_URL": {
+      "description": "Your Vercel deployment URL",
+      "required": true
+    }
+  },
+  "postgres": {
+    "enable": true,
+    "description": "Database for storing widget threads and configuration"
+  }
+}
