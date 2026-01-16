@@ -96,6 +96,17 @@ export default function WidgetPage() {
     initialize();
   }, [visitorId]);
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      const form = e.currentTarget.form;
+      if (form) {
+        const submitEvent = new Event('submit', { bubbles: true, cancelable: true });
+        form.dispatchEvent(submitEvent);
+      }
+    }
+  };
+
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -207,24 +218,27 @@ export default function WidgetPage() {
           padding: '16px',
           display: 'flex',
           alignItems: 'center',
+          justifyContent: 'space-between',
           gap: '12px',
           color: config.accentColor,
         }}
       >
-        {config.logoUrl && (
-          <img
-            src={config.logoUrl}
-            alt="Logo"
-            style={{ width: '40px', height: '40px', borderRadius: '50%' }}
-          />
-        )}
-        <div>
-          <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>
-            AI Assistant
-          </h1>
-          <p style={{ margin: '4px 0 0 0', fontSize: '12px', opacity: 0.9 }}>
-            {config.subtitle}
-          </p>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
+          {config.logoUrl && (
+            <img
+              src={config.logoUrl}
+              alt="Logo"
+              style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }}
+            />
+          )}
+          <div>
+            <h1 style={{ margin: 0, fontSize: '18px', fontWeight: 'bold' }}>
+              AI Assistant
+            </h1>
+            <p style={{ margin: '4px 0 0 0', fontSize: '12px', opacity: 0.9 }}>
+              {config.subtitle}
+            </p>
+          </div>
         </div>
       </div>
 
@@ -319,6 +333,7 @@ export default function WidgetPage() {
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder={!threadId ? 'Initializing...' : 'Type your message...'}
             disabled={loading || !threadId}
             style={{
