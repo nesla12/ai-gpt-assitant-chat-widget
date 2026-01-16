@@ -12,12 +12,9 @@
       "required": true
     },
     "NEXT_PUBLIC_APP_URL": {
-      "description": "Your Vercel deployment URL",
+      "description": "Your Vercel deployment URL (https://your-app.vercel.app)",
       "required": true
     }
-  },
-  "postgres": {
-    "enable": true,
-    "description": "Database for storing widget threads and configuration"
   }
 }
+
