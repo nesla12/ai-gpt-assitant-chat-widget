@@ -74,17 +74,17 @@ export default function ConfiguratorPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800">
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2">Widget Configurator</h1>
-          <p className="text-slate-400">Customize your AI Assistant widget</p>
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2">Widget Configurator</h1>
+          <p className="text-slate-400 text-sm sm:text-base">Customize your AI Assistant widget</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {/* Configuration Panel */}
-          <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
-            <h2 className="text-xl font-semibold text-white mb-6">Configuration</h2>
+          <div className="bg-slate-800 rounded-lg p-4 sm:p-6 border border-slate-700">
+            <h2 className="text-lg sm:text-xl font-semibold text-white mb-6">Configuration</h2>
 
             {/* Logo URL */}
             <div className="mb-5">
@@ -221,10 +221,10 @@ export default function ConfiguratorPage() {
           </div>
 
           {/* Preview Panel */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {/* Live Preview */}
-            <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
-              <h2 className="text-xl font-semibold text-white mb-4">Live Preview</h2>
+            <div className="bg-slate-800 rounded-lg p-4 sm:p-6 border border-slate-700">
+              <h2 className="text-lg sm:text-xl font-semibold text-white mb-4">Live Preview</h2>
               <div className="bg-white rounded-lg overflow-hidden" style={{ height: '500px' }}>
                 <iframe
                   src="/widget?preview=true"
@@ -243,8 +243,8 @@ export default function ConfiguratorPage() {
 
             {/* Embed Code */}
             {showEmbed && (
-              <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
-                <h2 className="text-xl font-semibold text-white mb-4">Embed Code</h2>
+              <div className="bg-slate-800 rounded-lg p-4 sm:p-6 border border-slate-700">
+                <h2 className="text-lg sm:text-xl font-semibold text-white mb-4">Embed Code</h2>
                 <p className="text-sm text-slate-400 mb-3">
                   Copy this code to your website (Systeme.io, etc)
                 </p>

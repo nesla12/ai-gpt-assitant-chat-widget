@@ -13,21 +13,30 @@
   // Get position from window config (if set before script load)
   const position = window.AIWidgetConfig?.position || 'bottom-right';
 
+  // Detect mobile
+  const isMobile = window.innerWidth <= 768;
+
   // Create widget container
   const container = document.createElement('div');
   container.id = 'ai-widget-container';
 
   const isLeftPosition = position === 'bottom-left';
   const positionStyles = isLeftPosition
-    ? 'left: 20px; right: auto;'
-    : 'bottom: 20px; right: 20px;';
+    ? 'left: 12px; right: auto;'
+    : 'bottom: 12px; right: 12px;';
+
+  const width = isMobile ? 'calc(100vw - 24px)' : '380px';
+  const height = isMobile ? 'calc(100vh - 100px)' : '600px';
+  const maxWidth = isMobile ? '100vw' : 'none';
 
   container.style.cssText = `
     position: fixed;
-    bottom: 20px;
+    bottom: 12px;
     ${positionStyles}
-    width: 380px;
-    height: 600px;
+    width: ${width};
+    height: ${height};
+    max-width: ${maxWidth};
+    max-height: calc(100vh - 100px);
     border-radius: 12px;
     box-shadow: 0 5px 40px rgba(0, 0, 0, 0.3);
     z-index: 999999;
