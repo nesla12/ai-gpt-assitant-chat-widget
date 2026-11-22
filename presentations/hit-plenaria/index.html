@@ -294,7 +294,15 @@ Se un'informazione non è nel testo, scrivi "non indicato".
 
 [descrivi il compito: cosa ti serve, per chi, entro quando]`),
  {t:"note",x:"Il prompt che ricevete lo provate subito. Se funziona ==lo salvate==: la prossima volta è già pronto.",s:1}]},
-
+{ch:1,eye:"Formato",title:"Cosa potete chiedere",b:[
+ {t:"lead",x:"Il formato fa parte dell'incarico. Se non lo dite, lo sceglie l'IA."},
+ {t:"cards",cols:4,q:1,s:1,items:[
+  ["Una tabella",`Nella risposta. Poi "Condividi ed esporta", "Esporta in Fogli".`],
+  ["Un documento o un file",`"Esporta in Documenti", oppure un file da scaricare: Word, Excel, PDF, CSV. Un file per prompt.`],
+  ["Slide, pagina web, infografica","Con Canvas. Le slide si esportano in Presentazioni Google o in PDF."],
+  ["Immagine e audio","Immagini direttamente in chat. Da un report o da un documento, un'overview audio da ascoltare."]]},
+ P("Una riga in fondo al prompt",`Rispondi in una tabella: una riga per [requisito], colonne [requisito, obbligatorio sì o no, frase del testo]. Niente testo prima o dopo la tabella.`,{sm:1}),
+ {t:"src",x:"Gemini con account di lavoro, guida di Google letta il 22/11/2026. Le opzioni di esportazione dipendono dalle impostazioni del vostro Workspace."}]},
 {ch:2,lay:"sect",title:"Il ragionamento"},
 {ch:2,eye:"Ragionamento",title:"Veloce o ragionato",b:[
  {t:"lead",x:"Un modello che ragiona, prima di rispondere, scrive per sé un piano: scompone, prova, scarta, controlla. È l'incarico che abbiamo appena scritto, fatto dentro il modello."},
@@ -341,7 +349,15 @@ Poi verifica in una tabella ogni vincolo: rispettato sì o no. Alla fine indica 
   ["Una pagina, non dieci","Più testo mettete, più il modello si distrae."],
   ["Fisso o variabile","Ciò che non cambia va nelle istruzioni o nel notebook, ciò che cambia ogni giorno si collega, non si copia."],
   ["Chat nuova per compito nuovo","Le chat lunghe si riempiono di cose vecchie."]]}]},
-
+{ch:3,eye:"Contesto",title:"Cosa potete caricare",b:[
+ {t:"lead",x:"Non solo testo. Spesso mostrare è più veloce che spiegare."},
+ {t:"cards",cols:4,q:1,s:1,items:[
+  ["Screenshot e foto","Un messaggio di errore, una tabella fotografata, una slide, una lavagna dopo la riunione."],
+  ["Documenti","PDF, Word, Excel, CSV, oppure direttamente da Drive. Fino a 10 file per prompt, 100 MB ciascuno."],
+  ["Audio e video","Si caricano come gli altri file. Video fino a 5 minuti e 2 GB, audio fino a 10 minuti."],
+  ["Cosa non funziona","I video nel vostro Drive e le registrazioni di Meet non si aprono dall'app Gemini. In Gemini Notebook i file video non entrano: da YouTube legge solo la trascrizione."]]},
+ P("Prompt per uno screenshot",`Ecco lo screenshot di [una tabella, un grafico, un messaggio di errore]. Trascrivi i dati in una tabella. Dove non riesci a leggere scrivi "illeggibile", non indovinare.`,{sm:1}),
+ {t:"src",x:"Limiti letti nella guida di Google il 22/11/2026: da provare una volta sul vostro account."}]},
 {ch:3,lay:"demo",eye:"Demo",title:"Il vostro profilo",b:[
  {t:"lead",x:"Gemini vi intervista e scrive le vostre istruzioni personali."},
  P("Prompt",`Aiutami a scrivere le mie istruzioni personali per Gemini. Intervistami una domanda alla volta, al massimo otto domande, su: il mio ruolo, i compiti ricorrenti, con chi scrivo più spesso, lingua e tono, formati che preferisco, cosa non voglio mai nei testi. Usa le mie parole, non inventare nulla. Alla fine dammi: 1) una versione breve, massimo 8 righe, da incollare nelle impostazioni; 2) una versione lunga per un Google Doc "Il mio profilo".`,{sm:1}),
