@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<title>Lavorare meglio con l'IA</title>
+<meta name="robots" content="noindex">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: ogni scena è un foglio del fascicolo. In basso i quattro timbri di ciò che diamo al collaboratore si riempiono capitolo dopo capitolo. L'evidenziatore giallo segna ciò che si può controllare. */
+:root{
+  --bg:#EDF0F3; --sheet:#FFFFFF; --ink:#101B2B; --ink2:#4A5668; --line:#C9D1DB;
+  --mark:#FFDC4D; --mark-ink:#101B2B; --act:#1A49C9; --ok:#0E7A52; --no:#B3261E;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",Consolas,"Courier New",monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0B131F; --sheet:#141F30; --ink:#EAF0F7; --ink2:#A3B0C2; --line:#2B3A4E;
+  --mark:#FFDC4D; --mark-ink:#101B2B; --act:#93AEFF; --ok:#5FD3A2; --no:#FF8F85; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B131F; --sheet:#141F30; --ink:#EAF0F7; --ink2:#A3B0C2; --line:#2B3A4E;
+  --mark:#FFDC4D; --mark-ink:#101B2B; --act:#93AEFF; --ok:#5FD3A2; --no:#FF8F85; color-scheme:dark}
+
+html{font-size:12.5px}
+html.stage{font-size:min(calc(100vw / 96),calc(100vh / 54))}
+html.stage{scroll-snap-type:y proximity}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.3rem;line-height:1.45;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+h1,h2,h3,p,figure,ol,ul,pre{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:.2rem solid var(--act);outline-offset:.2rem}
+mark{background:linear-gradient(var(--mark),var(--mark)) no-repeat 0 0/100% 100%;color:var(--mark-ink);padding:0 .2em;border-radius:.1em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+/* scene */
+.scene{padding:3rem 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:1.6rem;max-width:62rem;margin:0 auto}
+.eye{font-family:var(--mono);font-size:1.05rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);display:flex;gap:1rem;align-items:center}
+.eye .tag{background:var(--mark);color:var(--mark-ink);padding:.15em .6em;font-weight:500}
+h2{font-family:var(--display);font-weight:700;font-size:2.5rem;line-height:1.05;letter-spacing:-.02em;text-wrap:balance;margin-top:.6rem}
+.body{display:flex;flex-direction:column;gap:1.6rem;min-width:0}
+.lead{font-size:1.6rem;line-height:1.35;max-width:46em;text-wrap:pretty}
+.txt{max-width:46em}
+.cards{display:grid;gap:1.8rem 2.6rem;grid-template-columns:1fr}
+.card{min-width:0}
+.card h3{font-family:var(--display);font-weight:700;font-size:1.55rem;line-height:1.15;display:flex;gap:.6rem;align-items:baseline}
+.card h3::before{content:"";flex:none;width:.7rem;height:.7rem;background:var(--act);transform:translateY(-.1rem)}
+.card p{margin-top:.5rem;color:var(--ink);text-wrap:pretty}
+.note{font-family:var(--display);font-weight:500;font-size:1.7rem;line-height:1.25;text-wrap:balance;max-width:40em}
+.src{font-family:var(--mono);font-size:.95rem;color:var(--ink2)}
+.src a{color:inherit}
+.prompt{background:var(--sheet);border:1px solid var(--line);border-radius:.2rem;min-width:0;box-shadow:.5rem .5rem 0 color-mix(in srgb,var(--ink) 8%,transparent)}
+.prompt figcaption{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.6rem .7rem .6rem 1.2rem;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:1rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.prompt pre{font-family:var(--mono);font-size:1.2rem;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;padding:1.1rem 1.2rem 1.3rem}
+.prompt.sm pre{font-size:1.08rem;line-height:1.45}
+.btn{background:transparent;border:1px solid var(--ink);border-radius:.2rem;padding:.35em .9em;font-family:var(--mono);font-size:1rem;letter-spacing:.04em}
+.btn:hover{background:var(--ink);color:var(--bg)}
+.btn.done{background:var(--ok);border-color:var(--ok);color:var(--bg)}
+.pre{font-size:1.25rem;color:var(--ink2)}
+.sol{display:flex;flex-direction:column;gap:1rem;align-items:flex-start}
+.solbody{border-left:.5rem solid var(--mark);padding:.2rem 0 .2rem 1.2rem;font-size:1.15rem;line-height:1.35}
+.solbody b{font-family:var(--display);font-size:1.5rem}
+.solbody table{border-collapse:collapse;margin:.4rem 0;font-family:var(--mono);font-size:1.05rem}
+.solbody td{padding:.15rem 1.4rem .15rem 0}
+
+/* cover, section, pause */
+.cover h1{font-family:var(--display);font-weight:700;font-size:4rem;line-height:.95;letter-spacing:-.03em;text-wrap:balance}
+.cover .by{font-family:var(--mono);font-size:1.1rem;color:var(--ink2)}
+.sect h2{font-size:3.4rem}
+.sect .give{font-family:var(--mono);font-size:1.1rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.legal{font-size:.9rem;color:var(--ink2);max-width:60em}
+
+/* timbri */
+.stamp{display:inline-flex;align-items:center;gap:.5em;border:1px dashed var(--ink2);color:var(--ink2);padding:.3em .8em;font-family:var(--mono);font-size:1rem;letter-spacing:.04em;white-space:nowrap}
+.stamp::before{content:"";width:.6em;height:.6em;border:1px solid currentColor;border-radius:50%}
+.stamp.act{background:var(--mark);color:var(--mark-ink);border:1px solid var(--mark)}
+.stamp.act::before{background:var(--mark-ink)}
+.stamp.done{border:1px solid var(--ink);color:var(--ink)}
+.stamp.done::before{background:var(--ink)}
+.gifts{display:grid;gap:1.4rem;grid-template-columns:1fr}
+.gift{display:flex;flex-direction:column;gap:.6rem;align-items:flex-start}
+.gift .stamp{font-size:1.25rem}
+
+/* speciali */
+.ab{display:grid;gap:1.6rem;grid-template-columns:1fr}
+.rank{display:grid;gap:2rem 4rem;grid-template-columns:1fr}
+.rank h3{font-family:var(--display);font-size:1.7rem}
+.rank .sub{color:var(--ink2);margin:.2rem 0 .8rem}
+.rank ol{list-style:none;padding:0;display:flex;flex-direction:column;gap:.5rem}
+.rank li{display:flex;gap:1rem;align-items:baseline;font-size:1.5rem;border-bottom:1px solid var(--line);padding-bottom:.4rem}
+.rank li span{font-family:var(--mono);font-size:1.1rem;color:var(--ink2);width:2.2em;flex:none}
+.rank li:first-child{font-weight:600}
+.rows{display:flex;flex-direction:column}
+.row{display:grid;grid-template-columns:1fr;gap:.3rem 3rem;padding:1.1rem 0;border-bottom:1px solid var(--line)}
+.row .q{font-family:var(--display);font-weight:700;font-size:1.5rem;line-height:1.2}
+.tl{display:grid;gap:1.6rem;grid-template-columns:1fr}
+.tl .d{font-family:var(--mono);font-size:1.2rem;display:flex;gap:.8rem;align-items:center;flex-wrap:wrap}
+.tl .d b{font-weight:500;background:var(--ink);color:var(--bg);padding:.1em .5em}
+.tl .st{font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ok)}
+.tl .st.fut{color:var(--ink2)}
+.tl p{margin-top:.6rem;font-size:1.2rem}
+.vote{display:grid;gap:1.6rem 2.6rem;grid-template-columns:1fr}
+.case{display:flex;flex-direction:column;gap:.7rem;align-items:flex-start;min-width:0}
+.case .k{font-family:var(--mono);font-size:1rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+.case .q{font-size:1.4rem;line-height:1.3}
+.verdict{font-size:1.2rem}
+.verdict b{display:inline-block;padding:.1em .6em;margin-right:.5em;color:var(--bg);font-family:var(--mono);font-weight:500}
+.verdict .si{background:var(--ok)} .verdict .no{background:var(--no)} .verdict .co{background:var(--mark);color:var(--mark-ink)}
+.opts{font-family:var(--mono);font-size:1.15rem;color:var(--ink2)}
+.three{display:grid;gap:1.2rem;grid-template-columns:1fr}
+.tog{text-align:left;background:var(--sheet);border:1px solid var(--line);border-radius:.2rem;padding:1.1rem 1.3rem;display:flex;flex-direction:column;gap:.4rem}
+.tog b{font-family:var(--display);font-size:1.55rem;display:flex;justify-content:space-between;gap:1rem}
+.tog b::after{content:"spento";font-family:var(--mono);font-weight:400;font-size:.95rem;color:var(--ink2)}
+.tog[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 -.5rem 0 var(--mark)}
+.tog[aria-pressed="true"] b::after{content:"attivo";color:var(--ink)}
+.verd3{font-family:var(--mono);font-size:1.15rem;min-height:1.6em}
+.verd3.bad{color:var(--no);font-weight:500}
+
+/* cromo */
+#bar,#hud,#tim{display:none}
+.readhead{max-width:62rem;margin:0 auto;padding:1.6rem 0;display:flex;gap:1rem;flex-wrap:wrap;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:1rem;color:var(--ink2)}
+.ov{position:fixed;inset:0;z-index:30;background:var(--bg);overflow:auto;padding:3rem max(16px,5vw) 4rem}
+.ov h2{font-size:2.4rem;margin:0 0 .4rem}
+.ov .hint{font-family:var(--mono);font-size:1rem;color:var(--ink2);margin-bottom:2rem}
+.ov .x{position:fixed;top:1.2rem;right:max(16px,2vw);z-index:2;background:var(--bg)}
+.idx{columns:22rem;column-gap:3rem}
+.idx section{break-inside:avoid;margin-bottom:1.8rem}
+.idx h3{font-family:var(--display);font-size:1.4rem;margin:0 0 .4rem}
+.idx button{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:.45rem 0;font-size:1.1rem}
+.idx button:hover{color:var(--act)}
+.idx button span{font-family:var(--mono);color:var(--ink2);margin-right:.7em}
+.lib{display:grid;gap:1.6rem;grid-template-columns:repeat(auto-fill,minmax(min(100%,34rem),1fr));align-items:start}
+.lib .prompt pre{font-size:1.05rem}
+.lib .from{display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:.5rem .7rem .6rem 1.2rem;border-top:1px solid var(--line);font-size:1rem;color:var(--ink2)}
+.keys{display:grid;grid-template-columns:auto 1fr;gap:.6rem 2rem;font-size:1.2rem;max-width:44rem}
+.keys kbd{font-family:var(--mono);font-size:1rem;border:1px solid var(--ink2);border-radius:.2rem;padding:.05em .5em;white-space:nowrap}
+
+@media (min-width:700px){
+  .cards.c2,.cards.c4,.vote,.gifts,.ab,.rank,.tl{grid-template-columns:1fr 1fr}
+  .cards.c3,.three{grid-template-columns:repeat(3,1fr)}
+  .row{grid-template-columns:5fr 6fr}
+}
+
+/* ---------- schermo grande: una scena per schermata ---------- */
+html.stage body{padding:0}
+html.stage .readhead{display:none}
+html.stage .scene{position:relative;max-width:none;margin:0;border:0;min-height:100vh;min-height:100svh;padding:4.2rem 7rem 7rem;gap:2.4rem;justify-content:center;scroll-snap-align:start}
+html.stage h2{font-size:3.7rem}
+html.stage .body{gap:2.2rem}
+html.stage .cards.c4{grid-template-columns:repeat(4,1fr)}
+html.stage .cards.c4.q{grid-template-columns:1fr 1fr}
+html.stage .gifts,html.stage .tl{grid-template-columns:repeat(4,1fr)}
+html.stage .demo .body{display:grid;grid-template-columns:5fr 7fr;gap:4rem;align-items:center}
+html.stage .demo .l,html.stage .demo .r{display:flex;flex-direction:column;gap:1.6rem;min-width:0}
+html.stage .cover{justify-content:flex-end;padding-bottom:10rem}
+html.stage .cover h1{font-size:9.5rem;line-height:1.08}
+.cover mark{padding:0 .08em}
+html.stage .cover .lead{font-size:2rem;max-width:32em}
+html.stage .sect{justify-content:center}
+html.stage .sect h2{font-size:9rem;line-height:.95}
+html.stage .pause h2{font-size:12rem}
+html.stage #bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:5;align-items:center;justify-content:space-between;gap:2rem;padding:0 7rem 1.8rem}
+#bar .ch{font-family:var(--mono);font-size:1rem;color:var(--ink2);min-width:14rem}
+#bar .stamps{display:flex;gap:.8rem}
+#bar .stamp{font-size:.9rem}
+#bar .cnt{font-family:var(--mono);font-size:1rem;color:var(--ink2);min-width:14rem;text-align:right;font-variant-numeric:tabular-nums}
+#bar .cnt button{background:none;border:0;color:inherit;font:inherit;padding:0 0 0 1em;text-decoration:underline;text-underline-offset:.2em}
+#prog{position:fixed;left:0;bottom:0;height:.35rem;background:var(--mark);z-index:6;transition:width .3s}
+
+/* ---------- animazioni ---------- */
+.up{display:block}
+h1,h2{overflow:hidden;padding-bottom:.12em}
+html.anim [data-a],html.anim .eye,html.anim .give{transition:opacity .7s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform .7s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+html.anim .scene:not(.seen) [data-a]{opacity:0;transform:translateY(1.6rem)}
+html.anim .scene:not(.seen) .eye,html.anim .scene:not(.seen) .give{opacity:0;transform:translateX(-1.2rem)}
+html.anim .up{transition:transform .8s cubic-bezier(.2,.8,.2,1) .05s}
+html.anim .scene:not(.seen) .up{transform:translateY(110%)}
+html.anim mark{transition:background-size .7s cubic-bezier(.6,0,.2,1) calc(var(--d,0s) + .45s),color .2s calc(var(--d,0s) + .6s)}
+html.anim .scene:not(.seen) mark{background-size:0 100%;color:inherit}
+html.anim .scene.seen .bigstamp,html.anim .scene.seen .gift .stamp{animation:stamp .5s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(var(--d,0s) + .25s)}
+@keyframes stamp{from{opacity:0;transform:scale(2.4) rotate(-9deg)}to{opacity:1;transform:scale(1) rotate(-2deg)}}
+.bigstamp{font-size:1.5rem;transform:rotate(-2deg);align-self:flex-start}
+.gift .stamp{transform:rotate(-2deg)}
+#stamps .stamp{transition:background .4s,color .4s,border-color .4s}
+#stamps .stamp.pop{animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{from{transform:scale(1.5) rotate(-6deg)}to{transform:none}}
+.tl{position:relative}
+html.stage .tl{padding-top:1.6rem}
+html.stage .tl::before{content:"";position:absolute;left:0;right:0;top:0;height:.3rem;background:var(--ink);transform-origin:left;transition:transform 1.4s cubic-bezier(.6,0,.2,1) .3s}
+html.anim.stage .scene:not(.seen) .tl::before{transform:scaleX(0)}
+.typing pre::after{content:"▍";animation:blink .7s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.stats{display:grid;gap:1.4rem 3rem;grid-template-columns:1fr}
+.stat b{display:block;font-family:var(--display);font-weight:700;font-size:3.6rem;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat span{font-family:var(--mono);font-size:1rem;color:var(--ink2);letter-spacing:.02em;white-space:nowrap}
+html.stage .stats{grid-template-columns:repeat(3,auto);justify-content:start}
+html.stage .stat b{font-size:5rem}
+.hint0{font-family:var(--mono);font-size:1rem;color:var(--ink2);display:flex;gap:.8rem;align-items:center}
+.hint0::before{content:"";width:3rem;height:.25rem;background:var(--mark);animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(1rem)}}
+html.stage .cover .glow{position:absolute;right:-12rem;top:-14rem;width:60rem;height:60rem;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--mark) 55%,transparent),transparent);animation:drift 14s ease-in-out infinite alternate;pointer-events:none}
+.glow{display:none}html.stage .cover .glow{display:block}
+@keyframes drift{to{transform:translate(-9rem,7rem) scale(1.15)}}
+.cover>*{position:relative}
+html.stage .cover{overflow:hidden}
+html.stage .demo .stats{gap:1rem 2.4rem}html.stage .demo .stat b{font-size:3.2rem}
+html.stage .demo .l{gap:1.3rem}
+html.stage #hud{display:flex;position:fixed;top:1.6rem;right:7rem;z-index:5;gap:.6rem;align-items:center}
+#hud .btn{font-size:.9rem;border-color:var(--line);color:var(--ink2)}
+html.stage #tim.on{display:block;position:fixed;top:1.4rem;left:50%;transform:translateX(-50%);z-index:6;font-family:var(--mono);font-size:2.2rem;font-variant-numeric:tabular-nums;background:var(--ink);color:var(--bg);padding:.1em .7em}
+#tim.end{background:var(--no)!important}
+#timpick{position:fixed;top:4.6rem;right:7rem;z-index:7;background:var(--sheet);border:1px solid var(--line);padding:.8rem;display:flex;gap:.6rem}
+html.calm *,html.calm *::before,html.calm *::after{animation:none!important;transition:none!important}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+
+<div class="readhead"><span>Plenaria HIT · Lavorare meglio con l'IA</span><span><button class="btn" data-act="lib">Tutti i prompt</button> <button class="btn" data-act="mode">Modalità presentazione</button></span></div>
+<main id="deck"></main>
+<div id="bar"><span class="ch" id="chname"></span><span class="stamps" id="stamps"></span><span class="cnt"><span id="cnt"></span><button data-act="keys">Tasti</button></span></div>
+<div id="prog"></div>
+<div id="hud"><button class="btn" data-act="timer">Timer</button><button class="btn" data-act="lib">Prompt</button><button class="btn" data-act="idx">Indice</button></div>
+<div id="tim" role="timer"></div>
+<div id="timpick" hidden><button class="btn" data-min="5">5 min</button><button class="btn" data-min="10">10 min</button><button class="btn" data-min="15">15 min</button><button class="btn" data-min="0">Ferma</button></div>
+<div class="ov" id="ov-idx" hidden><button class="btn x" data-act="close">Chiudi</button><h2>Indice</h2><p class="hint">Clic su una scena per aprirla.</p><div class="idx" id="idx"></div></div>
+<div class="ov" id="ov-lib" hidden><button class="btn x" data-act="close">Chiudi</button><h2>Tutti i prompt</h2><p class="hint">Un clic copia il prompt. I dati tra [parentesi quadre] si sostituiscono con i vostri.</p><div class="lib" id="lib"></div></div>
+<div class="ov" id="ov-keys" hidden><button class="btn x" data-act="close">Chiudi</button><h2>Tasti</h2><p class="hint">Funzionano anche con un telecomando da presentazione.</p>
+<div class="keys">
+<span><kbd>→</kbd> <kbd>↓</kbd> <kbd>Spazio</kbd> <kbd>Pag giù</kbd></span><span>Scena successiva</span>
+<span><kbd>←</kbd> <kbd>↑</kbd> <kbd>Pag su</kbd></span><span>Scena precedente</span>
+<span><kbd>G</kbd></span><span>Indice delle scene</span>
+<span><kbd>P</kbd></span><span>Tutti i prompt</span>
+<span><kbd>S</kbd></span><span>Mostra la soluzione della scena</span>
+<span><kbd>1</kbd> … <kbd>4</kbd></span><span>Scopre un caso nella votazione</span>
+<span><kbd>T</kbd></span><span>Timer da 5, 10 o 15 minuti</span>
+<span><kbd>F</kbd></span><span>Schermo intero</span>
+<span><kbd>L</kbd></span><span>Tema chiaro o scuro</span>
+<span><kbd>M</kbd></span><span>Animazioni spente, per portatili lenti</span>
+<span><kbd>R</kbd></span><span>Modalità lettura, tutto su una pagina</span>
+</div></div>
+
+<script>
+const CH=["Apertura","L'incarico","Il ragionamento","Il contesto","I documenti","Gli strumenti","La verifica","Il caso completo","Le regole","Prossimi passi"];
+const STAMPS=[["Un incarico",1,1],["Tempo per pensare",2,2],["Contesto e documenti",3,4],["Lo strumento e un metodo",5,6]];
+const LEGAL="Gemini, Google Workspace, ChatGPT, Claude, Microsoft 365 Copilot e gli altri nomi di prodotto citati sono marchi dei rispettivi titolari. Questo sito è un materiale formativo indipendente e non ha alcun legame con i produttori.";
+const P=(label,x,o={})=>({t:"prompt",label,x,...o});
+const S=[
+{ch:0,lay:"cover",eye:"Plenaria HIT",title:"Lavorare ==meglio== con l'IA",b:[
+ {t:"lead",x:"Prompt, ragionamento, memoria e strumenti: come far lavorare bene un assistente IA e come fidarsi dei risultati."},
+ {t:"html",x:`<p class="by" data-a>Lorenzo Nesler, AI Automation Coach</p><p class="hint0" data-a>Scorrete, oppure premete la freccia a destra</p>`}]},
+{ch:0,lay:"demo",eye:"Il problema",title:"Un nuovo bando Horizon",b:[
+ {t:"lead",x:`Il 13 ottobre si è aperto il topic HORIZON-CL4-2027-02-DIGITAL-EMERGING-52, "New approaches for Human/AI collaboration for the workforce of the future". 30 milioni di euro, primo stage entro il 2 febbraio 2027.`},
+ {t:"stats"},
+ {t:"note",x:"Domanda: vale la pena approfondirlo?",s:1},
+ {t:"txt",x:"Lo chiediamo all'IA come facciamo di solito.",s:1},
+ P("Prompt A",`Riassumimi questo bando.`,{s:1,type:1}),
+ P("Prompt B",`Sei un esperto di progetti europei con 20 anni di esperienza. Riassumimi questo bando.`,{s:1,type:1}),
+ {t:"txt",x:"==Per alzata di mano: quale dei due dà la risposta più corretta?==",s:1}]},
+{ch:0,eye:"Immagine guida",title:"Un collaboratore appena arrivato",b:[
+ {t:"lead",x:"Sa moltissimo, scrive bene, lavora in fretta. Ma non conosce voi, il vostro lavoro né il compito."},
+ {t:"txt",x:"Oggi gli diamo una cosa alla volta:"},
+ {t:"gifts",items:[["Un incarico","Cosa deve uscire e quando è finito."],["Tempo per pensare","Il ragionamento."],["Contesto e documenti","Chi siete, su cosa lavora."],["Lo strumento e un metodo","Dove lavora e come lo controlliamo."]]}]},
+{ch:1,lay:"sect",title:"L'incarico"},
+{ch:1,eye:"Prompt",title:"Un prompt è un incarico",b:[
+ {t:"cards",cols:4,s:1,items:[
+  ["Obiettivo","Cosa deve uscire, per chi, a cosa serve."],
+  ["Contesto","Cosa deve sapere, dove sono le informazioni."],
+  ["Fatto quando",`Lunghezza, formato, contenuti obbligatori. Esempio: "massimo 10 righe, tre punti, una riga con il prossimo passo".`],
+  ["Controllabile",`"Per ogni punto la frase del testo da cui viene. Se manca, scrivi 'non indicato'."`]]},
+ {t:"note",x:`Il ruolo ("sei un esperto") dà il tono, ==non rende la risposta più corretta==. Un esempio di buon risultato aiuta molto.`,s:1},
+ {t:"src",x:"Fonti: Zheng et al., Findings of EMNLP 2024: 162 ruoli, 2.410 domande fattuali, nessun guadagno di accuratezza · Basil et al., Wharton, dicembre 2025: nessun guadagno significativo in 5 modelli su 6.",s:0}]},
+{ch:1,lay:"demo",eye:"Demo",title:"Lo stesso bando, come incarico",b:[
+ P("Prompt C",`Riassumi questo bando per la direzione di un ente che lavora con ricercatori, imprese e startup.
+
+Obiettivo: decidere se vale la pena approfondirlo.
+
+Fatto quando:
+- massimo 10 righe
+- cosa finanzia, chi può partecipare, budget e scadenze
+- i requisiti obbligatori
+- una riga "Da chiarire" e una riga "Prossimo passo consigliato"
+- per ogni punto, tra virgolette, la frase del bando da cui viene
+
+Se un'informazione non è nel testo, scrivi "non indicato".
+
+[incolla il testo del bando]`,{sm:1}),
+ {t:"note",x:"Stesso modello, stesso testo. Risultato diverso, e ==si controlla in un minuto==.",s:1}]},
+{ch:1,lay:"demo",eye:"Demo",title:"Il prompt lo scrive l'IA",b:[
+ {t:"lead",x:"Non serve saper scrivere il prompt perfetto. Descrivete il compito con parole vostre e chiedete il prompt."},
+ P("Prompt per il prompt",`Aiutami a scrivere un prompt breve e chiaro per questo compito:
+
+[descrivi il compito: cosa ti serve, per chi, entro quando]`),
+ {t:"note",x:"Il prompt che ricevete lo provate subito. Se funziona ==lo salvate==: la prossima volta è già pronto.",s:1}]},
+
+{ch:2,lay:"sect",title:"Il ragionamento"},
+{ch:2,eye:"Ragionamento",title:"Veloce o ragionato",b:[
+ {t:"lead",x:"Un modello che ragiona, prima di rispondere, scrive per sé un piano: scompone, prova, scarta, controlla. È l'incarico che abbiamo appena scritto, fatto dentro il modello."},
+ {t:"cards",cols:3,s:1,items:[
+  ["Veloce","Riscrivere, riassumere, tradurre, formattare."],
+  ["Ragionato","Vincoli, calcoli, confronti, giudizi."],
+  ["Dove si sceglie","Gemini con account di lavoro: menu del modello nella barra del prompt, Fast, Thinking o Pro."]]},
+ {t:"note",x:"Regola: più il compito è un giudizio, più serve il ragionamento. Costa attesa e quota.",s:1}]},
+{ch:2,lay:"demo",eye:"Demo",title:"Un piano a ritroso dalla scadenza",b:[
+ {t:"lead",x:"Stesso prompt in due schede: una in Fast, una in Thinking."},
+ P("Prompt",`La proposta di primo stage per il topic HORIZON-CL4-2027-02-DIGITAL-EMERGING-52 va inviata entro il 2 febbraio 2027. Oggi è [data di oggi].
+
+Costruisci un piano a ritroso, settimana per settimana, con queste tappe: decisione se partecipare, ricerca dei partner, prima bozza, revisione interna, firme dei partner, invio.
+
+Vincoli:
+1. Uffici chiusi dal [24 dicembre] al [6 gennaio].
+2. Le firme dei partner richiedono [due settimane].
+3. La revisione interna viene dopo la prima bozza e dura almeno [una settimana].
+4. Invio almeno [5 giorni lavorativi] prima della scadenza.
+
+Poi verifica in una tabella ogni vincolo: rispettato sì o no. Alla fine indica la tappa più a rischio e perché.`,{sm:1}),
+ {t:"note",x:"Guardate la tabella di verifica: ==è lì che si vede chi ha ragionato==.",s:1}]},
+{ch:2,lay:"demo",eye:"Demo",title:"Quanti giorni lavorativi?",b:[
+ {t:"lead",x:"Dal giorno dopo l'apertura alla scadenza dello stage 1."},
+ P("Prompt",`Un bando europeo è aperto dal 14/10/2026 al 02/02/2027, estremi inclusi. Quanti giorni lavorativi ci sono, escludendo sabati, domeniche e festività nazionali italiane? Elenca le festività che hai tolto e indica per ognuna il giorno della settimana.`),
+ {t:"note",x:"Per i numeri non ci si fida del primo risultato: ==si chiede la lista che permette di controllarlo==.",s:1},
+ {t:"sol",x:`<b>76 giorni lavorativi.</b><br>112 giorni di calendario, 80 dal lunedì al venerdì, meno 4 festività infrasettimanali.<table><tr><td>8/12/2026</td><td>martedì</td></tr><tr><td>25/12/2026</td><td>venerdì</td></tr><tr><td>1/1/2027</td><td>venerdì</td></tr><tr><td>6/1/2027</td><td>mercoledì</td></tr></table>1/11 è domenica e 26/12 è sabato: cadono già nel fine settimana e non vanno tolti due volte.`}]},
+{ch:3,lay:"sect",title:"Il contesto"},
+{ch:3,eye:"Memoria",title:"Tutto diventa prompt",b:[
+ {t:"lead",x:"Il modello non ricorda e non impara da voi: ogni chat parte da zero."},
+ {t:"txt",x:"Tutto ciò che sa di voi è testo aggiunto al prompt prima della risposta:"},
+ {t:"cards",cols:4,s:1,items:[
+  ["Istruzioni personali","Chi siete, come scrivete. Sempre presenti."],
+  ["Documenti e notebook","Su cosa state lavorando."],
+  ["Skill","Come si fa un certo lavoro."],
+  ["Collegamenti","Gmail, Drive, Calendar, ricerca web, letti al momento."]]}]},
+{ch:3,lay:"demo",eye:"Demo",title:"La chat nuova non ricorda",b:[
+ P("Chat 1",`Lavoro in [il vostro ufficio] di HIT. Scrivo in italiano, registro [formale ma diretto], frasi brevi, niente punti esclamativi, firmo "[nome, ufficio]". Scrivimi una mail di tre righe per ringraziare un relatore dopo un evento.`),
+ P("Chat 2, nuova",`Scrivimi una mail di tre righe per ringraziare un relatore dopo un evento. Poi dimmi cosa sai di me.`,{s:1}),
+ {t:"note",x:"Poi le due frasi su ruolo e stile vanno nelle istruzioni personali, e si rifà la chat 2.",s:1}]},
+{ch:3,eye:"Contesto",title:"Poco ma giusto",b:[
+ {t:"cards",cols:4,q:1,s:1,items:[
+  ["Fatti, non regole",`"Scrivo a enti di ricerca e imprese" aiuta più di "scrivi sempre in modo professionale".`],
+  ["Una pagina, non dieci","Più testo mettete, più il modello si distrae."],
+  ["Fisso o variabile","Ciò che non cambia va nelle istruzioni o nel notebook, ciò che cambia ogni giorno si collega, non si copia."],
+  ["Chat nuova per compito nuovo","Le chat lunghe si riempiono di cose vecchie."]]}]},
+
+{ch:3,lay:"demo",eye:"Demo",title:"Il vostro profilo",b:[
+ {t:"lead",x:"Gemini vi intervista e scrive le vostre istruzioni personali."},
+ P("Prompt",`Aiutami a scrivere le mie istruzioni personali per Gemini. Intervistami una domanda alla volta, al massimo otto domande, su: il mio ruolo, i compiti ricorrenti, con chi scrivo più spesso, lingua e tono, formati che preferisco, cosa non voglio mai nei testi. Usa le mie parole, non inventare nulla. Alla fine dammi: 1) una versione breve, massimo 8 righe, da incollare nelle impostazioni; 2) una versione lunga per un Google Doc "Il mio profilo".`,{sm:1}),
+ {t:"cards",cols:1,s:1,items:[
+  ["Versione breve","Nelle istruzioni dell'app Gemini e nel pannello laterale di Gmail e Docs: sono due posti separati."],
+  ["Versione lunga",`Google Doc "Il mio profilo", allegato a una skill o richiamato quando serve.`]]}]},
+{ch:3,eye:"Gemini con account di lavoro",title:"Dove si mette in Gemini",b:[
+ {t:"cards",cols:4,q:1,s:1,items:[
+  ["Memoria delle chat","Non disponibile con account di lavoro."],
+  ["Istruzioni","Due posti separati: app Gemini e pannello laterale di Workspace."],
+  ["Skill",`Un prompt che non volete più rispiegare: Personalizza, Skills, Crea. Si richiama con "/" e si condivide con i colleghi.`],
+  ["Gem","Dal 17/11 sono nelle Impostazioni. Dal 1° marzo 2027 al più presto diventano skill in bozza."]]}]},
+{ch:4,lay:"sect",title:"I documenti"},
+{ch:4,eye:"Memoria dei documenti",title:"Rispondere dai documenti",b:[
+ {t:"cards",cols:4,q:1,s:1,items:[
+  ["A cosa serve","Far rispondere il modello dai vostri documenti invece che da ciò che ricorda, anche quando sono troppi per la scrivania."],
+  ["Come lo fa","Cerca i passaggi più vicini alla domanda, li mette nel prompt e risponde da lì. Si chiama RAG."],
+  ["Perché cita","Sa da quale passaggio viene ogni frase: un clic e controllate."],
+  ["Limiti","Trova solo ciò che c'è, a volte prende il passaggio sbagliato, con scansioni scadenti peggiora."]]},
+ {t:"src",x:"È la memoria di Gemini Notebook, dei progetti di ChatGPT e Claude, di Copilot su SharePoint.",big:1}]},
+{ch:4,lay:"demo",eye:"Demo",title:"Il bando in Gemini Notebook",b:[
+ {t:"lead",x:"Nel notebook: la scheda del topic e la scheda CORDIS di un progetto Horizon concluso (CORTEX2)."},
+ P("Prompt",`Elenca i requisiti del bando in una tabella: requisito, obbligatorio o facoltativo, citazione. Includi expected outcomes, i tre ambiti, TRL, tipo di azione, budget e scadenze.`),
+ {t:"note",x:"Mouse sulla citazione: compare il passaggio. Clic: si apre nel documento.",s:1}]},
+{ch:4,lay:"demo",eye:"Demo",title:"Due ricerche in corso",b:[
+ {t:"lead",x:"Dentro i documenti va bene. Per sapere cosa c'è fuori serve una ricerca approfondita: la lanciamo ora e la leggiamo dopo la pausa."},
+ P("Prompt",`Il topic Horizon Europe HORIZON-CL4-2027-02-DIGITAL-EMERGING-52 invita a partire dai progetti finanziati con i topic HORIZON-CL4-2021-HUMAN-01-13, -14, -25, -06 e -28. Elenca al massimo 8 di questi progetti. Per ognuno: acronimo, topic, coordinatore e paese, date di inizio e fine, contributo UE, link alla scheda CORDIS. Usa CORDIS come fonte primaria e scrivi "non da CORDIS" accanto a ogni dato preso altrove. Alla fine: cosa non sei riuscito a trovare.`,{sm:1}),
+ {t:"note",x:"Prima di avviare, il piano si modifica come un incarico.",s:1}]},
+{ch:4,lay:"sect pause",title:"Pausa",timer:1},
+{ch:5,lay:"sect",title:"Gli strumenti"},
+{ch:5,eye:"Modelli",title:"Modello e app",b:[
+ {t:"lead",x:"Il modello pensa. L'app prepara il posto di lavoro: quali dati vede, quali strumenti usa, quali regole segue."},
+ {t:"cards",cols:4,s:1,items:[
+  ["Gemini","Gemini 4 Neon, 18 novembre."],
+  ["ChatGPT","GPT-6.2 Astra e Sol, 17 novembre."],
+  ["Claude","Fable 5.2, 9 novembre."],
+  ["Microsoft 365 Copilot","GPT-6.2 Sol, 20 novembre. Claude solo se attivato."]]},
+ {t:"note",x:"Tre nuovi modelli in due settimane. Il nome cambia, il criterio di scelta no.",s:1}]},
+{ch:5,eye:"Modelli",title:"Due classifiche, due vincitori",b:[
+ {t:"rank",s:1,items:[
+  ["Artificial Analysis","Test di intelligenza",["Claude Fable 5.2","GPT-6.2 Astra","Gemini 4 Neon"]],
+  ["Text Arena","Preferenza delle persone",["Gemini 4 Carbon","Argon","Neon"]]]},
+ {t:"note",x:"Nessuno vince su tutto. In 5 punti ci sono tutti e tre i produttori. La differenza la fa ciò che c'è intorno al modello.",s:1},
+ {t:"src",x:"Fonti: artificialanalysis.ai, 22/11/2026 · Text Arena, dati del 19/11/2026."}]},
+{ch:5,eye:"Scelta",title:"Dove vive il vostro lavoro?",b:[
+ {t:"lead",x:`La prima domanda non è "qual è il modello migliore", ma dove sono posta, file e calendario.`},
+ {t:"cards",cols:3,s:1,items:[
+  ["Google Workspace","Gemini vede Gmail, Drive e Calendar dall'interno, senza costi aggiuntivi."],
+  ["Microsoft 365","Copilot vede Outlook, Teams e SharePoint, ma solo con licenza."],
+  ["Uno strumento esterno","ChatGPT e Claude arrivano ai vostri dati con connettori, da configurare e approvare."]]},
+ {t:"note",x:"Voi lavorate già con Gemini. Gli altri servono per compiti specifici.",s:1}]},
+{ch:5,eye:"Confronto",title:"Gli stessi mattoni, ovunque",b:[
+ {t:"lead",x:"Tutti vendono gli stessi mattoni. Cambia cosa è incluso per un account aziendale."},
+ {t:"cards",cols:4,q:1,s:1,items:[
+  ["Gemini in Workspace",`Notebook con citazioni, Deep Research incluso, Canvas, skill, Workspace Studio per i flussi. Agente "Task" non disponibile con account di lavoro.`],
+  ["ChatGPT Business","Progetti, Deep Research con piano modificabile, Work: un agente che lavora per ore con app e browser e produce documenti, fogli e slide."],
+  ["Claude Team","Documenti lunghi e analisi, Claude in Chrome legge e confronta siti, artefatti e piccole applicazioni. Niente immagini né video."],
+  ["Microsoft 365 Copilot","Researcher e Analyst su posta e file aziendali, Copilot Studio per gli agenti."]]}]},
+{ch:5,eye:"Confronto",title:"Dati, contratto e costi",b:[
+ {t:"lead",x:"Il confine non passa tra uno strumento e l'altro, ma tra ==account privato e account aziendale==."},
+ {t:"cards",cols:4,q:1,s:1,items:[
+  ["Gemini in Workspace","Incluso nella licenza. Niente addestramento, niente revisione umana. Dati conservati in UE con Business Standard e Plus, elaborati in UE solo con Enterprise Plus."],
+  ["ChatGPT Business","Circa 20-25 dollari al mese per utente. Niente addestramento. Residenza dati in UE solo con Enterprise."],
+  ["Claude Team","Circa 20-25 dollari al mese per utente. Niente addestramento. Dati conservati negli USA."],
+  ["Microsoft 365 Copilot Business","15,60 euro al mese in promozione fino al 31/12, più Microsoft 365. Perimetro dati UE, modelli Claude esclusi: Microsoft annuncia il cambio per dicembre 2026."]]},
+ {t:"src",x:"Prezzi per utente al mese, IVA esclusa, novembre 2026."}]},
+{ch:5,eye:"Scelta",title:"Quale strumento per quale compito",b:[
+ {t:"rows",s:1,items:[
+  ["Rispondere da un bando o da un documento lungo","Gemini Notebook: risponde solo dal testo, con citazioni."],
+  ["Farsi un quadro di un tema","Deep Research di Gemini, incluso e con fonti interne se servono."],
+  ["Leggere e confrontare siti di enti","Claude in Chrome: Gemini in Chrome non è disponibile in Italia."],
+  ["Un'analisi critica difficile, una gap analysis","Il modello più forte disponibile, in modalità ragionata."]]}]},
+{ch:5,lay:"demo",eye:"Demo",title:"Lo stesso compito, due strumenti",b:[
+ {t:"lead",x:"Stesso documento, stesso prompt, in Gemini Notebook e in un secondo strumento."},
+ P("Prompt",`Usa solo questo documento. Per il topic HORIZON-CL4-2027-02-DIGITAL-EMERGING-52 indica: budget totale, contributo per progetto, tipo di azione, scadenze, livello TRL atteso e numero minimo di partner. Per ogni dato cita la pagina. Se un dato non è nel documento, scrivi "non presente" e non dedurlo.`),
+ {t:"note",x:`Voi votate: chi rispetta il "fatto quando", chi cita la pagina giusta, chi ammette cosa manca, chi inventa.`,s:1}]},
+{ch:6,lay:"sect",title:"La verifica"},
+{ch:6,eye:"Fonti",title:"Sbaglia in modo convincente",b:[
+ {t:"lead",x:"Il modello completa il testo più probabile. Quando non sa, completa comunque, con lo stesso tono sicuro."},
+ {t:"cards",cols:3,s:1,items:[
+  ["Stessa domanda, risposte diverse","Full Fact ha posto le stesse 22 domande a cinque assistenti ogni giorno per 10 settimane: dati vecchi, conti sbagliati, risposte che cambiano."],
+  ["Circa 1 link su 10 non esiste","Nei report di ricerca approfondita il 10,7% dei link citati era inventato."],
+  ["Cede alla prima obiezione",`Chiedere "sei sicuro?" non verifica: il modello spesso cambia idea per compiacervi.`]]},
+ {t:"src",x:"Fonti: Full Fact, ottobre 2026 · University of Pennsylvania, aprile 2026 · UNESCO-UCL, novembre 2026."}]},
+{ch:6,lay:"demo",eye:"Demo",title:"Caccia all'errore",b:[
+ P("Prompt",`Dati del progetto Horizon Europe CORTEX2: data di inizio e di fine, durata in mesi, contributo UE, costo totale, coordinatore, tipo di azione (RIA o IA), numero di partner. Rispondi in una tabella, senza commenti.`),
+ P("Poi la stessa domanda con",`Per ogni dato indica il link alla fonte e la frase esatta della fonte tra virgolette. Se non la trovi, scrivi "non verificato".`,{s:1}),
+ {t:"note",x:"E controlliamo su CORDIS.",s:1},
+ {t:"sol",x:`<b>Scheda CORDIS di CORTEX2</b><table><tr><td>Inizio e fine</td><td>1/9/2022 – 30/9/2025</td></tr><tr><td>Durata</td><td>37 mesi</td></tr><tr><td>Contributo UE</td><td>7.997.197,25 €</td></tr><tr><td>Costo totale</td><td>8.787.512,50 €</td></tr><tr><td>Coordinatore</td><td>DFKI, Germania</td></tr><tr><td>Tipo di azione</td><td>IA</td></tr><tr><td>Organizzazioni</td><td>10</td></tr></table>Letta il 22/11/2026: cordis.europa.eu/project/id/101070192`}]},
+{ch:6,lay:"demo",eye:"Demo",title:"Due report a confronto",b:[
+ {t:"lead",x:"I due Deep Research lanciati prima della pausa."},
+ P("Prompt",`Confronta questi due report. Tabella con: progetti presenti in entrambi, progetti presenti solo in uno, dati che non coincidono (date, importi, coordinatore). Per ogni differenza indica quale report cita CORDIS. Non dire quale dei due ha ragione: segnala solo dove verificare.`),
+ {t:"note",x:"Le righe che non coincidono sono ==la vostra lista di controllo==.",s:1}]},
+{ch:6,eye:"Metodo",title:"Verificare prima di decidere",b:[
+ {t:"vprompts",s:1,items:[
+  ["La frase della fonte",`Per ogni numero e ogni data: fonte con link, data e la frase esatta tra virgolette.`],
+  ["Fatti e deduzioni",`Dividi la risposta in tre parti: fatti con fonte, tue deduzioni, cose che non hai trovato.`],
+  ["I punti deboli",`Elenca le 3 affermazioni più a rischio di errore e come le verificherei.`],
+  ["Un revisore nuovo",null,"La stessa domanda o il report in una chat nuova. Se due risposte non coincidono, quel dato va verificato."]]},
+ {t:"note",x:"Il report è un input. La decisione e la firma restano vostre.",s:1}]},
+{ch:7,lay:"sect",title:"Il caso completo"},
+{ch:7,eye:"Caso",title:"Bando dal vivo e progetto di confronto",b:[
+ {t:"cards",cols:4,q:1,s:1,items:[
+  ["Il bando","Topic 2027 sulla collaborazione persona-IA nella produzione avanzata. Ricerca e innovazione (RIA), da TRL 4-5 a TRL 6, almeno 2 ambiti su 3."],
+  ["Il progetto","CORTEX2, Horizon, concluso a settembre 2025: telepresenza in realtà estesa, tre pilot."],
+  ["Perché proprio questo","Il bando invita a partire dai progetti sulla realtà estesa del 2021, tra cui quello di CORTEX2."],
+  ["La domanda","Se volessimo ripartire da qui, cosa coprirebbe e cosa mancherebbe?"]]}]},
+{ch:7,lay:"demo",eye:"Demo",title:"La gap analysis",b:[
+ P("Template di gap analysis",`Confronta CORTEX2 con il bando, usando solo le fonti del notebook.
+
+Obiettivo: capire se è un buon punto di partenza per una proposta.
+
+Fatto quando:
+- tabella: requisito del bando, cosa offre CORTEX2, copertura (piena, parziale, assente), citazione
+- le 3 lacune più gravi e cosa servirebbe per colmarle
+- fatti citati separati dalle tue valutazioni
+
+Se un dato non c'è, scrivi "non risulta".`),
+ {t:"note",x:"Nessuna riga sul ruolo: ==l'incarico basta==.",s:1}]},
+{ch:7,lay:"demo",eye:"Demo",title:"Prima e dopo",b:[
+ P("Prompt",`Scrivi una nota di una pagina per la direzione: vale la pena approfondire? Massimo 5 punti: copertura, lacune, condizioni, rischi, prossimi passi con scadenze. Tono asciutto, solo fatti delle fonti.`),
+ {t:"txt",x:"Accanto: il riassunto delle 9."},
+ {t:"note",x:"Stesso modello, stesso bando. Il collaboratore è lo stesso: ==è cambiato quello che gli abbiamo dato==.",s:1}]},
+{ch:7,eye:"Sintesi",title:"Il modello e il resto",b:[
+ {t:"lead",x:"Il modello è un cervello in un vaso: sa moltissimo, ma da solo non vede, non ricorda, non controlla."},
+ {t:"lead",x:"Tutto il resto lo abbiamo costruito noi in mattinata: incarico, istruzioni, documenti, strumento, verifica.",s:1},
+ {t:"lead",x:"Questo resta vostro e si porta da uno strumento all'altro.",s:1},
+ {t:"note",x:"Ciò che deve succedere sempre non si affida al prompt: ==si decide con una regola==.",s:1}]},
+{ch:8,lay:"sect",title:"Le regole"},
+{ch:8,eye:"Regole",title:"Cosa vale per HIT",b:[
+ {t:"lead",x:"HIT usa sistemi di IA nel proprio lavoro: per l'AI Act è un utilizzatore (deployer)."},
+ {t:"tl",s:1,items:[
+  ["2025-02-02","Dal 2/2/2025","Pratiche vietate. Alfabetizzazione: le organizzazioni adottano misure per sostenere la formazione del personale (art. 4)."],
+  ["2026-08-02","Dal 2/8/2026","Trasparenza (art. 50): deepfake sempre dichiarati; testi pubblicati per informare il pubblico dichiarati, salvo revisione umana sostanziale con un responsabile editoriale."],
+  ["2026-12-02","Dal 2/12/2026","Nuovi divieti, tra cui le immagini intime non consensuali."],
+  ["2027-12-02","Dal 2/12/2027","Sistemi ad alto rischio (Allegato III), per esempio selezione e valutazione del personale."]]},
+ {t:"src",x:`Icone ufficiali UE per i contenuti generati con IA: <a href="https://digital-strategy.ec.europa.eu/it/policies/eu-icons-labelling-ai-generated-content" target="_blank" rel="noopener">digital-strategy.ec.europa.eu/it/policies/eu-icons-labelling-ai-generated-content</a>`,raw:1}]},
+{ch:8,eye:"Regole",title:"Legge italiana",b:[
+ {t:"cards",cols:4,q:1,s:1,items:[
+  ["L. 132/2025","Informare i lavoratori sull'uso dell'IA. I professionisti informano i clienti sull'IA che usano. Diritto d'autore solo con contributo umano."],
+  ["D.Lgs. 179/2026","Assunzioni, valutazioni e misure disciplinari: decide una persona. Le decisioni solo automatiche sono nulle."],
+  ["GDPR","Vale com'è. La riforma nel Digital Omnibus è ancora in negoziazione."],
+  ["Un esempio vicino","Il Garante ha dato parere favorevole con condizioni al regolamento IA della Provincia autonoma di Trento: controllo umano reale e valutazione d'impatto."]]}]},
+{ch:8,eye:"Votate",tag:1,title:"Posso usare questo dato?",b:[
+ {t:"vote",items:[
+  ["Riassumere un bando europeo pubblico con Gemini nell'account di lavoro.","si","Sì","Dato pubblico, strumento approvato, account aziendale."],
+  ["Incollare in un chatbot gratuito, con account personale, il business plan di una startup ricevuto sotto NDA.","no","No","Dato riservato di terzi in un account privato: il confine è l'account aziendale."],
+  ["Far classificare a Gemini 40 candidature a un programma e scartare in automatico le ultime 20.","no","No","La classifica può aiutare come bozza. Lo scarto è una decisione su persone: la prende una persona."],
+  ["Pubblicare sul sito una notizia scritta con l'IA, rivista e firmata dalla comunicazione.","co","Sì, con condizioni","Serve una revisione umana sostanziale e un responsabile editoriale (art. 50)."]]},
+ {t:"html",x:`<p class="opts">Sì · Sì, con condizioni · No</p>`}]},
+{ch:8,eye:"Sicurezza",title:"Ogni testo può dare ordini",b:[
+ {t:"lead",x:"Per l'IA ogni documento, mail o pagina web può contenere istruzioni. Si chiama prompt injection."},
+ {t:"three",items:[["Dati vostri","Posta, file, calendario."],["Contenuti esterni","Mail, PDF di terzi, siti."],["Possibilità di agire","Inviare, condividere, cancellare."]]},
+ {t:"note",x:"Regola del due: al massimo due su tre. Se ci sono tutti e tre, ==l'ultima azione la fa una persona==."},
+ {t:"src",x:"Fonte: Meta, Agents Rule of Two, 31/10/2025."}]},
+{ch:8,eye:"Policy",title:"Una policy interna minima",b:[
+ {t:"cards",cols:4,q:1,s:1,items:[
+  ["Strumenti approvati","Quali, con quale edizione e quale account."],
+  ["Classi di dati","Cosa si può inserire, cosa solo anonimizzato, cosa mai."],
+  ["Cosa può fare l'IA da sola","Leggere e preparare bozze. Inviare, pubblicare, decidere su persone: mai senza una persona."],
+  ["Responsabilità e referente","Ogni documento ha un referente. Un dato inserito per errore si segnala subito. Formazione documentata, revisione annuale."]]}]},
+{ch:9,lay:"sect",title:"Prossimi passi"},
+{ch:9,eye:"Materiali",title:"Cosa vi portate",b:[
+ {t:"cards",cols:4,q:1,s:1,items:[
+  ["Incarico","Obiettivo, contesto, fatto quando, controllabile. E il meta prompt."],
+  ["Contesto","Intervista per il profilo e una skill da riusare."],
+  ["Documenti e verifica","Notebook con citazioni, i quattro prompt di verifica."],
+  ["Bandi","Il template di gap analysis, riutilizzabile per ogni bando e ogni idea progettuale."]]},
+ {t:"html",x:`<p><button class="btn" data-act="lib">Apri tutti i prompt</button></p>`}]},
+{ch:9,eye:"Prossimi passi",title:"I vostri casi",b:[
+ {t:"lead",x:"I post-it di stamattina: un compito che ripetete ogni settimana."},
+ {t:"txt",x:"Li raggruppiamo e scegliamo quelli che vi farebbero risparmiare più tempo. Diventano gli esercizi dei moduli di reparto."},
+ {t:"cards",cols:2,s:1,items:[
+  ["Moduli di reparto","Esercizi sui vostri casi: riepilogo settimanale, priorità alle email, bozze nel vostro stile, analisi di documenti."],
+  ["Modulo sull'IA agentica","Flussi tra più strumenti: quando ha senso un agente, come si progetta, quali piattaforme."]]},
+ {t:"html",x:`<p class="legal">${LEGAL}</p>`}]}
+];
+
+const $=(q,r=document)=>r.querySelector(q), $$=(q,r=document)=>[...r.querySelectorAll(q)];
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const fmt=s=>esc(s).replace(/==(.+?)==/g,"<mark>$1</mark>");
+const PROMPTS=[];const GIVE={1:0,2:1,3:2,4:2,5:3,6:3};
+function promptHTML(label,x,i,sm,show,type){const id=PROMPTS.push({label,x,i})-1;
+  return `<figure class="prompt${sm?" sm":""}"${type?" data-type":""}><figcaption><span>${esc(show||label)}</span><button class="btn copy" data-pid="${id}">Copia</button></figcaption><pre>${esc(x)}</pre></figure>`}
+function build(){
+  const deck=$("#deck");
+  S.forEach((sc,i)=>{
+    let step=0; const st=b=>b.s?` data-step="${++step}"`:"";
+    const parts={l:[],r:[]};
+    (sc.b||[]).forEach(b=>{
+      let h="",col="l";
+      if(b.t==="lead")h=`<p class="lead"${st(b)}>${fmt(b.x)}</p>`;
+      else if(b.t==="txt")h=`<p class="txt"${st(b)}>${fmt(b.x)}</p>`;
+      else if(b.t==="note")h=`<p class="note"${st(b)}>${fmt(b.x)}</p>`;
+      else if(b.t==="src")h=`<p class="${b.big?"txt":"src"}"${st(b)}>${b.raw?b.x:fmt(b.x)}</p>`;
+      else if(b.t==="html")h=b.x;
+      else if(b.t==="stats"){const dd=Math.ceil((new Date("2027-02-02T23:59:00")-new Date())/864e5);h=`<div class="stats"><p class="stat"><b class="num" data-to="30">30</b><span>milioni di euro</span></p><p class="stat"><b>2/2/2027</b><span>scadenza del primo stage</span></p>${dd>0?`<p class="stat"><b class="num" data-to="${dd}">${dd}</b><span>giorni da oggi</span></p>`:""}</div>`}
+      else if(b.t==="prompt"){col="r";h=`<div${st(b)}>${promptHTML(b.label,b.x,i,b.sm,0,b.type)}</div>`}
+      else if(b.t==="sol")h=`<div class="sol"><button class="btn solbtn" aria-expanded="false">Mostra soluzione</button><div class="solbody" hidden>${b.x}</div></div>`;
+      else if(b.t==="cards")h=`<div class="cards c${b.cols}${b.q?" q":""}">`+b.items.map(([a,p])=>`<div class="card"${b.s?` data-step="${++step}"`:""}><h3>${fmt(a)}</h3><p>${fmt(p)}</p></div>`).join("")+`</div>`;
+      else if(b.t==="vprompts")h=`<div class="cards c4 q">`+b.items.map(([a,p,plain])=>`<div class="card" data-step="${++step}"><h3>${fmt(a)}</h3>${p?`<div style="margin-top:.7rem">${promptHTML(a,p,i,1,"Prompt")}</div>`:`<p>${fmt(plain)}</p>`}</div>`).join("")+`</div>`;
+      else if(b.t==="gifts")h=`<div class="gifts">`+b.items.map(([a,p])=>`<div class="gift" data-step="${++step}"><span class="stamp act">${esc(a)}</span><p>${esc(p)}</p></div>`).join("")+`</div>`;
+      else if(b.t==="rank")h=`<div class="rank">`+b.items.map(([a,sub,l])=>`<div data-step="${++step}"><h3>${esc(a)}</h3><p class="sub">${esc(sub)}</p><ol>${l.map((x,k)=>`<li><span>${k+1}°</span>${esc(x)}</li>`).join("")}</ol></div>`).join("")+`</div>`;
+      else if(b.t==="rows")h=`<div class="rows">`+b.items.map(([q,a])=>`<div class="row" data-step="${++step}"><p class="q">${esc(q)}</p><p>${esc(a)}</p></div>`).join("")+`</div>`;
+      else if(b.t==="tl"){const now=new Date();h=`<div class="tl">`+b.items.map(([iso,d,p])=>{const on=new Date(iso)<=now;return `<div data-step="${++step}"><p class="d"><b>${esc(d)}</b><span class="st${on?"":" fut"}">${on?"in vigore":"in arrivo"}</span></p><p>${esc(p)}</p></div>`}).join("")+`</div>`}
+      else if(b.t==="vote")h=`<div class="vote">`+b.items.map(([q,c,v,why],k)=>`<div class="case"><span class="k">Caso ${k+1}</span><p class="q">${esc(q)}</p><button class="btn solbtn" aria-expanded="false">Mostra risposta</button><p class="verdict solbody" hidden style="border:0;padding:0"><b class="${c}">${esc(v)}</b>${esc(why)}</p></div>`).join("")+`</div>`;
+      else if(b.t==="three")h=`<div class="three">`+b.items.map(([a,p])=>`<button class="tog" aria-pressed="false"><b>${esc(a)}</b><span>${esc(p)}</span></button>`).join("")+`</div><p class="verd3" aria-live="polite">Attivate le caselle: quante sono presenti nel vostro caso?</p>`;
+      parts[col].push(h);
+    });
+    const lay=sc.lay||"";
+    const head=lay==="cover"?`<span class="glow"></span><p class="eye">${esc(sc.eye)}</p><h1><span class="up">${fmt(sc.title)}</span></h1>`
+      :lay.startsWith("sect")?`${sc.timer?"":`<p class="give">Parte ${sc.ch} di 9</p>`}<h2><span class="up">${esc(sc.title)}</span></h2>${sc.timer?`<p data-a><button class="btn" data-min="15">Timer 15 min</button></p>`:""}${!sc.timer&&GIVE[sc.ch]!==undefined?`<span class="stamp act bigstamp" style="--d:.5s">${esc(STAMPS[GIVE[sc.ch]][0])}</span>`:""}`
+      :`<header><p class="eye">${(lay==="demo"&&sc.eye==="Demo")||sc.tag?`<span class="tag">${esc(sc.eye)}</span>`:esc(sc.eye)}</p><h2><span class="up">${esc(sc.title)}</span></h2></header>`;
+    const body=lay==="demo"?`<div class="body"><div class="l">${parts.l.join("")}</div><div class="r">${parts.r.join("")}</div></div>`
+      :parts.l.length||parts.r.length?`<div class="body">${parts.l.concat(parts.r).join("")}</div>`:"";
+    const el=document.createElement("section");
+    el.className="scene "+lay; el.id="s"+(i+1); el.dataset.max=step;
+    el.innerHTML=head+body; deck.appendChild(el);
+    let k=0; $$(".lead,.txt,.note,.src,.card,.prompt,.gift,.row,.case,.tog,.tl>div,.rank>div,.sol,.stat,.opts,.legal,.verd3,[data-a]",el).forEach(x=>{if(x.parentElement.closest("[data-a]"))return;x.setAttribute("data-a","");x.style.setProperty("--d",(.2+k++*.09).toFixed(2)+"s")});
+  });
+  // indice
+  $("#idx").innerHTML=CH.map((c,k)=>`<section><h3>${esc(c)}</h3>${S.map((s,i)=>s.ch===k?`<button data-go="${i}"><span>${i+1}</span>${esc(s.title.replace(/==/g,""))}</button>`:"").join("")}</section>`).join("");
+  // libreria
+  $("#lib").innerHTML=PROMPTS.map((p,id)=>`<figure class="prompt"><figcaption><span>${esc(p.label)}</span><button class="btn copy" data-pid="${id}">Copia</button></figcaption><pre>${esc(p.x)}</pre><div class="from"><span>${esc(CH[S[p.i].ch])} · ${esc(S[p.i].title)}</span><button class="btn" data-go="${p.i}">Vai alla scena</button></div></figure>`).join("");
+}
+
+let cur=0,userRead=null,lastDone=-1;
+const scenes=()=>$$(".scene");
+const R=document.documentElement;
+const isStage=()=>R.classList.contains("stage");
+const still=()=>R.classList.contains("calm")||matchMedia("(prefers-reduced-motion:reduce)").matches;
+function setMode(){const st=userRead===null?innerWidth>=900&&innerHeight>=480:!userRead;R.classList.toggle("stage",st);render()}
+function render(){
+  const c=S[cur].ch;
+  $("#chname").textContent=CH[c];
+  const done=STAMPS.filter(([n,a,b])=>c>b).length;
+  $("#stamps").innerHTML=STAMPS.map(([n,a,b],k)=>`<span class="stamp ${c>b?"done":c>=a?"act":""}${k===done-1&&done>lastDone&&lastDone>=0?" pop":""}">${n}</span>`).join("");
+  lastDone=done;
+  $("#cnt").textContent=(cur+1)+" / "+S.length;
+  $("#prog").style.width=((cur+1)/S.length*100)+"%";
+  const h="#s"+(cur+1); if(location.hash!==h){try{history.replaceState(null,"",h)}catch(e){}}
+}
+function go(i,instant){i=Math.max(0,Math.min(S.length-1,i));scenes()[i].scrollIntoView({behavior:instant||still()?"auto":"smooth",block:"start"})}
+const next=()=>go(cur+1), prev=()=>go(cur-1);
+function fromHash(){const m=/^#s(\d+)$/.exec(location.hash);if(m&&+m[1]-1!==cur)go(+m[1]-1,true)}
+function countUp(el){const to=+el.dataset.to,t0=performance.now();const f=t=>{const p=Math.min(1,(t-t0)/1100);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+function typeOut(fig,delay){const pre=$("pre",fig),full=pre.textContent;pre.style.minHeight=pre.offsetHeight+"px";pre.textContent="";fig.classList.add("typing");let n=0;
+  setTimeout(()=>{const iv=setInterval(()=>{pre.textContent=full.slice(0,++n);if(n>=full.length){clearInterval(iv);fig.classList.remove("typing")}},22)},delay)}
+function seen(el){if(el.classList.contains("seen"))return;el.classList.add("seen");if(still())return;
+  $$(".num",el).forEach(countUp);$$("[data-type]",el).forEach((f,k)=>typeOut(f,700+k*900))}
+function watch(){
+  if(!("IntersectionObserver" in window)){scenes().forEach(e=>e.classList.add("seen"));return}
+  R.classList.add("anim");
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)seen(e.target)}),{threshold:.25});
+  const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){cur=scenes().indexOf(e.target);render()}}),{rootMargin:"-45% 0px -45% 0px"});
+  scenes().forEach(e=>{io.observe(e);io2.observe(e)});
+}
+const openOv=()=>$$(".ov").find(o=>!o.hidden);
+function ov(id){const o=$("#ov-"+id),was=!o.hidden;$$(".ov").forEach(x=>x.hidden=true);o.hidden=was;if(!was){o.scrollTop=0;$(".x",o).focus()}}
+function closeOv(){$$(".ov").forEach(x=>x.hidden=true);$("#timpick").hidden=true}
+function reveal(btn){const b=btn.parentElement.querySelector(".solbody");const open=b.hidden;b.hidden=!open;btn.setAttribute("aria-expanded",open);btn.textContent=open?"Nascondi":(btn.closest(".case")?"Mostra risposta":"Mostra soluzione")}
+async function copy(btn){const t=PROMPTS[+btn.dataset.pid].x;let ok=false;
+  try{await navigator.clipboard.writeText(t);ok=true}catch(e){
+    try{const ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();ok=document.execCommand("copy");ta.remove()}catch(e2){}
+    if(!ok){const pre=btn.closest(".prompt").querySelector("pre"),r=document.createRange();r.selectNodeContents(pre);const s=getSelection();s.removeAllRanges();s.addRange(r)}}
+  btn.textContent=ok?"Copiato":"Selezionato, premete Ctrl+C";btn.classList.toggle("done",ok);setTimeout(()=>{btn.textContent="Copia";btn.classList.remove("done")},1800)}
+let tEnd=0,tInt=0;
+function timer(min){const t=$("#tim");clearInterval(tInt);$("#timpick").hidden=true;if(!min){t.classList.remove("on","end");return}
+  tEnd=Date.now()+min*60000;t.classList.add("on");t.classList.remove("end");
+  const tick=()=>{const r=Math.max(0,Math.round((tEnd-Date.now())/1000));t.textContent=String(Math.floor(r/60)).padStart(2,"0")+":"+String(r%60).padStart(2,"0");if(!r){t.classList.add("end");t.textContent="Tempo";clearInterval(tInt)}};
+  tick();tInt=setInterval(tick,500)}
+function theme(){const r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches;r.dataset.theme=dark?"light":"dark"}
+
+document.addEventListener("click",e=>{
+  const t=e.target.closest("button,a");
+  if(!t)return;
+  if(t.tagName==="A")return;
+  if(t.dataset.pid!==undefined)return copy(t);
+  if(t.dataset.go!==undefined){closeOv();return go(+t.dataset.go,true)}
+  if(t.dataset.min!==undefined)return timer(+t.dataset.min);
+  if(t.classList.contains("solbtn"))return reveal(t);
+  if(t.classList.contains("tog")){t.setAttribute("aria-pressed",t.getAttribute("aria-pressed")!=="true");const box=t.parentElement,n=$$('.tog[aria-pressed="true"]',box).length,v=box.nextElementSibling;
+    v.classList.toggle("bad",n===3);v.textContent=n===3?"Tre su tre: l'ultima azione la fa una persona.":n===0?"Attivate le caselle: quante sono presenti nel vostro caso?":n+" su tre: l'IA può lavorare da sola.";return}
+  const a=t.dataset.act;
+  if(a==="close")closeOv();else if(a==="idx"||a==="lib"||a==="keys")ov(a);
+  else if(a==="timer")$("#timpick").hidden=!$("#timpick").hidden;
+  else if(a==="mode"){userRead=false;setMode()}
+});
+document.addEventListener("keydown",e=>{
+  if(e.ctrlKey||e.metaKey||e.altKey)return;
+  const k=e.key,low=k.toLowerCase();
+  if(k==="Escape"){closeOv();return}
+  if(low==="g"){ov("idx");return} if(low==="p"){ov("lib");return} if(k==="?"){ov("keys");return}
+  if(openOv())return;
+  if(low==="f"){const d=document;(d.fullscreenElement?d.exitFullscreen():d.documentElement.requestFullscreen()).catch(()=>{});return}
+  if(low==="m"){document.documentElement.classList.toggle("calm");return}
+  if(low==="l"){theme();return}
+  if(low==="r"){const c=cur;userRead=isStage();setMode();go(c,true);return}
+  if(low==="t"){$("#timpick").hidden=!$("#timpick").hidden;return}
+  if(low==="s"){const b=$(".sol .solbtn",scenes()[cur]);if(b)reveal(b);return}
+  if(/^[1-4]$/.test(k)){const b=$$(".case .solbtn",scenes()[cur])[+k-1];if(b)reveal(b);return}
+  if(e.target.closest("button")&&(k===" "||k==="Enter"))return;
+  if(["ArrowRight","ArrowDown"," ","PageDown"].includes(k)){e.preventDefault();next()}
+  else if(["ArrowLeft","ArrowUp","PageUp"].includes(k)){e.preventDefault();prev()}
+  else if(k==="Home")go(0); else if(k==="End")go(S.length-1);
+});
+addEventListener("hashchange",fromHash);
+addEventListener("resize",()=>{if(userRead===null)setMode()});
+build();
+setMode();
+const m0=/^#s(\d+)$/.exec(location.hash); if(m0){cur=Math.max(0,Math.min(S.length-1,+m0[1]-1));go(cur,true)}
+watch();render();
+</script>
+
+</body>
+</html>
