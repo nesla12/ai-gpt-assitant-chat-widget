@@ -252,15 +252,23 @@ const P=(label,x,o={})=>({t:"prompt",label,x,...o});
 const S=[
 {ch:0,lay:"cover",eye:"Plenaria HIT",title:"Lavorare ==meglio== con l'IA",b:[
  {t:"lead",x:"Prompt, ragionamento, memoria e strumenti: come far lavorare bene un assistente IA e come fidarsi dei risultati."},
- {t:"html",x:`<p class="by" data-a>Lorenzo Nesler, AI Automation Coach</p><p class="hint0" data-a>Scorrete, oppure premete la freccia a destra</p>`}]},
-{ch:0,lay:"demo",eye:"Il problema",title:"Un nuovo bando Horizon",b:[
- {t:"lead",x:`Il 13 ottobre si è aperto il topic HORIZON-CL4-2027-02-DIGITAL-EMERGING-52, "New approaches for Human/AI collaboration for the workforce of the future". 30 milioni di euro, primo stage entro il 2 febbraio 2027.`},
+ {t:"html",x:`<p class="by" data-a>Lorenzo Nesler · aiautomationcoach.com</p>`}]},
+{ch:0,eye:"Perché siamo qui",title:"Cosa vi portate a casa oggi",b:[
+ {t:"lead",x:"HIT coordina ARCADIA: strumenti di IA per valorizzare la conoscenza, nel rispetto di AI Act e GDPR. ==Chi li costruisce per gli altri deve saperli usare meglio di tutti.=="},
+ {t:"cards",cols:3,s:1,items:[
+  ["Scelta consapevole","Sapere quale strumento e quale livello di personalizzazione usare per ogni compito."],
+  ["Risultati verificabili","Ricerca con fonti tracciabili e un metodo per valutarne l'affidabilità."],
+  ["Uso conforme","Regole chiare su AI Act, GDPR e dati aziendali nell'uso quotidiano."]]},
+ {t:"txt",x:"Oggi le fondamenta comuni. Poi quattro moduli di reparto sui vostri casi e un modulo sull'IA agentica."}]},
+{ch:0,eye:"Il caso di oggi",title:"Martedì arriva il bando, venerdì si decide",b:[
+ {t:"lead",x:`Il 13 ottobre si è aperto il topic HORIZON-CL4-2027-02-DIGITAL-EMERGING-52, "New approaches for Human/AI collaboration for the workforce of the future". Vale la pena approfondirlo?`},
  {t:"stats"},
- {t:"note",x:"Domanda: vale la pena approfondirlo?",s:1},
- {t:"txt",x:"Lo chiediamo all'IA come facciamo di solito.",s:1},
- P("Prompt A",`Riassumimi questo bando.`,{s:1,type:1}),
- P("Prompt B",`Sei un esperto di progetti europei con 20 anni di esperienza. Riassumimi questo bando.`,{s:1,type:1}),
- {t:"txt",x:"==Per alzata di mano: quale dei due dà la risposta più corretta?==",s:1}]},
+ {t:"cards",cols:4,s:1,items:[
+  ["Capire cosa chiede","Requisiti, budget, scadenze."],
+  ["Trovare da dove partire","I progetti già finanziati che il bando cita."],
+  ["Misurare cosa manca","Una gap analysis da portare in direzione."],
+  ["Non sbagliare","Fatti, date e regole verificati."]]},
+ {t:"note",x:"Prima prova, adesso: chiedete a Gemini di riassumerlo ==come fareste di solito==. Tenete aperta la risposta: ci torniamo a fine mattinata.",s:1}]},
 {ch:0,eye:"Immagine guida",title:"Un collaboratore appena arrivato",b:[
  {t:"lead",x:"Sa moltissimo, scrive bene, lavora in fretta. Ma non conosce voi, il vostro lavoro né il compito."},
  {t:"txt",x:"Oggi gli diamo una cosa alla volta:"},
@@ -481,7 +489,7 @@ Se un dato non c'è, scrivi "non risulta".`),
  {t:"note",x:"Nessuna riga sul ruolo: ==l'incarico basta==.",s:1}]},
 {ch:7,lay:"demo",eye:"Demo",title:"Prima e dopo",b:[
  P("Prompt",`Scrivi una nota di una pagina per la direzione: vale la pena approfondire? Massimo 5 punti: copertura, lacune, condizioni, rischi, prossimi passi con scadenze. Tono asciutto, solo fatti delle fonti.`),
- {t:"txt",x:"Accanto: il riassunto delle 9."},
+ {t:"txt",x:"Accanto: la vostra prima risposta di stamattina."},
  {t:"note",x:"Stesso modello, stesso bando. Il collaboratore è lo stesso: ==è cambiato quello che gli abbiamo dato==.",s:1}]},
 {ch:7,eye:"Sintesi",title:"Il modello e il resto",b:[
  {t:"lead",x:"Il modello è un cervello in un vaso: sa moltissimo, ma da solo non vede, non ricorda, non controlla."},
