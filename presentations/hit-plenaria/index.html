@@ -228,6 +228,35 @@ html.anim.stage[data-dir="b"] .scene.on{animation-name:pgb}
 @keyframes pgf{from{opacity:0;transform:translateX(3rem)}}
 @keyframes pgb{from{opacity:0;transform:translateX(-3rem)}}
 .w{display:inline-block}
+.vz{display:flex;flex-direction:column;gap:.5rem;margin:.9rem 0;min-height:9rem;justify-content:center}
+.vz.docs{flex-direction:row;gap:.6rem;align-items:stretch}
+.doc{flex:1;background:var(--bg);border:1px solid var(--line);padding:.8rem .55rem;display:flex;flex-direction:column;gap:.5rem;justify-content:center;border-radius:.15rem}
+.vz i{display:block;height:.5rem;background:var(--line);border-radius:.25rem;transition:background .5s .25s,transform .5s .25s}
+.vz i.short{width:55%}
+.vz.pr i.hit{background:var(--mark)}
+.flow:has(.node:nth-child(2):not(.hid)) .docs i.hit{background:var(--mark);transform:scaleY(1.5)}
+.chip{font-family:var(--mono);font-size:.95rem;border:1px solid var(--ink2);padding:.1em .6em;align-self:flex-start;border-radius:.2rem;color:var(--ink)}
+.scanw{height:.3rem;background:var(--line);border-radius:.2rem;overflow:hidden;margin-top:.6rem}
+.scan{height:100%;width:30%;background:var(--mark);animation:scan 1.6s ease-in-out infinite alternate}
+@keyframes scan{to{transform:translateX(235%)}}
+.node.hl .vz i{background:rgba(27,25,26,.3)}
+.ans div{display:flex;gap:.4rem;margin-top:.3rem}
+.chip.c{background:#1B191A;color:#FFDC4D;border:0;border-radius:50%;width:1.9em;height:1.9em;padding:0;display:grid;place-items:center;font-weight:500}
+.node.wv b{font-size:1.45rem}
+.meter{display:none}
+html.stage .scene .stackw{grid-template-columns:auto 1fr auto;align-items:center;gap:2.2rem}
+.node.hl .chip.c{color:#FFDC4D}
+html.stage .meter{display:flex;flex-direction:column;align-items:center;gap:.8rem;align-self:stretch;padding-top:2rem}
+html.stage .meter i{flex:1;width:.9rem;border:1px solid var(--line);border-radius:.5rem;background:linear-gradient(to top,var(--mark) calc(var(--f) * 100%),transparent 0);transition:background .5s}
+html.stage .meter span{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--mono);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+html.stage .bar{box-shadow:0 .4rem 1rem rgba(0,0,0,.28);padding:.65rem 1.3rem}
+html.stage .stack{gap:.5rem}
+html.stage .stack .bar:nth-child(even){transform:rotate(-.5deg)}
+html.stage .stack .bar:nth-child(odd){transform:rotate(.4deg)}
+html.stage .scene .stack .bar[data-step]{transition:opacity .3s ease-out,transform .65s cubic-bezier(.3,1.5,.5,1)}
+html.stage .scene .stack .bar.hid{transform:translateY(-5rem) rotate(-8deg)!important}
+html.stage .out .arr{transition:transform .5s cubic-bezier(.3,1.5,.5,1) .15s}
+html.stage .out.hid .arr{transform:translateX(-2rem)}
 html.stage #deck{position:fixed;inset:0;overflow:hidden}
 html.stage .vennw{gap:1.4rem}html.stage .verd3{min-height:0}
 html.anim.stage .big .w{transition:opacity .5s ease-out,transform .5s cubic-bezier(.2,.7,.2,1);transition-delay:calc(.25s + var(--i) * 70ms)}
@@ -539,7 +568,7 @@ Se un'informazione manca, scrivi "non indicato".`,{sm:1}),
  {t:"note",x:"Poi provate: chiedete un parere su un'idea debole. ==Vi contraddice?=="},
  {t:"src",x:"Profilo e regole insieme devono stare in 1.024 caratteri."}]},
 {ch:3,eye:"Memoria dei documenti",title:"Rispondere dai documenti",b:[
- {t:"flow",items:[["I vostri documenti","Report, contratti, bandi"],["Ricerca","I passaggi più vicini alla domanda"],["Prompt","Passaggi più domanda"],["Risposta con citazione","Un clic e controllate",1]]},
+ {t:"flow",items:[["I vostri documenti","Report, contratti, bandi",0,"docs"],["Ricerca","I passaggi più vicini alla domanda",0,"search"],["Prompt","Passaggi più domanda",0,"prompt"],["Risposta con citazione","Un clic e controllate",1,"answer"]]},
  {t:"src",x:"Si chiama RAG. È la memoria di Gemini Notebook, dei progetti di ChatGPT e Claude, di Copilot su SharePoint.",big:1},
  {t:"note",x:"Limiti: trova solo ciò che c'è, a volte prende il passaggio sbagliato, con scansioni scadenti peggiora."}]},
 {ch:3,lay:"demo",eye:"Demo",logo:"gemini",title:"Deep Research: la lanciamo ora",b:[
@@ -683,6 +712,11 @@ const $=(q,r=document)=>r.querySelector(q), $$=(q,r=document)=>[...r.querySelect
 const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const fmt=s=>esc(s).replace(/==(.+?)==/g,"<mark>$1</mark>");
 const logo=k=>LOGO[k]?`<svg class="lg" viewBox="0 0 24 24" aria-hidden="true"><path d="${LOGO[k]}"/></svg>`:"";
+const VIZ={
+ docs:`<div class="vz docs"><div class="doc"><i></i><i class="hit"></i><i></i><i></i></div><div class="doc"><i></i><i></i><i class="hit"></i><i></i></div><div class="doc"><i class="hit"></i><i></i><i></i><i></i></div></div>`,
+ search:`<div class="vz"><span class="chip">La domanda</span><div class="scanw"><div class="scan"></div></div></div>`,
+ prompt:`<div class="vz pr"><span class="chip">La domanda</span><i class="hit"></i><i class="hit"></i><i class="hit"></i></div>`,
+ answer:`<div class="vz ans"><i></i><i></i><i class="short"></i><div><span class="chip c">1</span><span class="chip c">2</span><span class="chip c">3</span></div></div>`};
 const PROMPTS=[];
 function words(x){let i=0,out="";x.split(" ").forEach(w=>{const open=w.startsWith("=="),close=w.length>2&&w.endsWith("==");if(open)out+="<mark>";out+=`<span class="w" style="--i:${i++}">${esc(w.replace(/==/g,""))}</span>`;if(close)out+="</mark>";out+=" "});return out}
 function promptHTML(label,x,i,sm,show){const id=PROMPTS.push({label,x,i})-1;
@@ -708,8 +742,8 @@ function build(){
       else if(b.t==="cards")h=`<div class="cards c${b.cols}${b.q?" q":""}">`+b.items.map(([a,p,f,d])=>`<div class="card">${f?`<b class="fig">${esc(f)}</b>`:""}${d?`<div class="dots">${Array.from({length:100},(_,q)=>`<i${q<d?` class="x" style="--i:${q}"`:""}></i>`).join("")}</div>`:""}<h3>${fmt(a)}</h3><p>${fmt(p)}</p></div>`).join("")+`</div>`;
       else if(b.t==="logos")h=`<div class="logos${b.hl?" hl1":""}">`+b.items.map(([k,n,p])=>`<div class="logo" data-a>${logo(k)}<h3>${esc(n)}</h3><p>${esc(p)}</p></div>`).join("")+`</div>`;
       else if(b.t==="table")h=`<div class="tw" data-a><table class="cmp${b.gl?" gl":""}"><thead><tr>${b.head.map(x=>`<th>${esc(x)}</th>`).join("")}</tr></thead><tbody>`+b.rows.map(r=>`<tr>`+r.map(c=>Array.isArray(c)?`<th scope="row">${logo(c[0])}<span>${esc(c[1])}</span></th>`:`<td>${esc(c)}</td>`).join("")+`</tr>`).join("")+`</tbody></table></div>`;
-      else if(b.t==="flow")h=`<div class="flow">`+b.items.map(([a,p,hl])=>`<div class="node${hl?" hl":""}" data-a><b>${esc(a)}</b><span>${esc(p)}</span></div>`).join("")+`</div>`;
-      else if(b.t==="stack")h=`<div class="stackw"><div class="stack"><p class="cap" data-a>La sua scrivania: ciò che ha davanti quando risponde</p>`+b.items.map(([a,p])=>`<div class="bar" data-a><b>${esc(a)}</b><span>${esc(p)}</span></div>`).join("")+`<div class="bar hl" data-a><b>${esc(b.last[0])}</b><span>${esc(b.last[1])}</span></div></div><div class="out" data-a><span class="arr">→</span><b>Risposta</b></div></div>`;
+      else if(b.t==="flow")h=`<div class="flow">`+b.items.map(([a,p,hl,vz])=>`<div class="node${hl?" hl":""}${vz?" wv":""}" data-a><b>${esc(a)}</b>${vz?VIZ[vz]:""}<span>${esc(p)}</span></div>`).join("")+`</div>`;
+      else if(b.t==="stack")h=`<div class="stackw" style="--f:1"><div class="meter" data-a><i></i><span>Spazio sulla scrivania</span></div><div class="stack"><p class="cap" data-a>La sua scrivania: ciò che ha davanti quando risponde</p>`+b.items.map(([a,p])=>`<div class="bar" data-a><b>${esc(a)}</b><span>${esc(p)}</span></div>`).join("")+`<div class="bar hl" data-a><b>${esc(b.last[0])}</b><span>${esc(b.last[1])}</span></div></div><div class="out" data-a><span class="arr">→</span><b>Risposta</b></div></div>`;
       else if(b.t==="levels")h=`<div class="levels">`+b.items.map(([a,p,ex],k)=>`<div class="lvl" data-a style="--k:${k}"><span class="n">Livello ${k+1}</span><h3>${esc(a)}</h3><p>${esc(p)}</p><p class="ex">${esc(ex)}</p></div>`).join("")+`</div>`;
       else if(b.t==="vprompts")h=`<div class="cards c4 q">`+b.items.map(([a,p,plain])=>`<div class="card"><h3>${fmt(a)}</h3>${p?`<div style="margin-top:.7rem">${promptHTML(a,p,i,1,"Prompt")}</div>`:`<p>${fmt(plain)}</p>`}</div>`).join("")+`</div>`;
       else if(b.t==="gifts")h=`<div class="gifts">`+b.items.map(([a,p])=>`<div class="gift"><span class="stamp act">${esc(a)}</span><p>${esc(p)}</p></div>`).join("")+`</div>`;
@@ -761,7 +795,8 @@ function render(){
 function countUp(el){const to=+el.dataset.to,t0=performance.now();const f=t=>{const p=Math.min(1,(t-t0)/1100);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
 function seen(el){if(el.classList.contains("seen"))return;el.classList.add("seen");if(!still())$$(".num",el).forEach(countUp)}
 function applyStep(){const sc=scenes()[cur];$$("[data-step]",sc).forEach(e=>e.classList.toggle("hid",+e.dataset.step>step));
-  $$(".sem",sc).forEach(s=>{const rows=$$(".amp",s),lamps=$$(".lamp",s);let last=-1;rows.forEach((x,k)=>{const on=!isStage()||!x.classList.contains("hid");lamps[k].classList.toggle("on",on);if(on)last=k});lamps.forEach((l,k)=>l.classList.toggle("now",k===last&&isStage()&&last<rows.length-1||k===last&&step===last+1))})}
+  $$(".sem",sc).forEach(s=>{const rows=$$(".amp",s),lamps=$$(".lamp",s);let last=-1;rows.forEach((x,k)=>{const on=!isStage()||!x.classList.contains("hid");lamps[k].classList.toggle("on",on);if(on)last=k});lamps.forEach((l,k)=>l.classList.toggle("now",k===last&&isStage()&&last<rows.length-1||k===last&&step===last+1))});
+  $$(".stackw",sc).forEach(s=>{const b=$$(".bar",s);s.style.setProperty("--f",isStage()?b.filter(x=>!x.classList.contains("hid")).length/b.length:1)})}
 function go(i,s){i=Math.max(0,Math.min(S.length-1,i));R.dataset.dir=i<cur?"b":"f";cur=i;const els=scenes(),el=els[i];step=s===undefined?+el.dataset.max:s;applyStep();
   if(isStage()){els.forEach((e,k)=>{e.classList.toggle("on",k===i);if(k!==i)e.classList.remove("seen")});void el.offsetWidth;requestAnimationFrame(()=>requestAnimationFrame(()=>seen(el)))}
   else{els.forEach(e=>e.classList.remove("on"));el.scrollIntoView({block:"start"})}
