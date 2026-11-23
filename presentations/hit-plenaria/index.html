@@ -231,6 +231,8 @@ html.anim.stage[data-dir="b"] .scene.on{animation-name:pgb}
 @keyframes pgb{from{opacity:0;transform:translateX(-3rem)}}
 .w{display:inline-block}
 .kw{color:var(--mark);font-weight:600}
+html.stage .scene:has(.legal) .big{font-size:3.5rem}
+html.stage .scene:has(.legal) .body{gap:1.6rem}
 :root[data-theme="light"] .kw{color:var(--ink);background:linear-gradient(transparent 62%,var(--mark) 0)}
 html.stage .sect h2.long{font-size:5.4rem}
 html.stage .scene.roomy .card p,html.stage .scene.roomy .tl p{font-size:1.5rem;line-height:1.42}
@@ -621,24 +623,6 @@ Per ogni numero: fonte, anno e link. Distingui i dati delle aziende da quelli in
   ["Farsi un quadro di una tecnologia o di un mercato","Deep Research di Gemini, incluso.","gemini"],
   ["Leggere e confrontare siti di enti","Claude in Chrome o l'agente di ChatGPT. Gemini in Chrome non è disponibile in Italia.","claude,openai"],
   ["Un'analisi critica difficile, una gap analysis","Serve un processo: modello forte, incarico preciso, Thinking, e un secondo agente che rilegge e corregge.",""]]}]},
-{ch:7,lg:1,eye:"Regole",title:"EU AI Act: cosa vale per HIT",b:[
- {t:"lead",x:"HIT usa sistemi di IA nel proprio lavoro. Per l'AI Act è un **utilizzatore** (deployer)."},
- {t:"tl",items:[
-  ["2025-02-02","Dal 2 febbraio 2025","Alcune pratiche sono **vietate**. Chi usa l'IA deve **formare il personale** (art. 4): questa mattina fa parte di quella formazione."],
-  ["2026-08-02","Dal 2 agosto 2026","**Trasparenza** (art. 50). Un deepfake va sempre dichiarato. Un testo scritto con l'IA su temi di interesse pubblico va dichiarato, a meno che una persona lo **riveda e ne risponda**."],
-  ["2027-12-02","Dal 2 dicembre 2027","Regole per i sistemi ad **alto rischio**, per esempio quelli che selezionano o valutano il personale."]]},
- {t:"links",items:[["Icone ufficiali UE per i contenuti generati con IA","https://digital-strategy.ec.europa.eu/it/policies/eu-icons-labelling-ai-generated-content"]]}]},
-{ch:7,lg:1,eye:"Regole",title:"Legge italiana: due norme da conoscere",b:[
- {t:"cards",cols:2,items:[
-  ["Legge 132/2025","Se un sistema **decide o controlla in automatico**, il datore di lavoro deve **informare i lavoratori**. I professionisti dicono ai clienti quali strumenti di IA usano. Il **diritto d'autore** protegge solo ciò che nasce dal lavoro intellettuale di una persona."],
-  ["Decreto legislativo 179/2026","Nel rapporto di lavoro le decisioni finali su assunzione, valutazione e disciplina le prende **una persona**. Una decisione presa solo da un sistema automatico è **nulla**. La prima selezione delle candidature non rientra in questa regola."]]}]},
-{ch:7,lg:1,eye:"Regole",title:"GDPR e IA: le basi",b:[
- {t:"cards",cols:4,q:1,items:[
-  ["Un prompt è un trattamento","Se nel prompt ci sono **dati personali**, vale il GDPR come per ogni altro trattamento."],
-  ["Solo con un contratto","L'**account aziendale** ha un accordo sul trattamento dei dati con il fornitore. In un account personale gratuito ciò che scrivete può essere riutilizzato."],
-  ["Meno dati possibile","Mettete solo ciò che serve al compito. Dove potete, **togliete i nomi**."],
-  ["Decisioni su persone","Nessuno deve subire una decisione importante presa **solo da un sistema automatico**: ha diritto all'intervento di una persona (art. 22)."]]},
- {t:"src",x:"Il Digital Omnibus propone di semplificare il GDPR. Il negoziato è ancora aperto: oggi vale il testo attuale."}]},
 {ch:7,eye:"Dati",title:"Il semaforo dei dati",b:[
  {t:"ampel",items:[
   ["g","Verde","Ogni strumento","Bandi pubblici, testi del sito, esempi anonimizzati.","Potrebbe uscire domani sul giornale?"],
@@ -657,22 +641,51 @@ Per ogni numero: fonte, anno e link. Distingui i dati delle aziende da quelli in
   ["Far classificare a Gemini 40 candidature a un programma e scartare in automatico le ultime 20.","co","Sì, con condizioni","La classifica aiuta. Lo scarto lo decide una persona (GDPR art. 22, se i candidati sono persone fisiche)."],
   ["Pubblicare sul sito una notizia scritta con l'IA, rivista e firmata dalla comunicazione.","co","Sì, con condizioni","Revisione umana e un responsabile editoriale (art. 50)."]]},
  {t:"html",x:`<p class="opts">Sì · Sì, con condizioni · No</p>`}]},
-{ch:7,eye:"Sicurezza",title:"Ogni testo può dare ordini",b:[
- {t:"lead",x:"Per l'IA ogni documento, mail o pagina web può contenere istruzioni. Si chiama prompt injection."},
- {t:"three",items:[["Dati vostri","Posta, file, calendario."],["Contenuti non fidati","Mail, PDF di terzi, siti."],["Possibilità di agire","Inviare, condividere, cancellare."]]},
- {t:"note",x:"Regola del due: al massimo due su tre. Se ci sono tutti e tre, ==l'ultima azione la fa una persona==."},
- {t:"src",x:"Fonte: Meta, Agents Rule of Two, 31/10/2025."}]},
+{ch:7,lg:1,eye:"Regole",title:"EU AI Act: cosa vale per HIT",b:[
+ {t:"lead",x:"HIT usa sistemi di IA nel proprio lavoro. Per l'AI Act è un **utilizzatore** (deployer)."},
+ {t:"tl",items:[
+  ["2025-02-02","Dal 2 febbraio 2025","Alcune pratiche sono **vietate**. Chi usa l'IA deve **formare il personale** (art. 4): questa mattina fa parte di quella formazione."],
+  ["2026-08-02","Dal 2 agosto 2026","**Trasparenza** (art. 50). Un deepfake va sempre dichiarato. Un testo scritto con l'IA su temi di interesse pubblico va dichiarato, a meno che una persona lo **riveda e ne risponda**."],
+  ["2027-12-02","Dal 2 dicembre 2027","Regole per i sistemi ad **alto rischio**, per esempio quelli che selezionano o valutano il personale."]]},
+ {t:"links",items:[["Icone ufficiali UE per i contenuti generati con IA","https://digital-strategy.ec.europa.eu/it/policies/eu-icons-labelling-ai-generated-content"]]}]},
+{ch:7,lg:1,eye:"Regole",title:"Legge italiana: due norme da conoscere",b:[
+ {t:"cards",cols:2,items:[
+  ["Legge 132/2025","Se un sistema **decide o controlla in automatico**, il datore di lavoro deve **informare i lavoratori**. I professionisti dicono ai clienti quali strumenti di IA usano. Il **diritto d'autore** protegge solo ciò che nasce dal lavoro intellettuale di una persona."],
+  ["Decreto legislativo 179/2026","Nel rapporto di lavoro le decisioni finali su assunzione, valutazione e disciplina le prende **una persona**. Una decisione presa solo da un sistema automatico è **nulla**. La prima selezione delle candidature non rientra in questa regola."]]}]},
+{ch:7,lg:1,eye:"Regole",title:"GDPR e IA: le basi",b:[
+ {t:"cards",cols:4,q:1,items:[
+  ["Un prompt è un trattamento","Se nel prompt ci sono **dati personali**, vale il GDPR come per ogni altro trattamento."],
+  ["Solo con un contratto","L'**account aziendale** ha un accordo sul trattamento dei dati con il fornitore. In un account personale gratuito ciò che scrivete può essere riutilizzato."],
+  ["Meno dati possibile","Mettete solo ciò che serve al compito. Dove potete, **togliete i nomi**."],
+  ["Decisioni su persone","Nessuno deve subire una decisione importante presa **solo da un sistema automatico**: ha diritto all'intervento di una persona (art. 22)."]]},
+ {t:"src",x:"Il Digital Omnibus propone di semplificare il GDPR. Il negoziato è ancora aperto: oggi vale il testo attuale."}]},
 {ch:7,lg:1,eye:"Policy",title:"Una policy interna minima",b:[
  {t:"cards",cols:4,q:1,items:[
   ["Strumenti approvati","Quali, con quale edizione e quale account."],
   ["Classi di dati","Cosa si può inserire, cosa solo anonimizzato, cosa mai."],
   ["Cosa può fare l'IA da sola","Legge e prepara bozze. ==Inviare, pubblicare, decidere su persone resta a voi.=="],
   ["Responsabilità","Ogni documento ha un referente. Formazione documentata, revisione annuale."]]}]},
-{ch:8,eye:"Prossimi passi",title:"I vostri casi",b:[
- {t:"lead",x:"I post-it di stamattina: un compito che ripetete ogni settimana."},
- {t:"cards",cols:2,items:[
-  ["Moduli di reparto","Sui vostri casi: piani di valorizzazione, analisi di bandi, ecosistemi, estrazione dati da documenti."],
-  ["Modulo sull'IA agentica","Quando ha senso un agente, come si progetta, e un flusso costruito insieme."]]},
+{ch:8,eye:"Prossimi passi",title:"Prima dei moduli: un form di cinque minuti",b:[
+ {t:"lead",x:"Ogni modulo di reparto parte dal vostro lavoro. Per prepararlo vi faccio qualche domanda online."},
+ {t:"cards",cols:3,items:[
+  ["Cosa vi costa tempo","Quale attività ricorrente vi prende più tempo o energia? Con un esempio recente."],
+  ["Cosa volete portare","Quale compito concreto vorreste affrontare con l'IA durante il modulo?"],
+  ["Su cosa lavoriamo","Avete materiale vero, senza dati personali? Una scheda, un report, un documento interno."]]},
+ {t:"note",x:"Pensate a un compito che fate ogni settimana. ==Partiamo da lì.=="}]},
+{ch:8,eye:"Prossimi passi",title:"Un modulo di reparto: due ore sul vostro lavoro",b:[
+ {t:"flow",items:[["Una storia del reparto","Un caso che conoscete"],["Una demo","Su materiale vero"],["Tocca a voi","Lo stesso lavoro, sul vostro caso"],["Ciò che resta","Prompt, skill e modelli pronti",1]]},
+ {t:"src",x:"Quattro sessioni online da due ore, una per reparto. Per un reparto segue il modulo sull'IA agentica: quattro ore per costruire un flusso che funziona.",big:1}]},
+{ch:8,eye:"Guardando avanti",title:"All'elettricità sono serviti quarant'anni",b:[
+ {t:"cards",cols:3,items:[
+  ["La prima centrale elettrica","Le fabbriche cambiano il motore e lasciano tutto il resto com'era.","1881"],
+  ["La produttività sale","Succede quando le fabbriche vengono ridisegnate intorno al motore elettrico.","1920"],
+  ["Imprese italiane che usano l'IA","Un anno prima erano l'8,2%. Il lavoro di riorganizzarsi è appena cominciato.","16,4%"]]},
+ {t:"note",x:"Il guadagno arriva a chi ripensa il proprio lavoro. ==Stamattina avete cominciato.=="},
+ {t:"src",x:"Paul David, The Dynamo and the Computer, 1990 · ISTAT, Imprese e ICT 2025."}]},
+{ch:8,eye:"Guardando avanti",title:"Dalla ricerca alla società",b:[
+ {t:"lead",x:"Nel 1962 Bruno Kessler disse che il Trentino non poteva crescere di sole mele. Da quella scommessa sulla ricerca nasce anche il vostro lavoro."},
+ {t:"big",x:"Oggi la ricerca corre più veloce. ==Portarla dove serve resta il vostro mestiere.=="},
+ {t:"src",x:"AlphaFold ha previsto oltre 200 milioni di strutture di proteine, usate da più di 3 milioni di persone in 190 paesi."},
  {t:"html",x:`<p data-a><button class="btn" data-act="lib">Apri tutti i prompt</button></p><p class="by" data-a>Lorenzo Nesler · aiautomationcoach.com</p><p class="legal" data-a>${LEGAL}</p>`}]}
 ];
 
