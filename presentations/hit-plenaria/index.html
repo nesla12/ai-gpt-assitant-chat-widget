@@ -231,8 +231,13 @@ html.anim.stage[data-dir="b"] .scene.on{animation-name:pgb}
 @keyframes pgb{from{opacity:0;transform:translateX(-3rem)}}
 .w{display:inline-block}
 .kw{color:var(--mark);font-weight:600}
+.qr{display:flex;flex-direction:column;align-items:center;gap:1.2rem}
+.qr img{width:100%;max-width:24rem;image-rendering:pixelated;background:#fff;padding:1rem;border-radius:.3rem}
+.qr a{font-family:var(--mono);font-size:1.5rem;color:var(--ink);text-underline-offset:.25em}
 html.stage .scene:has(.legal) .big{font-size:3.5rem}
-html.stage .scene:has(.legal) .body{gap:1.6rem}
+html.stage .scene:has(.legal) .body{gap:1.3rem}
+html.stage .scene:has(.legal) .lead{font-size:1.45rem}
+html.stage .scene:has(.legal) .quote{font-size:1.4rem}
 :root[data-theme="light"] .kw{color:var(--ink);background:linear-gradient(transparent 62%,var(--mark) 0)}
 html.stage .sect h2.long{font-size:5.4rem}
 html.stage .scene.roomy .card p,html.stage .scene.roomy .tl p{font-size:1.5rem;line-height:1.42}
@@ -665,27 +670,29 @@ Per ogni numero: fonte, anno e link. Distingui i dati delle aziende da quelli in
   ["Classi di dati","Cosa si può inserire, cosa solo anonimizzato, cosa mai."],
   ["Cosa può fare l'IA da sola","Legge e prepara bozze. ==Inviare, pubblicare, decidere su persone resta a voi.=="],
   ["Responsabilità","Ogni documento ha un referente. Formazione documentata, revisione annuale."]]}]},
-{ch:8,eye:"Prossimi passi",title:"Prima dei moduli: un form di cinque minuti",b:[
- {t:"lead",x:"Ogni modulo di reparto parte dal vostro lavoro. Per prepararlo vi faccio qualche domanda online."},
- {t:"cards",cols:3,items:[
-  ["Cosa vi costa tempo","Quale attività ricorrente vi prende più tempo o energia? Con un esempio recente."],
-  ["Cosa volete portare","Quale compito concreto vorreste affrontare con l'IA durante il modulo?"],
-  ["Su cosa lavoriamo","Avete materiale vero, senza dati personali? Una scheda, un report, un documento interno."]]},
- {t:"note",x:"Pensate a un compito che fate ogni settimana. ==Partiamo da lì.=="}]},
+{ch:8,lay:"demo",eye:"Prossimi passi",title:"Prima dei moduli: un form di cinque minuti",b:[
+ {t:"lead",x:"Ogni modulo di reparto parte dal vostro lavoro. Per prepararlo vi faccio qualche domanda."},
+ {t:"cards",cols:1,items:[
+  ["Cosa vi costa tempo","Un'attività che si ripete, con un esempio recente."],
+  ["Cosa volete portare","Un compito concreto da affrontare con l'IA."],
+  ["Su cosa lavoriamo","Materiale vero, senza dati personali."]]},
+ {t:"note",x:"Pensate a un compito che fate ogni settimana. ==Partiamo da lì.=="},
+ {t:"html",col:"r",x:`<div class="qr" data-a><img src="data:image/png;base64,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" alt="Codice QR del form"><a href="https://3rgx2ywwsq.zite.so" target="_blank" rel="noopener">3rgx2ywwsq.zite.so</a></div>`}]},
 {ch:8,eye:"Prossimi passi",title:"Un modulo di reparto: due ore sul vostro lavoro",b:[
  {t:"flow",items:[["Una storia del reparto","Un caso che conoscete"],["Una demo","Su materiale vero"],["Tocca a voi","Lo stesso lavoro, sul vostro caso"],["Ciò che resta","Prompt, skill e modelli pronti",1]]},
  {t:"src",x:"Quattro sessioni online da due ore, una per reparto. Per un reparto segue il modulo sull'IA agentica: quattro ore per costruire un flusso che funziona.",big:1}]},
-{ch:8,eye:"Guardando avanti",title:"All'elettricità sono serviti quarant'anni",b:[
- {t:"cards",cols:3,items:[
-  ["La prima centrale elettrica","Le fabbriche cambiano il motore e lasciano tutto il resto com'era.","1881"],
-  ["La produttività sale","Succede quando le fabbriche vengono ridisegnate intorno al motore elettrico.","1920"],
-  ["Imprese italiane che usano l'IA","Un anno prima erano l'8,2%. Il lavoro di riorganizzarsi è appena cominciato.","16,4%"]]},
- {t:"note",x:"Il guadagno arriva a chi ripensa il proprio lavoro. ==Stamattina avete cominciato.=="},
+{ch:8,eye:"Guardando avanti",title:"Come l'elettricità, l'automobile, internet",b:[
+ {t:"cards",cols:4,items:[
+  ["Elettricità","Alle fabbriche sono serviti quarant'anni per riorganizzarsi intorno al motore.","1881"],
+  ["Automobile","Ha ridisegnato le città e le distanze.","1908"],
+  ["Web","In trent'anni è entrato in ogni lavoro.","1991"],
+  ["IA generativa","In Italia la usa già il 16,4% delle imprese, il doppio di un anno prima.","2022"]]},
+ {t:"note",x:"Ogni volta il guadagno è andato a chi ha ripensato il proprio lavoro. ==Stamattina avete cominciato.=="},
  {t:"src",x:"Paul David, The Dynamo and the Computer, 1990 · ISTAT, Imprese e ICT 2025."}]},
-{ch:8,eye:"Guardando avanti",title:"Dalla ricerca alla società",b:[
- {t:"lead",x:"Nel 1962 Bruno Kessler disse che il Trentino non poteva crescere di sole mele. Da quella scommessa sulla ricerca nasce anche il vostro lavoro."},
- {t:"big",x:"Oggi la ricerca corre più veloce. ==Portarla dove serve resta il vostro mestiere.=="},
- {t:"src",x:"AlphaFold ha previsto oltre 200 milioni di strutture di proteine, usate da più di 3 milioni di persone in 190 paesi."},
+{ch:8,eye:"Guardando avanti",title:"L'ultima invenzione?",b:[
+ {t:"quote",x:"«La prima macchina ultraintelligente è l'ultima invenzione che l'uomo avrà bisogno di fare.» I. J. Good, matematico, 1965"},
+ {t:"lead",x:"Già oggi l'IA aiuta a fare scoperte: AlphaFold ha previsto oltre 200 milioni di strutture di proteine. Il passo successivo è un'IA che migliora sé stessa, l'**auto-miglioramento ricorsivo**. C'è chi lo ritiene vicino."},
+ {t:"big",x:"Stiamo imparando a usarla ==prima dell'esplosione dell'intelligenza.=="},
  {t:"html",x:`<p data-a><button class="btn" data-act="lib">Apri tutti i prompt</button></p><p class="by" data-a>Lorenzo Nesler · aiautomationcoach.com</p><p class="legal" data-a>${LEGAL}</p>`}]}
 ];
 
@@ -732,7 +739,7 @@ function build(){
       else if(b.t==="tl"){const now=new Date();h=`<div class="tl" style="--n:${b.items.length}">`+b.items.map(([iso,d,p])=>{const on=new Date(iso)<=now;return `<div><p class="d"><b>${esc(d)}</b><span class="st${on?"":" fut"}">${on?"in vigore":"in arrivo"}</span></p><p>${fmt(p)}</p></div>`}).join("")+`</div>`}
       else if(b.t==="vote")h=`<div class="vote">`+b.items.map(([q,c,v,why],k)=>`<div class="case"><span class="k">Caso ${k+1}</span><p class="q">${esc(q)}</p><button class="btn solbtn" aria-expanded="false">Mostra risposta</button><p class="verdict solbody" hidden style="border:0;padding:0"><b class="${c}">${esc(v)}</b>${fmt(why)}</p></div>`).join("")+`</div>`;
       else if(b.t==="three")h=`<div class="vennw"><svg class="venn" viewBox="0 0 200 190" data-a aria-hidden="true"><circle class="vc" cx="72" cy="70" r="55"/><circle class="vc" cx="128" cy="70" r="55"/><circle class="vc" cx="100" cy="118" r="55"/><circle class="vx" cx="100" cy="86" r="13"/></svg><div><div class="three">`+b.items.map(([a,p])=>`<button class="tog" aria-pressed="false"><b>${esc(a)}</b><span>${esc(p)}</span></button>`).join("")+`</div><p class="verd3" aria-live="polite">Attivate le caselle: quante sono presenti nel vostro caso?</p></div></div>`;
-      parts[col].push(h);
+      parts[b.col||col].push(h);
     });
     const lay=sc.lay||"";
     const lg=sc.logo?logo(sc.logo):"";
