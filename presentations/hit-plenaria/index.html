@@ -221,6 +221,8 @@ html.stage .cover{color:#fff}
 html.stage .cover .ph{display:block;width:100%;left:0}
 html.stage .cover .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(24,22,23,.94) 0%,rgba(24,22,23,.8) 45%,rgba(24,22,23,.35) 100%)}
 html.stage .cover .eye,html.stage .cover .by{color:rgba(255,255,255,.82)}
+html.stage .cover .legal{color:rgba(255,255,255,.6)}
+html.stage .cover .btn{border-color:rgba(255,255,255,.7);color:#fff}
 html.anim .ph{transition:opacity .9s ease-out}
 html.anim.stage .scene:not(.seen) .ph{opacity:0}
 html.anim.stage .ph i{transition:transform 22s linear}
@@ -678,22 +680,9 @@ Per ogni numero: fonte, anno e link. Distingui i dati delle aziende da quelli in
   ["Su cosa lavoriamo","Materiale vero, senza dati personali."]]},
  {t:"note",x:"Pensate a un compito che fate ogni settimana. ==Partiamo da lì.=="},
  {t:"html",col:"r",x:`<div class="qr" data-a><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAApQAAAKUCAAAAACfpPfgAAAGdklEQVR42u3dQY7eIAyA0Z8q97+ye4B2EcmWMeS9ZdWZJMwnWFms+MEsfywBogRRIkoQJaIEUSJKECWIElGCKBEliBJRgigRJYgSRIkoQZSIEkSJKEGUIEpECaJElCBKRAmiRJQgShAlogRRIkoQJaIEUYIoESWIElGCKBEliBJRgihBlIgSRIkoQZSIEkQJokSUIEpECaJElCBKRAmiBFEiShAlogRRIkoQJYgSUYIoESWIElFCj6f6F65BHxfF39Hx+zL/78R1tlPi+AZRIkoQJaIEUYIoESWIElGCKBEliBJRgihBlIgSRMkFno6HRMMzVsM7Z+Z2YtM7T19nOyWObxAlogRRIkoQJYgSUYIoESWIElGCKBEliBJEiShBlFzg2fXgzKxHXPLcuHid7ZQ4vkGUiBJECaJElCBKRAmiRJQgSkQJogRRIkoQJaIEUfIhjyXIeTsDE8U/a6cEUSJKECWIElGCKBEliBJRgihBlIgSRIkoQZSIEkSJKGEMMzq/9zMwq+G5y5/DTokoQZSIEkSJKEGUiBJECaJElCBKRAmiRJQgSkRpCRAliJLTbJvRmX43zEq883r5b9bZTokoQZSIEkSJKEGUIEpECaJElCBKRAmiRJQgShAlogRRcoWWGZ2b74Z5O8uT+X9fW2c7JaIEUSJKECWiBFEiShAliBJRgigRJYgSUYIoESWIEkTJYcpndOJjCxib1uXmdbZTIkoQJaIEUSJKECWiBFGCKBEliBJRgigRJYgSUYIoQZQcpnxGp+O+mLci8S4x/Nt2rZ+dEsc3iBJEiShBlIgSRIkoQZQgSkQJokSUIEpECaJElCBK+MfT8ZDMPMmuOZHV8C5v53uqZ4gmrYGdEsc3iBJRgigRJYgSRIkoQZSIEkSJKEGUiBJECaJElCBKLtAyo9Nx18xKvEsknhENa5D52cwzqtfATonjG0SJKEGUiBJECaJElCBKRAmiRJQgShAlogRRIkoQJZd6Jr1Mx5xI5k6a6nepntvp+HushufaKXF8gygRJYgSUYIoESWIEkSJKEGUiBJEiShBlIgSRAmi5DArJr1M8e/bNWMyXfW6uEcHxzeIElFaAkQJokSUIEpECaJElCBKECWiBFEiShAlogRR8nHl9+jsmrOJTc+ovvem+tt+xd/WMdNlp8TxDaJElCBKRAmiRJQgShAlogRRIkoQJaIEUSJKECWIksM8HQ/puM9mFb9LJH5f9TtPuvunY27HTonjG0SJKEGUiBJEiShBlCBKRAmiRJQgSkQJokSUIEoQJYd5Jr1M9T01HXNAmftxMt/RcadPx5raKXF8gygRJYgSUYIoQZSIEkSJKEGUiBJEiShBlCBKRAmi5AKjZnTWpp+NQc/ddbfO2zmgaOjATonjG0SJKEGUiBJEiShBlCBKRAmiRJQgSkQJokSUIEoQJYdZ8bUP/s+/ddxJk3luxwzRpA7slDi+QZSIEkSJKEGUiBJECaJElCBKRAmiRJQgSkQJogRRcpjye3TWoI/L3AMzfXZpFX/brnuI7JQ4vkGUiBJEiShBlCBKRAmiRJQgSkQJokSUIEoQJaIEUXKBp+MhHfMuq/j/VX9vDFrTtelvZKfE8Q2iRJQgSkQJogRRIkoQJaIEUSJKECWIElGCKBEliJJLPbsePOnelrf3ykTDt3X8vurvtVPi+AZRIkpLgChBlIgSRIkoQZSIEkQJokSUIEpECaJElCBKPu6xBLk7eDJ35uyavam+c6h6lsdOieMbRIkoQZSIEkSJKEGUIEpECaJElCBKRAmiRJQgShAlhzGj88vNmLyd28nMu2TuuOl4Fzsljm8QJaK0BIgSRIkoQZSIEkSJKEGUIEpECaJElCBKRAmi5OO2zejE8Od23CFTPY+zDvx72ClxfIMoESWIElGCKEGUiBJEiShBlIgSRIkoQZQgSkQJouQCLTM6a9AHr02/b9I8zvS/kZ0SxzeIElGCKBEliBJRgihBlIgSRIkoQZSIEkSJKEGUIEoOs8IaYKcEUSJKECWiBFEiShAliBJRgigRJYgSUYIoESWIEkSJKEGUiBJEiShBlCBKRAmiRJQgSkQJokSUIEoQJaIEUSJKECWiBFGCKBEliBJRgigRJYgSUYIoQZSIEkSJKEGUiBJECaJElCBKRAmiRJQgSkQJogRRIkoQJaIEUSJKECWIElGCKBEliBJRgij5pr+2xIFKNA9RDAAAAABJRU5ErkJggg==" alt="Codice QR del form"><a href="https://3rgx2ywwsq.zite.so" target="_blank" rel="noopener">3rgx2ywwsq.zite.so</a></div>`}]},
-{ch:8,eye:"Prossimi passi",title:"Un modulo di reparto: due ore sul vostro lavoro",b:[
- {t:"flow",items:[["Una storia del reparto","Un caso che conoscete"],["Una demo","Su materiale vero"],["Tocca a voi","Lo stesso lavoro, sul vostro caso"],["Ciò che resta","Prompt, skill e modelli pronti",1]]},
- {t:"src",x:"Quattro sessioni online da due ore, una per reparto. Per un reparto segue il modulo sull'IA agentica: quattro ore per costruire un flusso che funziona.",big:1}]},
-{ch:8,eye:"Guardando avanti",title:"Come l'elettricità, l'automobile, internet",b:[
- {t:"cards",cols:4,items:[
-  ["Elettricità","Alle fabbriche sono serviti quarant'anni per riorganizzarsi intorno al motore.","1881"],
-  ["Automobile","Ha ridisegnato le città e le distanze.","1908"],
-  ["Web","In trent'anni è entrato in ogni lavoro.","1991"],
-  ["IA generativa","In Italia la usa già il 16,4% delle imprese, il doppio di un anno prima.","2022"]]},
- {t:"note",x:"Ogni volta il guadagno è andato a chi ha ripensato il proprio lavoro. ==Stamattina avete cominciato.=="},
- {t:"src",x:"Paul David, The Dynamo and the Computer, 1990 · ISTAT, Imprese e ICT 2025."}]},
-{ch:8,eye:"Guardando avanti",title:"L'ultima invenzione?",b:[
- {t:"quote",x:"«La prima macchina ultraintelligente è l'ultima invenzione che l'uomo avrà bisogno di fare.» I. J. Good, matematico, 1965"},
- {t:"lead",x:"Già oggi l'IA aiuta a fare scoperte: AlphaFold ha previsto oltre 200 milioni di strutture di proteine. Il passo successivo è un'IA che migliora sé stessa, l'**auto-miglioramento ricorsivo**. C'è chi lo ritiene vicino."},
- {t:"big",x:"Stiamo imparando a usarla ==prima dell'esplosione dell'intelligenza.=="},
- {t:"html",x:`<p data-a><button class="btn" data-act="lib">Apri tutti i prompt</button></p><p class="by" data-a>Lorenzo Nesler · aiautomationcoach.com</p><p class="legal" data-a>${LEGAL}</p>`}]}
+{ch:8,lay:"cover",img:"river",eye:"Guardando avanti",title:"Che cosa le ==chiederete==?",b:[
+ {t:"lead",x:"Per la prima volta lavoriamo accanto a un'intelligenza che non è la nostra."},
+ {t:"html",x:`<p class="by" data-a>Lorenzo Nesler · aiautomationcoach.com</p><p data-a><button class="btn" data-act="lib">Apri tutti i prompt</button></p><p class="legal" data-a>${LEGAL}</p>`}]}
 ];
 
 const $=(q,r=document)=>r.querySelector(q), $$=(q,r=document)=>[...r.querySelectorAll(q)];
