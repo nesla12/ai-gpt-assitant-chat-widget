@@ -210,7 +210,8 @@ html.stage .cover .glow{position:absolute;right:-12rem;top:-14rem;width:60rem;he
 .glow{display:none!important}
 @keyframes drift{to{transform:translate(-9rem,7rem) scale(1.15)}}
 .cover>*{position:relative}
-.ph{background-size:cover;background-position:center;height:15rem;border-radius:.2rem;order:-1}
+.ph{position:relative;overflow:hidden;height:15rem;border-radius:.2rem;order:-1}
+.ph i{position:absolute;inset:0;background-size:cover;background-position:center}
 .cover .ph{display:none}
 html.stage .split{padding-right:calc(40% + 5rem)}
 html.stage .ph{position:absolute;top:0;right:0;bottom:0;left:auto;width:40%;height:auto;border-radius:0;order:0}
@@ -218,8 +219,54 @@ html.stage .cover{color:#fff}
 html.stage .cover .ph{display:block;width:100%;left:0}
 html.stage .cover .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(24,22,23,.94) 0%,rgba(24,22,23,.8) 45%,rgba(24,22,23,.35) 100%)}
 html.stage .cover .eye,html.stage .cover .by{color:rgba(255,255,255,.82)}
-html.anim .ph{transition:opacity .9s ease-out,transform 1.6s cubic-bezier(.2,.7,.2,1)}
-html.anim.stage .scene:not(.seen) .ph{opacity:0;transform:scale(1.05)}
+html.anim .ph{transition:opacity .9s ease-out}
+html.anim.stage .scene:not(.seen) .ph{opacity:0}
+html.anim.stage .ph i{transition:transform 22s linear}
+html.anim.stage .scene.seen .ph i{transform:scale(1.12)}
+html.anim.stage .scene.on{animation:pgf .5s cubic-bezier(.2,.7,.2,1)}
+html.anim.stage[data-dir="b"] .scene.on{animation-name:pgb}
+@keyframes pgf{from{opacity:0;transform:translateX(3rem)}}
+@keyframes pgb{from{opacity:0;transform:translateX(-3rem)}}
+.w{display:inline-block}
+html.stage #deck{position:fixed;inset:0;overflow:hidden}
+html.stage .vennw{gap:1.4rem}html.stage .verd3{min-height:0}
+html.anim.stage .big .w{transition:opacity .5s ease-out,transform .5s cubic-bezier(.2,.7,.2,1);transition-delay:calc(.25s + var(--i) * 70ms)}
+html.anim.stage .scene:not(.seen) .big .w{opacity:0;transform:translateY(.6em)}
+.logo .lg{transition:fill .5s,transform .6s cubic-bezier(.3,1.5,.5,1)}
+html.stage .scene .logos.hl1:has(~ .note:not(.hid)) .logo:not(:first-child){opacity:.35}
+html.stage .scene .logos.hl1:has(~ .note:not(.hid)) .logo:first-child .lg{fill:var(--mark);transform:scale(1.15)}
+html.stage .scene .logo.hid .lg{transform:scale(.4) rotate(-40deg)}
+.dots{display:grid;grid-template-columns:repeat(20,1fr);gap:.28rem;max-width:17rem;margin:0 0 1rem}
+.dots i{aspect-ratio:1;border-radius:50%;background:var(--line)}
+.dots i.x{background:var(--no);transition:background .3s;transition-delay:calc(.3s + var(--i) * 60ms)}
+html.stage .card.hid .dots i.x{background:var(--line);transition-delay:0s}
+.sem{display:grid;grid-template-columns:5.5rem 1fr;gap:1.6rem;align-items:stretch}
+.semh{display:grid;grid-template-rows:repeat(3,1fr);gap:.8rem;padding:.8rem;background:#141213;border:.15rem solid #4D494C;border-radius:3rem;justify-items:center;align-items:center}
+.semr{display:grid;grid-template-rows:repeat(3,1fr);gap:.8rem}
+.lamp{width:100%;max-width:7.5rem;aspect-ratio:1;border-radius:50%;transition:background .4s,box-shadow .5s}
+.lamp.g{grid-row:3;background:#12301F}.lamp.y{grid-row:2;background:#3D3413}.lamp.r{grid-row:1;background:#3A1518}
+.lamp.g.on{background:radial-gradient(circle at 35% 30%,#8DF5B4,#22C55E 60%);box-shadow:0 0 1.5rem #22C55E99}
+.lamp.y.on{background:radial-gradient(circle at 35% 30%,#FFF3B0,#FFD23F 60%);box-shadow:0 0 1.5rem #FFD23F99}
+.lamp.r.on{background:radial-gradient(circle at 35% 30%,#FFB3B3,#FF4D4D 60%);box-shadow:0 0 1.5rem #FF4D4D99}
+.lamp.now{animation:glow 1.6s ease-in-out infinite}
+@keyframes glow{50%{filter:brightness(1.25);transform:scale(1.04)}}
+.sem .amp{background:none;color:var(--ink);padding:0 0 0 1.4rem;display:grid;grid-template-columns:1fr;gap:.2rem 2rem;align-content:center;border-left:.35rem solid var(--line)}
+.sem .amp.g{grid-row:3;border-color:#22C55E}.sem .amp.y{grid-row:2;border-color:#FFD23F;color:var(--ink)}.sem .amp.r{grid-row:1;border-color:#FF4D4D}
+.sem .amp b{font-size:2.2rem}
+.sem .amp strong{font-size:1.35rem;font-weight:600}
+.sem .amp em{font-family:var(--mono);font-size:1.05rem;font-weight:400;color:var(--ink2);margin:0}
+html.stage .sem{grid-template-columns:10.5rem 1fr;gap:3.5rem}
+html.stage .semh{padding:1.1rem;gap:1rem}
+.sem .semr .amp{background:none;color:var(--ink)}
+.sem .semr .amp.g b{color:#4ADE80}.sem .semr .amp.y b{color:#FFD23F}.sem .semr .amp.r b{color:#FF6B6B}
+:root[data-theme="light"] .sem .semr .amp b{color:var(--ink)}
+html.stage .sem{grid-template-columns:9.5rem 1fr}
+html.stage .sem .amp{grid-template-columns:22rem 1fr;grid-template-rows:auto auto}
+html.stage .sem .amp b{grid-column:1;grid-row:1}
+html.stage .sem .amp strong{grid-column:1;grid-row:2}
+html.stage .sem .amp span{grid-column:2;grid-row:1;align-self:end;font-size:1.4rem}
+html.stage .sem .amp em{grid-column:2;grid-row:2}
+html.stage .scene .amp.hid{transform:translateX(-1.5rem)!important}
 .sect .sub{font-size:1.7rem;color:var(--ink2);max-width:22em}
 .quote{border-left:.3rem solid var(--mark);padding-left:1.2rem;font-size:1.5rem;font-style:normal;max-width:34em}
 .gl td:first-child{font-family:var(--display);font-weight:700;white-space:nowrap;padding-right:3rem}
@@ -261,7 +308,7 @@ h2 .lg{width:.8em;height:.8em}
 .out b{border:1px solid var(--ink);padding:1.4rem 1.8rem;font-family:var(--display);font-size:1.8rem;border-radius:.2rem}
 .out .arr{font-size:2.6rem}
 .levels{display:grid;gap:1.8rem;grid-template-columns:1fr}
-.lvl{border-top:.5rem solid var(--ink);padding-top:.9rem}
+.lvl::before{content:"";display:block;height:.5rem;background:var(--mark);margin-bottom:1rem}
 .lvl .n{font-family:var(--mono);font-size:.95rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
 .lvl h3{font-family:var(--display);font-size:1.7rem;margin:.3rem 0 .4rem}
 .lvl .ex{margin-top:.7rem;font-family:var(--mono);font-size:1rem;color:var(--ink2)}
@@ -285,7 +332,9 @@ html.stage .levels{grid-template-columns:repeat(4,1fr);align-items:end}
 html.stage .lvl{margin-bottom:calc((3 - var(--k)) * -0rem);padding-bottom:calc(var(--k) * 2.4rem)}
 html.stage .lvl{transform-origin:bottom}
 html.stage .levels{align-items:start}
-html.stage .lvl{margin-top:calc((3 - var(--k)) * 2.4rem);padding-bottom:0}
+html.stage .lvl{margin-top:0;padding-bottom:0}
+html.stage .lvl::before{height:calc((var(--k) + 1) * 2.3rem);margin-top:calc((3 - var(--k)) * 2.3rem);background:linear-gradient(var(--mark),color-mix(in srgb,var(--mark) 22%,transparent));transform-origin:bottom;transition:transform .7s cubic-bezier(.2,.8,.2,1) .1s}
+html.stage .lvl.hid::before{transform:scaleY(0)}
 html.stage .big{font-size:4.4rem}
 html.stage .vennw{grid-template-columns:15rem 1fr}html.stage .tog{padding:.6rem 1.2rem;gap:.1rem}html.stage .three{gap:.7rem}html.stage .tog b{font-size:1.35rem}
 html.stage .fig{font-size:3.6rem}
@@ -366,7 +415,7 @@ const S=[
 {ch:1,lay:"sect",img:"desk",title:"Gli strumenti",sub:"La sua scrivania: dove lavora e cosa vede."},
 {ch:1,eye:"Scelta",title:"Dove vive il vostro lavoro?",b:[
  {t:"lead",x:`La prima domanda non è "qual è il modello migliore", ma dove sono posta, file e calendario.`},
- {t:"logos",items:[
+ {t:"logos",hl:1,items:[
   ["gemini","Gemini","Dentro Google Workspace: vede Gmail, Drive e Calendar. Incluso."],
   ["microsoft","Microsoft 365 Copilot","Vede Outlook, Teams e SharePoint. Solo con licenza."],
   ["openai","ChatGPT","Esterno: arriva ai vostri dati con connettori da approvare."],
@@ -516,7 +565,7 @@ Per ogni numero: fonte, anno e link. Distingui i dati delle aziende da quelli in
  {t:"lead",x:"Come un collega nuovo che non osa dire «non lo so»: quando non sa, completa comunque, con lo stesso tono sicuro."},
  {t:"cards",cols:3,items:[
   ["Stessa domanda, risposte diverse","Full Fact: cinque assistenti, ogni giorno per 10 settimane. Dati vecchi, conti sbagliati.","22 domande"],
-  ["Link che non esistono","Nei report di ricerca approfondita, circa 1 link citato su 10 era inventato.","10,7%"],
+  ["Link che non esistono","Nei report di ricerca approfondita, circa 1 link citato su 10 era inventato.","10,7%",11],
   ["Cede alla prima obiezione","Non verifica: il modello spesso cambia idea per compiacervi.","«Sei sicuro?»"]]},
  {t:"src",x:"Fonti: Full Fact, ottobre 2026 · University of Pennsylvania, aprile 2026 · UNESCO-UCL, novembre 2026."}]},
 {ch:4,lay:"demo",eye:"Demo",title:"Caccia all'errore",b:[
@@ -635,6 +684,7 @@ const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const fmt=s=>esc(s).replace(/==(.+?)==/g,"<mark>$1</mark>");
 const logo=k=>LOGO[k]?`<svg class="lg" viewBox="0 0 24 24" aria-hidden="true"><path d="${LOGO[k]}"/></svg>`:"";
 const PROMPTS=[];
+function words(x){let i=0,out="";x.split(" ").forEach(w=>{const open=w.startsWith("=="),close=w.length>2&&w.endsWith("==");if(open)out+="<mark>";out+=`<span class="w" style="--i:${i++}">${esc(w.replace(/==/g,""))}</span>`;if(close)out+="</mark>";out+=" "});return out}
 function promptHTML(label,x,i,sm,show){const id=PROMPTS.push({label,x,i})-1;
   return `<figure class="prompt${sm?" sm":""}"><figcaption><span>${esc(show||label)}</span><button class="btn copy" data-pid="${id}">Copia</button></figcaption><pre>${esc(x)}</pre></figure>`}
 function build(){
@@ -647,16 +697,16 @@ function build(){
       else if(b.t==="txt")h=`<p class="txt">${fmt(b.x)}</p>`;
       else if(b.t==="note")h=`<p class="note">${fmt(b.x)}</p>`;
       else if(b.t==="quote")h=`<blockquote class="quote" data-a>${esc(b.x)}</blockquote>`;
-      else if(b.t==="ampel")h=`<div class="ampel">`+b.items.map(([c,n,w,x,q])=>`<div class="amp ${c}" data-a><b>${esc(n)}</b><strong>${esc(w)}</strong><span>${esc(x)}</span><em>${esc(q)}</em></div>`).join("")+`</div>`;
-      else if(b.t==="big")h=`<p class="big" data-a>${fmt(b.x)}</p>`;
+      else if(b.t==="ampel")h=`<div class="sem"><div class="semh" data-a>`+b.items.map(([c])=>`<i class="lamp ${c} on"></i>`).join("")+`</div><div class="semr">`+b.items.map(([c,n,w,x,q])=>`<div class="amp ${c}" data-a><b>${esc(n)}</b><strong>${esc(w)}</strong><span>${esc(x)}</span><em>${esc(q)}</em></div>`).join("")+`</div></div>`;
+      else if(b.t==="big")h=`<p class="big" data-a>${words(b.x)}</p>`;
       else if(b.t==="src")h=`<p class="${b.big?"txt":"src"}">${fmt(b.x)}</p>`;
       else if(b.t==="html")h=b.x;
       else if(b.t==="links")h=`<p class="links" data-a>`+b.items.map(([l,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(l)} ↗</a>`).join("")+`</p>`;
       else if(b.t==="stats"){const dd=Math.ceil((new Date("2027-02-02T23:59:00")-new Date())/864e5);h=`<div class="stats"><p class="stat"><b><span class="num" data-to="30">30</span> mln €</b><span>budget del topic</span></p><p class="stat"><b>2/2/2027</b><span>scadenza del primo stage</span></p>${dd>0?`<p class="stat"><b class="num" data-to="${dd}">${dd}</b><span>giorni da oggi</span></p>`:""}</div>`}
       else if(b.t==="prompt"){col="r";h=`<div data-a>${promptHTML(b.label,b.x,i,b.sm)}</div>`}
       else if(b.t==="sol")h=`<div class="sol"><button class="btn solbtn" aria-expanded="false">Mostra soluzione</button><div class="solbody" hidden>${b.x}</div></div>`;
-      else if(b.t==="cards")h=`<div class="cards c${b.cols}${b.q?" q":""}">`+b.items.map(([a,p,f])=>`<div class="card">${f?`<b class="fig">${esc(f)}</b>`:""}<h3>${fmt(a)}</h3><p>${fmt(p)}</p></div>`).join("")+`</div>`;
-      else if(b.t==="logos")h=`<div class="logos">`+b.items.map(([k,n,p])=>`<div class="logo" data-a>${logo(k)}<h3>${esc(n)}</h3><p>${esc(p)}</p></div>`).join("")+`</div>`;
+      else if(b.t==="cards")h=`<div class="cards c${b.cols}${b.q?" q":""}">`+b.items.map(([a,p,f,d])=>`<div class="card">${f?`<b class="fig">${esc(f)}</b>`:""}${d?`<div class="dots">${Array.from({length:100},(_,q)=>`<i${q<d?` class="x" style="--i:${q}"`:""}></i>`).join("")}</div>`:""}<h3>${fmt(a)}</h3><p>${fmt(p)}</p></div>`).join("")+`</div>`;
+      else if(b.t==="logos")h=`<div class="logos${b.hl?" hl1":""}">`+b.items.map(([k,n,p])=>`<div class="logo" data-a>${logo(k)}<h3>${esc(n)}</h3><p>${esc(p)}</p></div>`).join("")+`</div>`;
       else if(b.t==="table")h=`<div class="tw" data-a><table class="cmp${b.gl?" gl":""}"><thead><tr>${b.head.map(x=>`<th>${esc(x)}</th>`).join("")}</tr></thead><tbody>`+b.rows.map(r=>`<tr>`+r.map(c=>Array.isArray(c)?`<th scope="row">${logo(c[0])}<span>${esc(c[1])}</span></th>`:`<td>${esc(c)}</td>`).join("")+`</tr>`).join("")+`</tbody></table></div>`;
       else if(b.t==="flow")h=`<div class="flow">`+b.items.map(([a,p,hl])=>`<div class="node${hl?" hl":""}" data-a><b>${esc(a)}</b><span>${esc(p)}</span></div>`).join("")+`</div>`;
       else if(b.t==="stack")h=`<div class="stackw"><div class="stack"><p class="cap" data-a>La sua scrivania: ciò che ha davanti quando risponde</p>`+b.items.map(([a,p])=>`<div class="bar" data-a><b>${esc(a)}</b><span>${esc(p)}</span></div>`).join("")+`<div class="bar hl" data-a><b>${esc(b.last[0])}</b><span>${esc(b.last[1])}</span></div></div><div class="out" data-a><span class="arr">→</span><b>Risposta</b></div></div>`;
@@ -671,7 +721,7 @@ function build(){
     });
     const lay=sc.lay||"";
     const lg=sc.logo?logo(sc.logo):"";
-    const ph=sc.img&&IMG[sc.img]?`<div class="ph" style="background-image:url(${IMG[sc.img]})"></div>`:"";
+    const ph=sc.img&&IMG[sc.img]?`<div class="ph"><i style="background-image:url(${IMG[sc.img]})"></i></div>`:"";
     const head=lay==="cover"?ph+`<p class="eye">${esc(sc.eye)}</p><h1><span class="up">${fmt(sc.title)}</span></h1>`
       :lay.startsWith("sect")?ph+`<h2><span class="up">${esc(sc.title)}</span></h2>${sc.sub?`<p class="sub" data-a>${esc(sc.sub)}</p>`:""}${sc.timer?`<p data-a><button class="btn" data-min="15">Timer 15 min</button></p>`:""}${!sc.timer&&GIVE[sc.ch]!==undefined?`<span class="stamp act bigstamp" style="--d:.5s">${esc(STAMPS[GIVE[sc.ch]][0])}</span>`:""}`
       :(lay?"":ph)+`<header><p class="eye">${sc.eye==="Demo"?`<span class="tag">Demo</span>`:esc(sc.eye)}</p><h2>${lg}<span class="up">${esc(sc.title)}</span></h2></header>`;
@@ -710,8 +760,9 @@ function render(){
 }
 function countUp(el){const to=+el.dataset.to,t0=performance.now();const f=t=>{const p=Math.min(1,(t-t0)/1100);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
 function seen(el){if(el.classList.contains("seen"))return;el.classList.add("seen");if(!still())$$(".num",el).forEach(countUp)}
-function applyStep(){$$("[data-step]",scenes()[cur]).forEach(e=>e.classList.toggle("hid",+e.dataset.step>step))}
-function go(i,s){i=Math.max(0,Math.min(S.length-1,i));cur=i;const els=scenes(),el=els[i];step=s===undefined?+el.dataset.max:s;applyStep();
+function applyStep(){const sc=scenes()[cur];$$("[data-step]",sc).forEach(e=>e.classList.toggle("hid",+e.dataset.step>step));
+  $$(".sem",sc).forEach(s=>{const rows=$$(".amp",s),lamps=$$(".lamp",s);let last=-1;rows.forEach((x,k)=>{const on=!isStage()||!x.classList.contains("hid");lamps[k].classList.toggle("on",on);if(on)last=k});lamps.forEach((l,k)=>l.classList.toggle("now",k===last&&isStage()&&last<rows.length-1||k===last&&step===last+1))})}
+function go(i,s){i=Math.max(0,Math.min(S.length-1,i));R.dataset.dir=i<cur?"b":"f";cur=i;const els=scenes(),el=els[i];step=s===undefined?+el.dataset.max:s;applyStep();
   if(isStage()){els.forEach((e,k)=>{e.classList.toggle("on",k===i);if(k!==i)e.classList.remove("seen")});void el.offsetWidth;requestAnimationFrame(()=>requestAnimationFrame(()=>seen(el)))}
   else{els.forEach(e=>e.classList.remove("on"));el.scrollIntoView({block:"start"})}
   render()}
