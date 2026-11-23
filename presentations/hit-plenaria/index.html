@@ -439,24 +439,24 @@ const S=[
  {t:"lead",x:"Come un collega nuovo che non osa dire «non lo so». Quando non sa, completa comunque, con lo stesso tono sicuro."},
  {t:"cards",cols:3,items:[
   ["Stessa domanda, risposte diverse","Full Fact: cinque assistenti, ogni giorno per 10 settimane. Dati vecchi, conti sbagliati.","22 domande"],
-  ["Link che non esistono","Nei report di ricerca approfondita, circa 1 link citato su 10 era inventato.","10,7%",11],
-  ["Cede alla prima obiezione","Davanti a un dubbio il modello spesso cambia idea per compiacervi.","«Sei sicuro?»"]]},
- {t:"src",x:"Fonti: Full Fact, ottobre 2026 · University of Pennsylvania, aprile 2026 · UNESCO-UCL, novembre 2026."}]},
+  ["Link che non esistono","In due strumenti di ricerca approfondita, circa 1 link citato su 10 non esisteva. Stima prudente.","10,7%",11],
+  ["Cede alla prima obiezione","In un test su domande sul clima, 15 modelli hanno abbandonato risposte corrette quando l'utente insisteva.","«Sei sicuro?»"]]},
+ {t:"src",x:"Fonti: Full Fact, 2026 · Rao, Wong, Callison-Burch, aprile 2026 · UNESCO e UCL, novembre 2026."}]},
 {ch:1,eye:"Scelta",title:"Dove vive il vostro lavoro?",b:[
  {t:"lead",x:"Prima domanda: dove sono posta, file e calendario?"},
  {t:"logos",hl:1,items:[
-  ["gemini","Gemini","Dentro Google Workspace: vede Gmail, Drive e Calendar. Incluso."],
-  ["microsoft","Microsoft 365 Copilot","Vede Outlook, Teams e SharePoint. Solo con licenza."],
-  ["openai","ChatGPT","Esterno: arriva ai vostri dati con connettori da approvare."],
-  ["claude","Claude","Esterno: arriva ai vostri dati con connettori da approvare."]]},
+  ["gemini","Gemini","Dentro Google Workspace: Gmail, Drive, Docs, Meet. Incluso nella licenza."],
+  ["microsoft","Microsoft 365 Copilot","Vede Outlook, Teams e SharePoint con la licenza Copilot a pagamento."],
+  ["openai","ChatGPT","Esterno: arriva ai vostri dati con connettori che l'amministratore approva."],
+  ["claude","Claude","Esterno: arriva ai vostri dati con connettori che l'amministratore approva."]]},
  {t:"note",x:"==Voi lavorate già con Gemini.== Gli altri servono per compiti specifici."}]},
 {ch:1,eye:"Panoramica",title:"Cosa c'è dentro",b:[
  {t:"table",head:["","Posta, file, calendario","Usa il browser","Altri strumenti","Skill"],rows:[
-  [["gemini","Gemini"],"Dentro Workspace","Non in Italia","Soprattutto Google","Sì"],
-  [["microsoft","Microsoft 365 Copilot"],"Dentro Microsoft 365","—","Soprattutto Microsoft","Agenti in Copilot Studio"],
-  [["openai","ChatGPT"],"Con connettori","Sì, con l'agente Work","Connettori da aggiungere","Sì"],
-  [["claude","Claude"],"Con connettori","Sì, con Claude in Chrome","Connettori da aggiungere","Sì"]]},
- {t:"note",x:"Gemini e Copilot vedono già il vostro ufficio. ==ChatGPT e Claude usano il browser e si collegano a più strumenti.=="},
+  [["gemini","Gemini"],"Dentro Workspace","Non in Italia","Google e 7 app esterne","Sì"],
+  [["microsoft","Microsoft 365 Copilot"],"Dentro Microsoft 365","Solo in anteprima","Microsoft e connettori","Sì, in Copilot Studio"],
+  [["openai","ChatGPT"],"Con connettori","Agente Work","Connettori e plugin","Skill e plugin"],
+  [["claude","Claude"],"Con connettori","Claude in Chrome","Connettori, anche propri","Sì"]]},
+ {t:"note",x:"Gemini e Copilot vedono già il vostro ufficio. ==ChatGPT e Claude sanno usare il browser.=="},
  {t:"links",items:[["Confronto aggiornato dei modelli: artificialanalysis.ai","https://artificialanalysis.ai/leaderboards/models"]]}]},
 {ch:2,lay:"sect",img:"notebook",title:"L'incarico",sub:"Cosa gli chiediamo, e quando è finito."},
 {ch:2,eye:"Prompt",title:"Un prompt è un incarico",b:[
@@ -466,7 +466,7 @@ const S=[
   ["Fatto quando",`"Massimo 10 righe, tre punti, una riga con il prossimo passo."`],
   ["Controllabile",`"Per ogni punto la frase del testo da cui viene. Se manca, scrivi 'non indicato'."`]]},
  {t:"note",x:`Il ruolo ("sei un esperto") cambia il tono. ==La correttezza resta la stessa.== Un esempio di buon risultato aiuta molto.`},
- {t:"src",x:"Fonti: Zheng et al., Findings of EMNLP 2024: 162 ruoli, 2.410 domande fattuali, nessun guadagno di accuratezza · Basil et al., Wharton, dicembre 2025: nessun guadagno significativo in 5 modelli su 6."}]},
+ {t:"src",x:"Fonti: Zheng et al., Findings of EMNLP 2024: 162 ruoli, 2.410 domande fattuali, nessun guadagno di accuratezza · Basil et al., Wharton, dicembre 2025: nessun ruolo ha migliorato l'accuratezza in modo affidabile."}]},
 {ch:2,lay:"demo",eye:"Demo",title:"In teoria il manuale. In pratica chiedete.",b:[
  {t:"lead",x:"Descrivete il compito con parole vostre e chiedete il prompt."},
  P("Prompt per il prompt",`Aiutami a scrivere un prompt breve e chiaro per questo compito: fare una ricerca sull'agritech e ricavarne un piccolo sito web navigabile, con animazioni.`),
@@ -474,10 +474,10 @@ const S=[
 {ch:2,eye:"Formato",title:"Cosa potete chiedere",b:[
  {t:"lead",x:"Il formato fa parte dell'incarico. Se non lo dite, lo sceglie l'IA."},
  {t:"cards",cols:4,items:[
-  ["Una tabella",`Poi "Condividi ed esporta", "Esporta in Fogli".`],
-  ["Un documento o un file",`"Esporta in Documenti", oppure Word, Excel, PDF, CSV da scaricare.`],
+  ["Una tabella",`Sotto la tabella, "Esporta in Fogli".`],
+  ["Un documento o un file",`"Condividi ed esporta", "Esporta in Documenti". Oppure Word, Excel, PDF, CSV da scaricare.`],
   ["Slide, pagina web, infografica","Con Canvas. Le slide si esportano in Presentazioni Google."],
-  ["Immagine e audio","Immagini in chat. Da un documento, un'overview audio."]]},
+  ["Immagine e audio","Immagini in chat. Da un documento, un'overview audio, anche in italiano."]]},
  {t:"src",x:"Gemini con account di lavoro, guida di Google letta il 22/11/2026. Le opzioni di esportazione dipendono dalle impostazioni del vostro Workspace."}]},
 {ch:2,eye:"Nel prompt",title:"Cosa potete caricare",b:[
  {t:"lead",x:"Spesso mostrare è più veloce che spiegare."},
@@ -485,7 +485,7 @@ const S=[
   ["Screenshot e foto","Un errore, una tabella fotografata, una lavagna dopo la riunione."],
   ["Documenti","PDF, Word, Excel, CSV, o da Drive. Fino a 10 file, 100 MB ciascuno."],
   ["Audio e video","Video fino a 5 minuti e 2 GB, audio fino a 10 minuti."],
-  ["Cosa non funziona","Video nel Drive e registrazioni di Meet. In Notebook niente file video."]]},
+  ["Da provare prima","Video lunghi, registrazioni di Meet, PDF scansionati male: il risultato cambia da caso a caso."]]},
  {t:"src",x:"Limiti letti nella guida di Google il 22/11/2026: da provare una volta sul vostro account."}]},
 {ch:3,lay:"sect",img:"binder",title:"Il contesto",sub:"La cartella di inserimento: chi siete, su cosa lavora."},
 {ch:3,eye:"Contesto",title:"Ciò che resta vostro",b:[
@@ -570,12 +570,12 @@ Per ogni numero: fonte, anno e link. Distingui i dati delle aziende da quelli in
 {ch:5,lay:"demo",eye:"Demo",logo:"gemini",title:"Dal report a una tabella",b:[
  {t:"lead",x:"Nella stessa chat del report."},
  P("Prompt",`Dal report crea una tabella con una riga per ogni impresa, startup o centro di ricerca citato. Colonne: nome, paese, cosa fa, a che punto è, fonte con link. Usa solo ciò che è scritto nel report.`),
- {t:"note",x:`Poi "Condividi ed esporta", ==Esporta in Fogli==.`}]},
+ {t:"note",x:`Poi, sotto la tabella, ==Esporta in Fogli==.`}]},
 {ch:5,eye:"Demo",title:"Dal report a un podcast",b:[
  {t:"lead",x:"Per chi preferisce ascoltare: il report diventa una conversazione a due voci."},
  {t:"cards",cols:2,items:[
   ["Dal report","Crea, Overview audio."],
-  ["Da Gemini Notebook","Si aggiunge il report come fonte, poi Overview audio."]]},
+  ["Da Gemini Notebook","Si esporta il report in Documenti, lo si aggiunge come fonte, poi Overview audio."]]},
  {t:"note",x:"Ascoltatelo con il report davanti: ==anche il podcast può sbagliare==."}]},
 {ch:5,lay:"demo",eye:"Demo",title:"Da un PDF a una tabella",b:[
  {t:"lead",x:"Amministrazione. Fatture, moduli, contratti: i dati escono in una tabella che si controlla riga per riga."},
@@ -599,7 +599,7 @@ Se un dato non c'è, scrivi "non risulta".`,{sm:1}),
  P("Prompt programmato",`Cerca le novità degli ultimi 7 giorni sull'agritech: bandi, round di investimento, brevetti, nuove norme UE. Massimo 8 voci. Per ognuna: una riga, fonte, data e link. Scarta ciò che non ha una fonte primaria. Se non c'è nulla di rilevante, scrivilo.`),
  {t:"cards",cols:1,items:[
   ["App Gemini","Azione programmata: il risultato arriva nella chat."],
-  ["Workspace Studio",`Avvio "On a schedule", poi "Notify me by email".`]]},
+  ["Workspace Studio","Un flusso programmato che vi avvisa per email."]]},
  {t:"note",x:"Legge e prepara. ==Decidere resta a voi.=="}]},
 {ch:5,eye:"Scelta",title:"Quale strumento per quale compito",b:[
  {t:"rows",items:[
@@ -615,14 +615,14 @@ Se un dato non c'è, scrivi "non risulta".`,{sm:1}),
  {t:"lead",x:"HIT usa sistemi di IA nel proprio lavoro: per l'AI Act è un utilizzatore (deployer)."},
  {t:"tl",items:[
   ["2025-02-02","Dal 2/2/2025","Pratiche vietate. Alfabetizzazione: misure per la formazione del personale (art. 4)."],
-  ["2026-08-02","Dal 2/8/2026","Trasparenza (art. 50): deepfake sempre dichiarati. Testi per il pubblico dichiarati, salvo revisione umana sostanziale."],
+  ["2026-08-02","Dal 2/8/2026","Trasparenza (art. 50): deepfake dichiarati. Testi su temi di interesse pubblico dichiarati, salvo revisione umana e responsabilità editoriale."],
   ["2026-12-02","Dal 2/12/2026","Nuovi divieti, tra cui le immagini intime non consensuali."],
   ["2027-12-02","Dal 2/12/2027","Sistemi ad alto rischio, per esempio selezione e valutazione del personale."]]},
  {t:"links",items:[["Icone ufficiali UE per i contenuti generati con IA","https://digital-strategy.ec.europa.eu/it/policies/eu-icons-labelling-ai-generated-content"]]}]},
 {ch:6,eye:"Regole",title:"Legge italiana",b:[
  {t:"cards",cols:4,q:1,items:[
-  ["L. 132/2025","Informare i lavoratori e i clienti sull'IA che si usa. Diritto d'autore solo con contributo umano."],
-  ["D.Lgs. 179/2026","Assunzioni, valutazioni, disciplina: ==decide una persona==. Le decisioni solo automatiche sono nulle."],
+  ["L. 132/2025","Informare i lavoratori quando un sistema decide o controlla in automatico. I professionisti informano i clienti. Diritto d'autore solo con lavoro intellettuale umano."],
+  ["D.Lgs. 179/2026","Nel rapporto di lavoro le decisioni finali le prende ==una persona==. Quelle solo automatiche sono nulle. La selezione delle candidature resta fuori."],
   ["GDPR","Vale com'è. La riforma nel Digital Omnibus è ancora in negoziazione."],
   ["Un esempio vicino","Parere favorevole del Garante, con condizioni, al regolamento IA della Provincia di Trento."]]}]},
 {ch:6,eye:"Dati",title:"Il semaforo dei dati",b:[
@@ -631,17 +631,17 @@ Se un dato non c'è, scrivi "non risulta".`,{sm:1}),
   ["y","Giallo","Solo nell'account aziendale","Corrispondenza, offerte, verbali, bozze di proposta.","Lo darei a un fornitore con contratto?"],
   ["r","Rosso","Mai nell'IA","Dati sanitari e bancari, credenziali, fascicoli del personale.","Una fuga andrebbe notificata?"]]},
  {t:"note",x:"Nel dubbio, ==un livello più severo==."},
- {t:"src",x:"GDPR. Non è consulenza legale. I documenti ricevuti sotto NDA seguono l'NDA."}]},
+ {t:"src",x:"Regola interna prudente, non consulenza legale. I documenti ricevuti sotto NDA seguono l'NDA."}]},
 {ch:6,eye:"Votate",title:"Posso usare questo dato?",b:[
  {t:"vote",items:[
   ["Riassumere un bando europeo pubblico con Gemini nell'account di lavoro.","si","Sì","Dato pubblico, strumento approvato, account aziendale."],
   ["Incollare in un chatbot gratuito, con account personale, il business plan di una startup ricevuto sotto NDA.","no","No","Dato riservato di terzi in un account privato."],
-  ["Far classificare a Gemini 40 candidature a un programma e scartare in automatico le ultime 20.","no","No","La classifica può aiutare. Lo scarto lo decide una persona."],
-  ["Pubblicare sul sito una notizia scritta con l'IA, rivista e firmata dalla comunicazione.","co","Sì, con condizioni","Revisione umana sostanziale e un responsabile editoriale (art. 50)."]]},
+  ["Far classificare a Gemini 40 candidature a un programma e scartare in automatico le ultime 20.","co","Sì, con condizioni","La classifica aiuta. Lo scarto lo decide una persona (GDPR art. 22, se i candidati sono persone fisiche)."],
+  ["Pubblicare sul sito una notizia scritta con l'IA, rivista e firmata dalla comunicazione.","co","Sì, con condizioni","Revisione umana e un responsabile editoriale (art. 50)."]]},
  {t:"html",x:`<p class="opts">Sì · Sì, con condizioni · No</p>`}]},
 {ch:6,eye:"Sicurezza",title:"Ogni testo può dare ordini",b:[
  {t:"lead",x:"Per l'IA ogni documento, mail o pagina web può contenere istruzioni. Si chiama prompt injection."},
- {t:"three",items:[["Dati vostri","Posta, file, calendario."],["Contenuti esterni","Mail, PDF di terzi, siti."],["Possibilità di agire","Inviare, condividere, cancellare."]]},
+ {t:"three",items:[["Dati vostri","Posta, file, calendario."],["Contenuti non fidati","Mail, PDF di terzi, siti."],["Possibilità di agire","Inviare, condividere, cancellare."]]},
  {t:"note",x:"Regola del due: al massimo due su tre. Se ci sono tutti e tre, ==l'ultima azione la fa una persona==."},
  {t:"src",x:"Fonte: Meta, Agents Rule of Two, 31/10/2025."}]},
 {ch:6,eye:"Policy",title:"Una policy interna minima",b:[
