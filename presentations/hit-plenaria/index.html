@@ -306,7 +306,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
 <main id="deck"></main>
 <div id="bar"><span class="ch" id="chname"></span><span class="stamps" id="stamps"></span><span class="cnt"><button data-act="prev" aria-label="Pagina precedente">←</button><span id="cnt" style="padding-left:1em"></span><button data-act="next" aria-label="Pagina successiva">→</button><button data-act="keys">Tasti</button></span></div>
 <div id="prog"></div>
-<div id="hud"><button class="btn" data-act="timer">Timer</button><button class="btn" data-act="lib">Prompt</button><button class="btn" data-act="idx">Indice</button></div>
+<div id="hud"><button class="btn" data-act="lib">Prompt</button><button class="btn" data-act="idx">Indice</button></div>
 <div id="tim" role="timer"></div>
 <div id="timpick" hidden><button class="btn" data-min="5">5 min</button><button class="btn" data-min="10">10 min</button><button class="btn" data-min="15">15 min</button><button class="btn" data-min="0">Ferma</button></div>
 <div class="ov" id="ov-idx" hidden><button class="btn x" data-act="close">Chiudi</button><h2>Indice</h2><p class="hint">Clic su una pagina per aprirla.</p><div class="idx" id="idx"></div></div>
@@ -319,7 +319,6 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
 <span><kbd>P</kbd></span><span>Tutti i prompt</span>
 <span><kbd>S</kbd></span><span>Mostra la soluzione</span>
 <span><kbd>1</kbd> … <kbd>4</kbd></span><span>Scopre un caso nella votazione</span>
-<span><kbd>T</kbd></span><span>Timer da 5, 10 o 15 minuti</span>
 <span><kbd>F</kbd></span><span>Schermo intero</span>
 <span><kbd>L</kbd></span><span>Tema chiaro o scuro</span>
 <span><kbd>M</kbd></span><span>Animazioni spente, per portatili lenti</span>
@@ -511,7 +510,6 @@ Per ogni numero: fonte, anno e link. Distingui i dati delle aziende da quelli in
  {t:"lead",x:"Un benchmark: HIT e due enti europei che fanno lo stesso mestiere."},
  P("Prompt",`Analizza l'offerta per ricercatori e spin-off di questi tre enti: trentinoinnovation.eu, lrd.kuleuven.be, vttresearch.com. Per ciascuno: servizi, a chi si rivolgono, come si accede, cosa offre che gli altri non offrono. Tabella finale con il link alla pagina da cui viene ogni informazione. Se una pagina non si apre, scrivilo.`),
  {t:"note",x:"Legge le pagine vere, non la memoria. ==Ogni riga ha il suo link.=="}]},
-{ch:3,lay:"sect pause",img:"clock",title:"Pausa",timer:1},
 
 {ch:4,lay:"sect",img:"autumn",title:"La verifica",sub:"Come con ogni collega nuovo: fidarsi, ma controllare."},
 {ch:4,eye:"Fonti",title:"Sbaglia in modo convincente",b:[
@@ -675,7 +673,7 @@ function build(){
     const lg=sc.logo?logo(sc.logo):"";
     const ph=sc.img&&IMG[sc.img]?`<div class="ph" style="background-image:url(${IMG[sc.img]})"></div>`:"";
     const head=lay==="cover"?ph+`<p class="eye">${esc(sc.eye)}</p><h1><span class="up">${fmt(sc.title)}</span></h1>`
-      :lay.startsWith("sect")?ph+`${sc.timer?"":`<p class="give">Parte ${sc.ch} di 6</p>`}<h2><span class="up">${esc(sc.title)}</span></h2>${sc.sub?`<p class="sub" data-a>${esc(sc.sub)}</p>`:""}${sc.timer?`<p data-a><button class="btn" data-min="15">Timer 15 min</button></p>`:""}${!sc.timer&&GIVE[sc.ch]!==undefined?`<span class="stamp act bigstamp" style="--d:.5s">${esc(STAMPS[GIVE[sc.ch]][0])}</span>`:""}`
+      :lay.startsWith("sect")?ph+`<h2><span class="up">${esc(sc.title)}</span></h2>${sc.sub?`<p class="sub" data-a>${esc(sc.sub)}</p>`:""}${sc.timer?`<p data-a><button class="btn" data-min="15">Timer 15 min</button></p>`:""}${!sc.timer&&GIVE[sc.ch]!==undefined?`<span class="stamp act bigstamp" style="--d:.5s">${esc(STAMPS[GIVE[sc.ch]][0])}</span>`:""}`
       :(lay?"":ph)+`<header><p class="eye">${sc.eye==="Demo"?`<span class="tag">Demo</span>`:esc(sc.eye)}</p><h2>${lg}<span class="up">${esc(sc.title)}</span></h2></header>`;
     const body=lay==="demo"?`<div class="body"><div class="l">${parts.l.join("")}</div><div class="r">${parts.r.join("")}</div></div>`
       :parts.l.length||parts.r.length?`<div class="body">${parts.l.concat(parts.r).join("")}</div>`:"";
@@ -769,7 +767,6 @@ document.addEventListener("keydown",e=>{
   if(low==="m"){R.classList.toggle("calm");return}
   if(low==="l"){theme();return}
   if(low==="r"){userRead=isStage();setMode();return}
-  if(low==="t"){$("#timpick").hidden=!$("#timpick").hidden;return}
   if(low==="s"){const b=$(".sol .solbtn",scenes()[cur]);if(b)reveal(b);return}
   if(/^[1-4]$/.test(k)){const b=$$(".case .solbtn",scenes()[cur])[+k-1];if(b)reveal(b);return}
   if(e.target.closest("button")&&(k===" "||k==="Enter"))return;
