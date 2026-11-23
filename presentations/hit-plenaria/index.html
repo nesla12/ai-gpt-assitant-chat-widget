@@ -429,7 +429,7 @@ const S=[
 {ch:0,img:"office",eye:"L'immagine di oggi",title:"Un collaboratore appena arrivato",b:[
  {t:"quote",x:"«Ho un nuovo collega che a quanto pare sa fare tutto. Gli chiedo qualcosa e la risposta è generica, non c'entra con me.»"},
  {t:"lead",x:"Sa moltissimo, scrive bene, lavora in fretta. Ma non conosce voi, il vostro lavoro né il compito."},
- {t:"note",x:"Il problema non è il collega. ==Nessuno lo ha inserito.== L'inserimento è compito nostro."}]},
+ {t:"note",x:"==Nessuno lo ha inserito.== L'inserimento è compito nostro."}]},
 {ch:0,eye:"Il percorso",title:"Oggi lo inseriamo, una cosa alla volta",b:[
  {t:"gifts",items:[["Lo strumento","La sua scrivania: dove lavora e cosa vede."],["Un incarico","Cosa deve uscire e quando è finito."],["Contesto e documenti","La cartella di inserimento: chi siete, su cosa lavora."],["Un metodo","Come controlliamo il suo lavoro."]]}]},
 {ch:0,eye:"Le parole",title:"I termini, nell'immagine del collaboratore",b:[
@@ -443,11 +443,11 @@ const S=[
   ["Skill","Una procedura insegnata una volta."],
   ["Agente","Uno specialista formato per un compito."]]}]},
 {ch:0,eye:"Fonti",title:"Sbaglia in modo convincente",b:[
- {t:"lead",x:"Come un collega nuovo che non osa dire «non lo so»: quando non sa, completa comunque, con lo stesso tono sicuro."},
+ {t:"lead",x:"Come un collega nuovo che non osa dire «non lo so». Quando non sa, completa comunque, con lo stesso tono sicuro."},
  {t:"cards",cols:3,items:[
   ["Stessa domanda, risposte diverse","Full Fact: cinque assistenti, ogni giorno per 10 settimane. Dati vecchi, conti sbagliati.","22 domande"],
   ["Link che non esistono","Nei report di ricerca approfondita, circa 1 link citato su 10 era inventato.","10,7%",11],
-  ["Cede alla prima obiezione","Non verifica: il modello spesso cambia idea per compiacervi.","«Sei sicuro?»"]]},
+  ["Cede alla prima obiezione","Davanti a un dubbio il modello spesso cambia idea per compiacervi.","«Sei sicuro?»"]]},
  {t:"src",x:"Fonti: Full Fact, ottobre 2026 · University of Pennsylvania, aprile 2026 · UNESCO-UCL, novembre 2026."}]},
 {ch:1,lay:"sect",img:"desk",title:"Gli strumenti",sub:"La sua scrivania: dove lavora e cosa vede."},
 {ch:1,eye:"Scelta",title:"Dove vive il vostro lavoro?",b:[
@@ -465,7 +465,7 @@ const S=[
   ["openai","ChatGPT","GPT-6.2 Astra e Sol, 17 novembre."],
   ["claude","Claude","Fable 5.2, 9 novembre."],
   ["microsoft","Microsoft 365 Copilot","GPT-6.2 Sol, 20 novembre. Claude solo se attivato."]]},
- {t:"note",x:"Tre nuovi modelli in due settimane. ==Il nome cambia, il criterio di scelta no.=="},
+ {t:"note",x:"Tre nuovi modelli in due settimane. ==Il criterio di scelta resta lo stesso.=="},
  {t:"links",items:[["Confronto aggiornato dei modelli: artificialanalysis.ai","https://artificialanalysis.ai/leaderboards/models"]]}]},
 {ch:1,eye:"Confronto",title:"Gli stessi mattoni, ovunque",b:[
  {t:"table",head:["","Punto di forza","Dati","Al mese per utente"],rows:[
@@ -482,10 +482,10 @@ const S=[
   ["Contesto","Cosa deve sapere, dove sono le informazioni."],
   ["Fatto quando",`"Massimo 10 righe, tre punti, una riga con il prossimo passo."`],
   ["Controllabile",`"Per ogni punto la frase del testo da cui viene. Se manca, scrivi 'non indicato'."`]]},
- {t:"note",x:`Il ruolo ("sei un esperto") dà il tono, ==non rende la risposta più corretta==. Un esempio di buon risultato aiuta molto.`},
+ {t:"note",x:`Il ruolo ("sei un esperto") cambia il tono. ==La correttezza resta la stessa.== Un esempio di buon risultato aiuta molto.`},
  {t:"src",x:"Fonti: Zheng et al., Findings of EMNLP 2024: 162 ruoli, 2.410 domande fattuali, nessun guadagno di accuratezza · Basil et al., Wharton, dicembre 2025: nessun guadagno significativo in 5 modelli su 6."}]},
 {ch:2,lay:"demo",eye:"Demo",title:"In teoria il manuale. In pratica chiedete.",b:[
- {t:"lead",x:"Non serve scrivere ogni volta il prompt perfetto. Descrivete il compito con parole vostre e chiedete il prompt."},
+ {t:"lead",x:"Descrivete il compito con parole vostre e chiedete il prompt."},
  P("Prompt per il prompt",`Aiutami a scrivere un prompt breve e chiaro per questo compito: ogni lunedì preparo per la direzione un riepilogo di una pagina con le email e le riunioni importanti della settimana.`),
  {t:"note",x:"Se funziona ==lo salvate==: la prossima volta è già pronto."}]},
 {ch:2,eye:"Formato",title:"Cosa potete chiedere",b:[
@@ -509,7 +509,7 @@ const S=[
  {t:"big",x:"Il modello è sostituibile. ==Il vostro contesto no.=="},
  {t:"lead",x:"Ogni anno arriva un modello nuovo. Ciò che scrivete una volta su di voi e sul vostro lavoro lo portate in ogni strumento."}]},
 {ch:3,eye:"Memoria",title:"Tutto diventa prompt",b:[
- {t:"lead",x:"Il modello non ricorda e non impara da voi: ogni chat parte da zero."},
+ {t:"lead",x:"Ogni chat parte da zero. Il modello sa di voi solo ciò che ha sulla scrivania."},
  {t:"stack",items:[
   ["Istruzioni personali","Chi siete, come scrivete. Sempre presenti."],
   ["Documenti e notebook","Su cosa state lavorando."],
@@ -527,8 +527,8 @@ const S=[
  {t:"note",x:"Poi provate: chiedete un parere su un'idea debole. ==Vi contraddice?=="},
  {t:"src",x:"Profilo e regole insieme devono stare in 1.024 caratteri."}]},
 {ch:3,eye:"Metodo",title:"Prima il piano, poi il lavoro",b:[
- {t:"lead",x:"Un compito complesso non si chiede in una riga. Come con un collaboratore: prima si concorda il piano."},
- {t:"flow",items:[["Compito","Cosa serve, per chi"],["Piano","L'IA propone i passi"],["Il vostro ok","Si corregge prima, non dopo",1],["Esecuzione","Un passo alla volta"],["Verifica",`Contro il "fatto quando"`]]},
+ {t:"lead",x:"Per un compito complesso si concorda prima il piano, come con un collaboratore."},
+ {t:"flow",items:[["Compito","Cosa serve, per chi"],["Piano","L'IA propone i passi"],["Il vostro ok","Qui si corregge",1],["Esecuzione","Un passo alla volta"],["Verifica",`Contro il "fatto quando"`]]},
  P("Una riga in più nel prompt",`Prima di iniziare, scrivi il piano in massimo 5 passi e aspetta il mio ok.`,{sm:1}),
  {t:"src",x:"In Gemini: Fast per riscrivere e riassumere, Thinking per vincoli, confronti e giudizi. Costa attesa e quota.",big:1}]},
 {ch:3,eye:"Gemini con account di lavoro",title:"Cosa ricorda di voi, e dove",b:[
@@ -539,11 +539,17 @@ const S=[
  {t:"note",x:"Scrivete chi siete e per chi lavorate, in poche righe. ==Funziona meglio di un elenco di ordini.=="}]},
 {ch:3,lay:"demo",eye:"Demo",logo:"gemini",title:"Una skill: glielo insegnate una volta",b:[
  {t:"lead",x:`Un lavoro che spiegate sempre uguale diventa una skill. Poi la richiamate con "/" e la condividete con i colleghi.`},
- P("Prompt",`Crea una skill "Nota per la direzione". Quando ti do un documento, scrivi una nota di una pagina con al massimo 5 punti. Per ogni punto indica la frase del documento da cui viene. Chiudi con una riga "Da verificare". Tono asciutto, niente introduzioni.`),
+ P("Prompt",`Crea una skill "Senza tono da IA". Quando ti do un testo, riscrivilo con frasi brevi e parole concrete. Togli frasi fatte, superlativi, elenchi di tre e formule come "non solo, ma anche". Non aggiungere informazioni e non cambiare i fatti. Alla fine elenca in tre righe cosa hai cambiato.`),
  {t:"cards",cols:1,items:[
   ["Dove","Personalizza, Skills, Crea."],
   ["I vecchi Gem","Dal 1° marzo 2027 al più presto diventano skill."]]},
  {t:"note",x:"Ciò che avete spiegato due volte ==diventa una skill==."}]},
+{ch:3,lay:"demo",eye:"Demo",logo:"gemini",title:"La skill al lavoro",b:[
+ {t:"lead",x:"La proviamo su un testo scritto da un'IA senza istruzioni."},
+ P("Prompt",`/Senza tono da IA
+
+Nel panorama odierno in rapida evoluzione, l'intelligenza artificiale rappresenta non solo un'opportunità straordinaria, ma anche una sfida cruciale. È fondamentale sottolineare che il nostro ente è pronto a cogliere appieno questo potenziale unico, innovativo e trasformativo.`),
+ {t:"note",x:"Che cosa è rimasto del testo? ==Quello è il contenuto vero.=="}]},
 {ch:3,lay:"demo",eye:"Demo",logo:"gemini",title:"I collegamenti: gli aprite l'ufficio",b:[
  {t:"lead",x:"Con i collegamenti legge posta, file e calendario, come un collega a cui date accesso all'archivio."},
  P("Prompt",`Guarda la mia posta e il mio calendario. Quali email degli ultimi 7 giorni aspettano una mia risposta? Quali riunioni ho questa settimana e cosa devo preparare? Elenco breve con i link. Se non trovi qualcosa, scrivilo.`),
@@ -568,7 +574,7 @@ Per ogni numero: fonte, anno e link. Distingui i dati delle aziende da quelli in
 {ch:3,lay:"demo",eye:"Demo",logo:"claude",title:"Claude legge tre siti",b:[
  {t:"lead",x:"Un benchmark: HIT e due enti europei che fanno lo stesso mestiere."},
  P("Prompt",`Analizza l'offerta per ricercatori e spin-off di questi tre enti: trentinoinnovation.eu, lrd.kuleuven.be, vttresearch.com. Per ciascuno: servizi, a chi si rivolgono, come si accede, cosa offre che gli altri non offrono. Tabella finale con il link alla pagina da cui viene ogni informazione. Se una pagina non si apre, scrivilo.`),
- {t:"note",x:"Legge le pagine vere, non la memoria. ==Ogni riga ha il suo link.=="}]},
+ {t:"note",x:"Legge le pagine sul momento. ==Ogni riga ha il suo link.=="}]},
 {ch:3,eye:"Personalizzare",title:"Quattro livelli, come si inserisce un collega",b:[
  {t:"levels",items:[
   ["Chiedere","Chat. Finita la chat, il contesto si perde.","Riscrivere una mail a un ricercatore"],
@@ -582,25 +588,27 @@ Per ogni numero: fonte, anno e link. Distingui i dati delle aziende da quelli in
  P("Prompt di verifica",`Rileggi la tua risposta come un revisore critico. Elenca le affermazioni che potrebbero essere sbagliate e spiega perché. Poi controlla ognuna con una ricerca online e indica la fonte con il link. Alla fine dimmi cosa correggeresti e cosa non sei riuscito a verificare.`),
  {t:"txt",x:"Per i dati che contano: la stessa domanda in una chat nuova. Se le due risposte non coincidono, quel dato va controllato a mano."},
  {t:"note",x:"Il report è un input. ==La decisione e la firma restano vostre.=="}]},
-{ch:5,lay:"sect",img:"peaks",title:"Tanti lavori",sub:"Lo stesso collaboratore, un caso per reparto."},
-{ch:5,eye:"I casi",title:"Cosa gli fate fare, reparto per reparto",b:[
- {t:"cards",cols:3,items:[
-  ["Amministrazione","Da fatture e moduli in PDF a una tabella controllabile."],
-  ["Trasferimento tecnologico","Dalla scheda di una tecnologia ad applicazioni e mercati."],
-  ["Progetti finanziati","Un bando letto con citazioni, e una gap analysis."],
-  ["Ecosistema e startup","Un digest settimanale su un settore."],
-  ["Business development","Mercato e concorrenti, con fonti verificate."],
-  ["Comunicazione","Dal documento alla presentazione."]]}]},
-{ch:5,lay:"demo",eye:"Business development",title:"Dal report alla nota",b:[
- P("Prompt",`Dal report scrivi una nota di una pagina per la direzione: vale la pena approfondire questo tema? Massimo 5 punti: stato della tecnologia, attori, opportunità per il territorio, rischi, prossimi passi con scadenze. Tono asciutto, solo fatti con fonte.`),
- {t:"note",x:"Il collaboratore è lo stesso di stamattina: ==è cambiato quello che gli abbiamo dato.=="}]},
-{ch:5,lay:"demo",eye:"Trasferimento tecnologico",title:"Dalla scheda alle applicazioni",b:[
- P("Prompt",`Ecco la scheda di una tecnologia. Proponi 5 possibili applicazioni. Per ognuna: a chi serve, in quale mercato, quali tipi di imprese potrebbero essere interessate, cosa manca per arrivarci. Tieni separato ciò che è scritto nella scheda da ciò che deduci tu.`),
- {t:"note",x:"Le deduzioni sono idee da verificare, ==non fatti==."}]},
+{ch:5,lay:"sect",img:"peaks",title:"Tanti lavori",sub:"Dal report al risultato, e un caso per reparto."},
+{ch:5,eye:"Il processo",title:"Un report, tante uscite",b:[
+ {t:"flow",items:[["Deep Research","Il report con le fonti"],["Fogli","La tabella degli attori"],["Documenti","Il report da condividere"],["Notebook","Domande con citazioni"],["Overview audio","Un podcast da ascoltare",1]]},
+ {t:"note",x:"Ogni passaggio è un pulsante: ==Esporta, Aggiungi, Crea==."}]},
+{ch:5,lay:"demo",eye:"Demo",logo:"gemini",title:"Dal report a una tabella",b:[
+ {t:"lead",x:"Nella stessa chat del report."},
+ P("Prompt",`Dal report crea una tabella con una riga per ogni impresa, startup o centro di ricerca citato. Colonne: nome, paese, cosa fa, a che punto è, fonte con link. Usa solo ciò che è scritto nel report.`),
+ {t:"note",x:`Poi "Condividi ed esporta", ==Esporta in Fogli==.`}]},
+{ch:5,eye:"Demo",title:"Dal report a un podcast",b:[
+ {t:"lead",x:"Per chi preferisce ascoltare: il report diventa una conversazione a due voci."},
+ {t:"cards",cols:2,items:[
+  ["Dal report","Crea, Overview audio."],
+  ["Da Gemini Notebook","Si aggiunge il report come fonte, poi Overview audio."]]},
+ {t:"note",x:"Ascoltatelo con il report davanti: ==anche il podcast può sbagliare==."}]},
 {ch:5,lay:"demo",eye:"Demo",title:"Da un PDF a una tabella",b:[
  {t:"lead",x:"Amministrazione. Fatture, moduli, contratti: i dati escono in una tabella che si controlla riga per riga."},
  P("Prompt",`Ecco alcune fatture in PDF. Estrai in una tabella: fornitore, data, numero, imponibile, IVA, totale, scadenza. Una riga per documento. Se un campo manca o non si legge, scrivi "non leggibile", non indovinare. Alla fine elenca i campi su cui hai dubbi.`),
  {t:"note",x:`Poi "Esporta in Fogli". ==Giallo nel semaforo: solo nell'account aziendale.==`}]},
+{ch:5,lay:"demo",eye:"Trasferimento tecnologico",title:"Dalla scheda alle applicazioni",b:[
+ P("Prompt",`Ecco la scheda di una tecnologia. Proponi 5 possibili applicazioni. Per ognuna: a chi serve, in quale mercato, quali tipi di imprese potrebbero essere interessate, cosa manca per arrivarci. Tieni separato ciò che è scritto nella scheda da ciò che deduci tu.`),
+ {t:"note",x:"Le deduzioni si verificano ==una per una==."}]},
 {ch:5,lay:"demo",eye:"Progetti finanziati",logo:"gemini",title:"Un bando in Gemini Notebook",b:[
  {t:"lead",x:"Nel notebook: il testo del bando e la scheda di un progetto o di un'idea. Risponde solo da lì, con citazioni."},
  P("Template di gap analysis",`Confronta il progetto con il bando, usando solo le fonti del notebook.
@@ -628,7 +636,7 @@ Se un dato non c'è, scrivi "non risulta".`,{sm:1}),
   ["Leggere e confrontare siti di enti","Claude in Chrome: Gemini in Chrome non è disponibile in Italia.","claude"],
   ["Un'analisi critica difficile, una gap analysis","Il modello più forte disponibile, in modalità ragionata.",""]]}]},
 {ch:5,eye:"Sintesi",title:"Il modello e il resto",b:[
- {t:"lead",x:"Il modello da solo non vede, non ricorda, non controlla. Il resto lo avete costruito voi stamattina, e si porta da uno strumento all'altro."},
+ {t:"lead",x:"Strumento, incarico, contesto e metodo li avete costruiti voi stamattina. Valgono con qualsiasi modello."},
  {t:"big",x:"Ciò che deve succedere sempre non si affida al prompt: ==si decide con una regola.=="}]},
 {ch:6,lay:"sect",img:"river",title:"Le regole",sub:"Cosa può fare da solo, e cosa no."},
 {ch:6,eye:"Regole",title:"Cosa vale per HIT",b:[
