@@ -419,13 +419,6 @@ const S=[
 {ch:0,lay:"cover",img:"cover",eye:"Fondazione Hub Innovazione Trentino · 24 novembre 2026",title:"Lavorare ==meglio== con l'IA",b:[
  {t:"lead",x:"Come far lavorare bene un assistente IA e come fidarsi dei risultati."},
  {t:"html",x:`<p class="by" data-a>Lorenzo Nesler · aiautomationcoach.com</p>`}]},
-{ch:0,eye:"Perché siamo qui",title:"Cosa vi portate a casa oggi",b:[
- {t:"lead",x:"Una mattina per tutta HIT: da chi fa contabilità a chi fa trasferimento tecnologico, a chi segue i bandi."},
- {t:"cards",cols:3,items:[
-  ["Scelta consapevole","Lo strumento giusto per ogni compito."],
-  ["Risultati verificabili","Fonti tracciabili e un metodo per controllarle."],
-  ["Uso conforme","AI Act, GDPR e dati aziendali, in pratica."]]},
- {t:"src",x:"Oggi le fondamenta comuni. Poi quattro moduli di reparto sui vostri casi e un modulo sull'IA agentica.",big:1}]},
 {ch:0,img:"office",eye:"L'immagine di oggi",title:"Un collaboratore appena arrivato",b:[
  {t:"quote",x:"«Ho un nuovo collega che a quanto pare sa fare tutto. Gli chiedo qualcosa e la risposta è generica, non c'entra con me.»"},
  {t:"lead",x:"Sa moltissimo, scrive bene, lavora in fretta. Ma non conosce voi, il vostro lavoro né il compito."},
@@ -449,7 +442,6 @@ const S=[
   ["Link che non esistono","Nei report di ricerca approfondita, circa 1 link citato su 10 era inventato.","10,7%",11],
   ["Cede alla prima obiezione","Davanti a un dubbio il modello spesso cambia idea per compiacervi.","«Sei sicuro?»"]]},
  {t:"src",x:"Fonti: Full Fact, ottobre 2026 · University of Pennsylvania, aprile 2026 · UNESCO-UCL, novembre 2026."}]},
-{ch:1,lay:"sect",img:"desk",title:"Gli strumenti",sub:"La sua scrivania: dove lavora e cosa vede."},
 {ch:1,eye:"Scelta",title:"Dove vive il vostro lavoro?",b:[
  {t:"lead",x:"Prima domanda: dove sono posta, file e calendario?"},
  {t:"logos",hl:1,items:[
@@ -458,23 +450,14 @@ const S=[
   ["openai","ChatGPT","Esterno: arriva ai vostri dati con connettori da approvare."],
   ["claude","Claude","Esterno: arriva ai vostri dati con connettori da approvare."]]},
  {t:"note",x:"==Voi lavorate già con Gemini.== Gli altri servono per compiti specifici."}]},
-{ch:1,eye:"Modelli",title:"Modello e app",b:[
- {t:"lead",x:"Il modello pensa. L'app prepara il posto di lavoro: quali dati vede, quali strumenti usa, quali regole segue."},
- {t:"logos",items:[
-  ["gemini","Gemini","Gemini 4 Neon, 18 novembre."],
-  ["openai","ChatGPT","GPT-6.2 Astra e Sol, 17 novembre."],
-  ["claude","Claude","Fable 5.2, 9 novembre."],
-  ["microsoft","Microsoft 365 Copilot","GPT-6.2 Sol, 20 novembre. Claude solo se attivato."]]},
- {t:"note",x:"Tre nuovi modelli in due settimane. ==Il criterio di scelta resta lo stesso.=="},
+{ch:1,eye:"Panoramica",title:"Cosa c'è dentro",b:[
+ {t:"table",head:["","Posta, file, calendario","Usa il browser","Altri strumenti","Skill"],rows:[
+  [["gemini","Gemini"],"Dentro Workspace","Non in Italia","Soprattutto Google","Sì"],
+  [["microsoft","Microsoft 365 Copilot"],"Dentro Microsoft 365","—","Soprattutto Microsoft","Agenti in Copilot Studio"],
+  [["openai","ChatGPT"],"Con connettori","Sì, con l'agente Work","Connettori da aggiungere","Sì"],
+  [["claude","Claude"],"Con connettori","Sì, con Claude in Chrome","Connettori da aggiungere","Sì"]]},
+ {t:"note",x:"Gemini e Copilot vedono già il vostro ufficio. ==ChatGPT e Claude usano il browser e si collegano a più strumenti.=="},
  {t:"links",items:[["Confronto aggiornato dei modelli: artificialanalysis.ai","https://artificialanalysis.ai/leaderboards/models"]]}]},
-{ch:1,eye:"Confronto",title:"Gli stessi mattoni, ovunque",b:[
- {t:"table",head:["","Punto di forza","Dati","Al mese per utente"],rows:[
-  [["gemini","Gemini in Workspace"],"Notebook con citazioni, Deep Research, Canvas, skill","Niente addestramento. Conservati in UE","Incluso nella licenza"],
-  [["openai","ChatGPT Business"],"Progetti, Deep Research con piano modificabile, agente Work","Niente addestramento. UE solo con Enterprise","Circa 20-25 euro"],
-  [["claude","Claude Team"],"Documenti lunghi, analisi, Claude in Chrome","Niente addestramento. Conservati negli USA","Circa 20-25 euro"],
-  [["microsoft","Microsoft 365 Copilot"],"Researcher e Analyst su posta e file aziendali","Perimetro dati UE","15,60 euro fino al 31/12, più Microsoft 365"]]},
- {t:"note",x:"Il confine è tra ==account privato e account aziendale==."},
- {t:"src",x:"Prezzi IVA esclusa, novembre 2026. ChatGPT e Claude: listino in dollari, importo in euro indicativo. Gemini: elaborazione in UE solo con Enterprise Plus."}]},
 {ch:2,lay:"sect",img:"notebook",title:"L'incarico",sub:"Cosa gli chiediamo, e quando è finito."},
 {ch:2,eye:"Prompt",title:"Un prompt è un incarico",b:[
  {t:"cards",cols:4,items:[
@@ -486,7 +469,7 @@ const S=[
  {t:"src",x:"Fonti: Zheng et al., Findings of EMNLP 2024: 162 ruoli, 2.410 domande fattuali, nessun guadagno di accuratezza · Basil et al., Wharton, dicembre 2025: nessun guadagno significativo in 5 modelli su 6."}]},
 {ch:2,lay:"demo",eye:"Demo",title:"In teoria il manuale. In pratica chiedete.",b:[
  {t:"lead",x:"Descrivete il compito con parole vostre e chiedete il prompt."},
- P("Prompt per il prompt",`Aiutami a scrivere un prompt breve e chiaro per questo compito: ogni lunedì preparo per la direzione un riepilogo di una pagina con le email e le riunioni importanti della settimana.`),
+ P("Prompt per il prompt",`Aiutami a scrivere un prompt breve e chiaro per questo compito: fare una ricerca sull'agritech e ricavarne un piccolo sito web navigabile, con animazioni.`),
  {t:"note",x:"Se funziona ==lo salvate==: la prossima volta è già pronto."}]},
 {ch:2,eye:"Formato",title:"Cosa potete chiedere",b:[
  {t:"lead",x:"Il formato fa parte dell'incarico. Se non lo dite, lo sceglie l'IA."},
@@ -514,7 +497,8 @@ const S=[
   ["Istruzioni personali","Chi siete, come scrivete. Sempre presenti."],
   ["Documenti e notebook","Su cosa state lavorando."],
   ["Skill","Un lavoro che gli avete insegnato una volta."],
-  ["Collegamenti","Posta, file, calendario e web: li apre quando servono."]],last:["La vostra domanda","L'unica parte che scrivete ogni volta."]}]},
+  ["Collegamenti","Posta, file, calendario e web: li apre quando servono."]],last:["La vostra domanda","L'unica parte che scrivete ogni volta."]},
+ {t:"src",x:"Con account di lavoro Gemini non ricorda le chat precedenti."}]},
 {ch:3,lay:"demo",eye:"Demo",title:"Il vostro profilo",b:[
  {t:"lead",x:"Gemini vi intervista e scrive le vostre istruzioni personali."},
  P("Prompt",`Aiutami a scrivere le mie istruzioni personali per Gemini. Intervistami una domanda alla volta, al massimo otto domande, su: il mio ruolo, i compiti ricorrenti, con chi scrivo più spesso, lingua e tono, formati che preferisco, cosa non voglio mai nei testi. Usa le mie parole, non inventare nulla. Alla fine dammi: 1) una versione breve, massimo 1.024 caratteri, da incollare nelle impostazioni; 2) una versione lunga per un Google Doc "Il mio profilo".`,{sm:1}),
@@ -529,14 +513,8 @@ const S=[
 {ch:3,eye:"Metodo",title:"Prima il piano, poi il lavoro",b:[
  {t:"lead",x:"Per un compito complesso si concorda prima il piano, come con un collaboratore."},
  {t:"flow",items:[["Compito","Cosa serve, per chi"],["Piano","L'IA propone i passi"],["Il vostro ok","Qui si corregge",1],["Esecuzione","Un passo alla volta"],["Verifica",`Contro il "fatto quando"`]]},
- P("Una riga in più nel prompt",`Prima di iniziare, scrivi il piano in massimo 5 passi e aspetta il mio ok.`,{sm:1}),
+ P("Prompt",`Voglio una routine settimanale: ogni lunedì una ricerca sulle novità dell'agritech (bandi, investimenti, brevetti, norme UE), con fonte e link per ogni voce. Prima di iniziare scrivi il piano in massimo 5 passi e aspetta il mio ok.`,{sm:1}),
  {t:"src",x:"In Gemini: Fast per riscrivere e riassumere, Thinking per vincoli, confronti e giudizi. Costa attesa e quota.",big:1}]},
-{ch:3,eye:"Gemini con account di lavoro",title:"Cosa ricorda di voi, e dove",b:[
- {t:"cards",cols:3,items:[
-  ["Le chat","Non le ricorda: la memoria delle chat non è disponibile con account di lavoro."],
-  ["Le istruzioni","Le legge sempre. Si scrivono nel pannello laterale di Gmail, Docs e Drive: Impostazioni, Personalizzazione."],
-  ["Le skill","Le usa quando le richiamate."]]},
- {t:"note",x:"Scrivete chi siete e per chi lavorate, in poche righe. ==Funziona meglio di un elenco di ordini.=="}]},
 {ch:3,lay:"demo",eye:"Demo",logo:"gemini",title:"Una skill: glielo insegnate una volta",b:[
  {t:"lead",x:`Un lavoro che spiegate sempre uguale diventa una skill. Poi la richiamate con "/" e la condividete con i colleghi.`},
  P("Prompt",`Crea una skill "Senza tono da IA". Quando ti do un testo, riscrivilo con frasi brevi e parole concrete. Togli frasi fatte, superlativi, elenchi di tre e formule come "non solo, ma anche". Non aggiungere informazioni e non cambiare i fatti. Alla fine elenca in tre righe cosa hai cambiato.`),
@@ -589,9 +567,6 @@ Per ogni numero: fonte, anno e link. Distingui i dati delle aziende da quelli in
  {t:"txt",x:"Per i dati che contano: la stessa domanda in una chat nuova. Se le due risposte non coincidono, quel dato va controllato a mano."},
  {t:"note",x:"Il report è un input. ==La decisione e la firma restano vostre.=="}]},
 {ch:5,lay:"sect",img:"peaks",title:"Tanti lavori",sub:"Dal report al risultato, e un caso per reparto."},
-{ch:5,eye:"Il processo",title:"Un report, tante uscite",b:[
- {t:"flow",items:[["Deep Research","Il report con le fonti"],["Fogli","La tabella degli attori"],["Documenti","Il report da condividere"],["Notebook","Domande con citazioni"],["Overview audio","Un podcast da ascoltare",1]]},
- {t:"note",x:"Ogni passaggio è un pulsante: ==Esporta, Aggiungi, Crea==."}]},
 {ch:5,lay:"demo",eye:"Demo",logo:"gemini",title:"Dal report a una tabella",b:[
  {t:"lead",x:"Nella stessa chat del report."},
  P("Prompt",`Dal report crea una tabella con una riga per ogni impresa, startup o centro di ricerca citato. Colonne: nome, paese, cosa fa, a che punto è, fonte con link. Usa solo ciò che è scritto nel report.`),
@@ -606,9 +581,6 @@ Per ogni numero: fonte, anno e link. Distingui i dati delle aziende da quelli in
  {t:"lead",x:"Amministrazione. Fatture, moduli, contratti: i dati escono in una tabella che si controlla riga per riga."},
  P("Prompt",`Ecco alcune fatture in PDF. Estrai in una tabella: fornitore, data, numero, imponibile, IVA, totale, scadenza. Una riga per documento. Se un campo manca o non si legge, scrivi "non leggibile", non indovinare. Alla fine elenca i campi su cui hai dubbi.`),
  {t:"note",x:`Poi "Esporta in Fogli". ==Giallo nel semaforo: solo nell'account aziendale.==`}]},
-{ch:5,lay:"demo",eye:"Trasferimento tecnologico",title:"Dalla scheda alle applicazioni",b:[
- P("Prompt",`Ecco la scheda di una tecnologia. Proponi 5 possibili applicazioni. Per ognuna: a chi serve, in quale mercato, quali tipi di imprese potrebbero essere interessate, cosa manca per arrivarci. Tieni separato ciò che è scritto nella scheda da ciò che deduci tu.`),
- {t:"note",x:"Le deduzioni si verificano ==una per una==."}]},
 {ch:5,lay:"demo",eye:"Progetti finanziati",logo:"gemini",title:"Un bando in Gemini Notebook",b:[
  {t:"lead",x:"Nel notebook: il testo del bando e la scheda di un progetto o di un'idea. Risponde solo da lì, con citazioni."},
  P("Template di gap analysis",`Confronta il progetto con il bando, usando solo le fonti del notebook.
@@ -678,19 +650,12 @@ Se un dato non c'è, scrivi "non risulta".`,{sm:1}),
   ["Classi di dati","Cosa si può inserire, cosa solo anonimizzato, cosa mai."],
   ["Cosa può fare l'IA da sola","Legge e prepara bozze. ==Inviare, pubblicare, decidere su persone resta a voi.=="],
   ["Responsabilità","Ogni documento ha un referente. Formazione documentata, revisione annuale."]]}]},
-{ch:7,eye:"Materiali",title:"Cosa vi portate",b:[
- {t:"cards",cols:4,q:1,items:[
-  ["Strumento","La tabella compito e strumento, i quattro livelli."],
-  ["Incarico","Obiettivo, contesto, fatto quando, controllabile. Prima il piano."],
-  ["Contesto","L'intervista per il profilo e una skill da riusare."],
-  ["Metodo","Il prompt di verifica, la nota, la tabella dai PDF, il digest."]]},
- {t:"html",x:`<p data-a><button class="btn" data-act="lib">Apri tutti i prompt</button></p>`}]},
 {ch:7,eye:"Prossimi passi",title:"I vostri casi",b:[
  {t:"lead",x:"I post-it di stamattina: un compito che ripetete ogni settimana."},
  {t:"cards",cols:2,items:[
   ["Moduli di reparto","Sui vostri casi: piani di valorizzazione, analisi di bandi, ecosistemi, estrazione dati da documenti."],
   ["Modulo sull'IA agentica","Quando ha senso un agente, come si progetta, e un flusso costruito insieme."]]},
- {t:"html",x:`<p class="by" data-a>Lorenzo Nesler · aiautomationcoach.com</p><p class="legal" data-a>${LEGAL}</p>`}]}
+ {t:"html",x:`<p data-a><button class="btn" data-act="lib">Apri tutti i prompt</button></p><p class="by" data-a>Lorenzo Nesler · aiautomationcoach.com</p><p class="legal" data-a>${LEGAL}</p>`}]}
 ];
 
 const $=(q,r=document)=>r.querySelector(q), $$=(q,r=document)=>[...r.querySelectorAll(q)];
