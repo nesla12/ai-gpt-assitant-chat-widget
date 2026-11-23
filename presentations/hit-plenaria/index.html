@@ -175,6 +175,8 @@ html.stage #bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:5;al
 
 /* ---------- animazioni ---------- */
 .up{display:block}
+html.stage .scene [data-step]{transition:opacity .45s ease-out,transform .45s cubic-bezier(.2,.7,.2,1)}
+html.stage .scene [data-step].hid{opacity:0!important;transform:translateY(1rem)!important;pointer-events:none}
 h1,h2{overflow:hidden;padding-bottom:.12em}
 html.anim [data-a],html.anim .eye,html.anim .give{transition:opacity .7s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform .7s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
 html.anim .scene:not(.seen) [data-a]{opacity:0;transform:translateY(1.6rem)}
@@ -311,7 +313,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
 <div class="ov" id="ov-lib" hidden><button class="btn x" data-act="close">Chiudi</button><h2>Tutti i prompt</h2><p class="hint">Un clic copia il prompt. I dati tra [parentesi quadre] si sostituiscono con i vostri.</p><div class="lib" id="lib"></div></div>
 <div class="ov" id="ov-keys" hidden><button class="btn x" data-act="close">Chiudi</button><h2>Tasti</h2><p class="hint">Funzionano anche con un telecomando da presentazione.</p>
 <div class="keys">
-<span><kbd>→</kbd> <kbd>↓</kbd> <kbd>Spazio</kbd> <kbd>Pag giù</kbd></span><span>Pagina successiva</span>
+<span><kbd>→</kbd> <kbd>↓</kbd> <kbd>Spazio</kbd> <kbd>Pag giù</kbd></span><span>Avanti, un punto alla volta</span>
 <span><kbd>←</kbd> <kbd>↑</kbd> <kbd>Pag su</kbd></span><span>Pagina precedente</span>
 <span><kbd>G</kbd></span><span>Indice delle scene</span>
 <span><kbd>P</kbd></span><span>Tutti i prompt</span>
@@ -675,12 +677,18 @@ function build(){
     el.className="scene "+lay+(sc.img&&lay!=="cover"?" split":""); el.id="s"+(i+1);
     el.innerHTML=head+body; deck.appendChild(el);
     let k=0; $$(".lead,.txt,.note,.src,.card,.prompt,.gift,.row,.case,.tog,.tl>div,.sol,.stat,.opts,.legal,.verd3,[data-a]",el).forEach(x=>{if(x.parentElement.closest("[data-a]"))return;x.setAttribute("data-a","");x.style.setProperty("--d",(.2+k++*.08).toFixed(2)+"s")});
+    let st=0,started=false;const IT=".logo,.card,.cmp tbody tr,.node,.bar,.lvl,.gift,.row,.tl>div,.amp";
+    $$(IT+",.out,.note,.big,.src,.txt,.links,.sol,.opts",el).forEach(x=>{
+      if(x.matches(IT)){started=true;x.dataset.step=++st}
+      else if(started)x.dataset.step=x.matches(".src,.links,.opts")?st:++st;
+      if(x.dataset.step)x.style.setProperty("--d","0s")});
+    el.dataset.max=st;
   });
   $("#idx").innerHTML=CH.map((c,k)=>`<section><h3>${esc(c)}</h3>${S.map((s,i)=>s.ch===k?`<button data-go="${i}"><span>${i+1}</span>${esc(s.title.replace(/==/g,""))}${s.eye==="Demo"?" · demo":""}</button>`:"").join("")}</section>`).join("");
   $("#lib").innerHTML=PROMPTS.map((p,id)=>`<figure class="prompt"><figcaption><span>${esc(p.label)}</span><button class="btn copy" data-pid="${id}">Copia</button></figcaption><pre>${esc(p.x)}</pre><div class="from"><span>${esc(CH[S[p.i].ch])} · ${esc(S[p.i].title)}</span><button class="btn" data-go="${p.i}">Vai alla pagina</button></div></figure>`).join("");
 }
 
-let cur=0,userRead=null,lastDone=-1;
+let cur=0,step=0,userRead=null,lastDone=-1;
 const scenes=()=>$$(".scene");
 const R=document.documentElement;
 const isStage=()=>R.classList.contains("stage");
@@ -698,11 +706,13 @@ function render(){
 }
 function countUp(el){const to=+el.dataset.to,t0=performance.now();const f=t=>{const p=Math.min(1,(t-t0)/1100);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
 function seen(el){if(el.classList.contains("seen"))return;el.classList.add("seen");if(!still())$$(".num",el).forEach(countUp)}
-function go(i){i=Math.max(0,Math.min(S.length-1,i));cur=i;const els=scenes(),el=els[i];
+function applyStep(){$$("[data-step]",scenes()[cur]).forEach(e=>e.classList.toggle("hid",+e.dataset.step>step))}
+function go(i,s){i=Math.max(0,Math.min(S.length-1,i));cur=i;const els=scenes(),el=els[i];step=s===undefined?+el.dataset.max:s;applyStep();
   if(isStage()){els.forEach((e,k)=>{e.classList.toggle("on",k===i);if(k!==i)e.classList.remove("seen")});void el.offsetWidth;requestAnimationFrame(()=>requestAnimationFrame(()=>seen(el)))}
   else{els.forEach(e=>e.classList.remove("on"));el.scrollIntoView({block:"start"})}
   render()}
-const next=()=>go(cur+1), prev=()=>go(cur-1);
+function next(){if(isStage()&&step<+scenes()[cur].dataset.max){step++;applyStep()}else if(cur<S.length-1)go(cur+1,0)}
+function prev(){if(isStage()&&step>0){step--;applyStep()}else if(cur>0)go(cur-1)}
 function fromHash(){const m=/^#s(\d+)$/.exec(location.hash);if(m&&+m[1]-1!==cur)go(+m[1]-1)}
 function watch(){
   if(!("IntersectionObserver" in window)){scenes().forEach(e=>e.classList.add("seen"));return}
