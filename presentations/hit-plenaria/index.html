@@ -325,7 +325,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none!important;tran
 </div></div>
 
 <script>
-const CH=["Apertura","Gli strumenti","L'incarico","Il contesto","La verifica","Il caso completo","Le regole","Prossimi passi"];
+const CH=["Apertura","Gli strumenti","L'incarico","Il contesto","La verifica","Tre casi","Le regole","Prossimi passi"];
 const STAMPS=[["Lo strumento",1,1],["Un incarico",2,2],["Contesto e documenti",3,3],["Un metodo",4,4]];
 const GIVE={1:0,2:1,3:2,4:3};
 const LOGO={"gemini": "M11.04 19.32Q12 21.51 12 24q0-2.49.93-4.68.96-2.19 2.58-3.81t3.81-2.55Q21.51 12 24 12q-2.49 0-4.68-.93a12.3 12.3 0 0 1-3.81-2.58 12.3 12.3 0 0 1-2.58-3.81Q12 2.49 12 0q0 2.49-.96 4.68-.93 2.19-2.55 3.81a12.3 12.3 0 0 1-3.81 2.58Q2.49 12 0 12q2.49 0 4.68.96 2.19.93 3.81 2.55t2.55 3.81", "claude": "m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z", "openai": "M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z", "microsoft": "M0 0v11.408h11.408V0zm12.594 0v11.408H24V0zM0 12.594V24h11.408V12.594zm12.594 0V24H24V12.594z"};
@@ -345,16 +345,15 @@ const S=[
   ["Risultati verificabili","Fonti tracciabili e un metodo per controllarle."],
   ["Uso conforme","AI Act, GDPR e dati aziendali, in pratica."]]},
  {t:"src",x:"Oggi le fondamenta comuni. Poi quattro moduli di reparto sui vostri casi e un modulo sull'IA agentica.",big:1}]},
-{ch:0,eye:"Il caso di oggi",title:"Martedì arriva il bando, venerdì si decide",b:[
- {t:"lead",x:`Horizon Europe, topic DIGITAL-EMERGING-52: "New approaches for Human/AI collaboration for the workforce of the future".`},
- {t:"stats"},
+{ch:0,eye:"Il tema di oggi",title:"Una domanda vera, da qui a venerdì",b:[
+ {t:"quote",x:"«Cosa sta succedendo nel raffreddamento dei data center? Chi ci lavora, e ci sono opportunità per noi?»"},
  {t:"cards",cols:4,items:[
-  ["Capire cosa chiede","Requisiti, budget, scadenze."],
-  ["Trovare da dove partire","I progetti già finanziati."],
-  ["Misurare cosa manca","Una gap analysis."],
-  ["Non sbagliare","Fatti, date e regole."]]},
- {t:"note",x:"Prima prova, adesso: chiedete a Gemini di riassumerlo ==come fareste di solito==. Tenete aperta la risposta."},
- {t:"links",items:[["Scheda del topic su CORDIS",TOPIC]]}]},
+  ["Capire il tema","Le tecnologie e a che punto sono."],
+  ["Trovare gli attori","Imprese, ricerca, startup, progetti."],
+  ["Controllare","Numeri e fonti, prima di usarli."],
+  ["Decidere","Una nota di una pagina."]]},
+ {t:"src",x:"Oggi usiamo questo tema. Da domani mettete il vostro: automotive, biotech, agritech.",big:1},
+ {t:"note",x:"Prima prova, adesso: chiedetelo a Gemini ==come fareste di solito==. Tenete aperta la risposta."}]},
 {ch:0,img:"office",eye:"L'immagine di oggi",title:"Un collaboratore appena arrivato",b:[
  {t:"quote",x:"«Ho un nuovo collega che a quanto pare sa fare tutto. Gli chiedo qualcosa e la risposta è generica, non c'entra con me.»"},
  {t:"lead",x:"Sa moltissimo, scrive bene, lavora in fretta. Ma non conosce voi, il vostro lavoro né il compito."},
@@ -402,14 +401,14 @@ const S=[
 {ch:1,eye:"Personalizzare",title:"Quattro livelli, come si inserisce un collega",b:[
  {t:"levels",items:[
   ["Chiedere","Chat. Finita la chat, il contesto si perde.","Riscrivere una mail a un ricercatore"],
-  ["Conoscersi","Istruzioni e notebook: sa chi siete e su cosa lavorate.","Il notebook del bando"],
+  ["Conoscersi","Istruzioni e notebook: sa chi siete e su cosa lavorate.","Il notebook di un tema o di un bando"],
   ["Formare","Skill: una procedura che si richiama e si condivide.","Gap analysis Horizon per il reparto"],
-  ["Lasciarlo lavorare","Agente: più passaggi da solo, con strumenti.","Radar bandi settimanale"]]},
+  ["Lasciarlo lavorare","Agente: più passaggi da solo, con strumenti.","Digest settimanale su un tema"]]},
  {t:"note",x:"==Si sceglie il livello più semplice.== Ciò che avete spiegato due volte diventa una skill."}]},
 {ch:1,eye:"Scelta",title:"Quale strumento per quale compito",b:[
  {t:"rows",items:[
-  ["Rispondere da un bando o da un documento lungo","Gemini Notebook: risponde solo dal testo, con citazioni.","gemini"],
-  ["Farsi un quadro di un tema","Deep Research di Gemini, incluso.","gemini"],
+  ["Rispondere da un contratto, un bando, un documento lungo","Gemini Notebook: risponde solo dal testo, con citazioni.","gemini"],
+  ["Farsi un quadro di una tecnologia o di un mercato","Deep Research di Gemini, incluso.","gemini"],
   ["Leggere e confrontare siti di enti","Claude in Chrome: Gemini in Chrome non è disponibile in Italia.","claude"],
   ["Un'analisi critica difficile, una gap analysis","Il modello più forte disponibile, in modalità ragionata.",""]]}]},
 
@@ -422,22 +421,20 @@ const S=[
   ["Controllabile",`"Per ogni punto la frase del testo da cui viene. Se manca, scrivi 'non indicato'."`]]},
  {t:"note",x:`Il ruolo ("sei un esperto") dà il tono, ==non rende la risposta più corretta==. Un esempio di buon risultato aiuta molto.`},
  {t:"src",x:"Fonti: Zheng et al., Findings of EMNLP 2024: 162 ruoli, 2.410 domande fattuali, nessun guadagno di accuratezza · Basil et al., Wharton, dicembre 2025: nessun guadagno significativo in 5 modelli su 6."}]},
-{ch:2,lay:"demo",eye:"Demo",title:"Lo stesso bando, come incarico",b:[
- P("Prompt",`Riassumi questo bando per la direzione di un ente che lavora con ricercatori, imprese e startup.
+{ch:2,lay:"demo",eye:"Demo",title:"La stessa domanda, come incarico",b:[
+ P("Prompt",`Fammi un quadro su [raffreddamento a liquido dei data center] per la direzione di un ente che lavora con ricercatori, imprese e startup.
 
-Obiettivo: decidere se vale la pena approfondirlo.
+Obiettivo: decidere se è un tema su cui investire tempo nei prossimi mesi.
 
 Fatto quando:
 - massimo 10 righe
-- cosa finanzia, chi può partecipare, budget e scadenze
-- i requisiti obbligatori
+- le tecnologie principali e a che punto sono
+- chi ci lavora in Europa: imprese, centri di ricerca, startup
 - una riga "Da chiarire" e una riga "Prossimo passo consigliato"
-- per ogni punto, tra virgolette, la frase del bando da cui viene
+- per ogni affermazione la fonte, con link e data
 
-Se un'informazione non è nel testo, scrivi "non indicato".
-
-[incolla il testo del bando]`,{sm:1}),
- {t:"note",x:"Stesso modello, stesso testo. ==Quale delle due risposte usereste senza modificarla?=="}]},
+Se non trovi un dato, scrivi "non trovato".`,{sm:1}),
+ {t:"note",x:"Stesso modello, stessa domanda. ==Quale delle due risposte usereste senza modificarla?=="}]},
 {ch:2,eye:"Metodo",title:"Prima il piano, poi il lavoro",b:[
  {t:"lead",x:"Un compito complesso non si chiede in una riga. Come con un collaboratore: prima si concorda il piano."},
  {t:"flow",items:[["Compito","Cosa serve, per chi"],["Piano","L'IA propone i passi"],["Il vostro ok","Si corregge prima, non dopo",1],["Esecuzione","Un passo alla volta"],["Verifica",`Contro il "fatto quando"`]]},
@@ -496,18 +493,22 @@ Se un'informazione non è nel testo, scrivi "non indicato".
  {t:"note",x:"Poi provate: chiedete un parere su un'idea debole. ==Vi contraddice?=="},
  {t:"src",x:"Profilo e regole insieme devono stare in 1.024 caratteri."}]},
 {ch:3,eye:"Memoria dei documenti",title:"Rispondere dai documenti",b:[
- {t:"flow",items:[["I vostri documenti","Bando, allegati, schede"],["Ricerca","I passaggi più vicini alla domanda"],["Prompt","Passaggi più domanda"],["Risposta con citazione","Un clic e controllate",1]]},
+ {t:"flow",items:[["I vostri documenti","Report, contratti, bandi"],["Ricerca","I passaggi più vicini alla domanda"],["Prompt","Passaggi più domanda"],["Risposta con citazione","Un clic e controllate",1]]},
  {t:"src",x:"Si chiama RAG. È la memoria di Gemini Notebook, dei progetti di ChatGPT e Claude, di Copilot su SharePoint.",big:1},
  {t:"note",x:"Limiti: trova solo ciò che c'è, a volte prende il passaggio sbagliato, con scansioni scadenti peggiora."}]},
-{ch:3,lay:"demo",eye:"Demo",logo:"gemini",title:"Il bando in Gemini Notebook",b:[
- {t:"lead",x:"Nel notebook: la scheda del topic e la scheda CORDIS di CORTEX2, un progetto Horizon concluso."},
- P("Prompt",`Elenca i requisiti del bando in una tabella: requisito, obbligatorio o facoltativo, citazione. Includi expected outcomes, i tre ambiti, TRL, tipo di azione, budget e scadenze.`),
- {t:"note",x:"Mouse sulla citazione: compare il passaggio. ==Clic: si apre nel documento.=="},
- {t:"links",items:[["Topic su CORDIS",TOPIC],["CORTEX2 su CORDIS",CORTEX]]}]},
-{ch:3,lay:"demo",eye:"Demo",title:"Deep Research: la lanciamo ora",b:[
- {t:"lead",x:"Per sapere cosa c'è fuori dai documenti. La leggiamo dopo la pausa."},
- P("Prompt",`Il topic Horizon Europe HORIZON-CL4-2027-02-DIGITAL-EMERGING-52 invita a partire dai progetti finanziati con i topic HORIZON-CL4-2021-HUMAN-01-13, -14, -25, -06 e -28. Elenca al massimo 8 di questi progetti. Per ognuno: acronimo, topic, coordinatore e paese, date di inizio e fine, contributo UE, link alla scheda CORDIS. Usa CORDIS come fonte primaria e scrivi "non da CORDIS" accanto a ogni dato preso altrove. Alla fine: cosa non sei riuscito a trovare.`,{sm:1}),
- {t:"note",x:"Prima di avviare, ==il piano si modifica== come un incarico."}]},
+{ch:3,lay:"demo",eye:"Demo",logo:"gemini",title:"Deep Research: la lanciamo ora",b:[
+ {t:"lead",x:"Una ricerca di mercato su una tecnologia recente. Lavora da sola per alcuni minuti: la leggiamo dopo la pausa."},
+ P("Prompt",`Ricerca approfondita su [raffreddamento dei data center].
+
+Mi serve:
+- le tecnologie (aria, liquido diretto al chip, immersione) e la loro maturità
+- le principali imprese e startup in Europa, i centri di ricerca
+- i progetti europei finanziati sul tema
+- le norme UE in vigore o in arrivo
+- i numeri di mercato
+
+Per ogni numero: fonte, anno e link. Distingui i dati delle aziende da quelli indipendenti. Alla fine: cosa non hai trovato e le 3 affermazioni meno sicure.`,{sm:1}),
+ {t:"note",x:"Prima di avviare, ==leggete e correggete il piano==: è un incarico anche questo."}]},
 {ch:3,lay:"demo",eye:"Demo",logo:"claude",title:"Claude legge tre siti",b:[
  {t:"lead",x:"Un benchmark che vi serve davvero: HIT e due enti partner di ARCADIA."},
  P("Prompt",`Analizza l'offerta per ricercatori e spin-off di questi tre enti: trentinoinnovation.eu, lrd.kuleuven.be, vttresearch.com. Per ciascuno: servizi, a chi si rivolgono, come si accede, cosa offre che gli altri non offrono. Tabella finale con il link alla pagina da cui viene ogni informazione. Se una pagina non si apre, scrivilo.`),
@@ -523,11 +524,9 @@ Se un'informazione non è nel testo, scrivi "non indicato".
   ["Cede alla prima obiezione","Non verifica: il modello spesso cambia idea per compiacervi.","«Sei sicuro?»"]]},
  {t:"src",x:"Fonti: Full Fact, ottobre 2026 · University of Pennsylvania, aprile 2026 · UNESCO-UCL, novembre 2026."}]},
 {ch:4,lay:"demo",eye:"Demo",title:"Caccia all'errore",b:[
- {t:"lead",x:"Un progetto del report, controllato sulla fonte."},
- P("Prompt",`Dati del progetto Horizon Europe CORTEX2: data di inizio e di fine, durata in mesi, contributo UE, costo totale, coordinatore, tipo di azione (RIA o IA), numero di partner. Rispondi in una tabella, senza commenti.`,{sm:1}),
- P("Poi la stessa domanda con",`Per ogni dato indica il link alla fonte e la frase esatta della fonte tra virgolette. Se non la trovi, scrivi "non verificato".`,{sm:1}),
- {t:"links",items:[["CORTEX2 su CORDIS",CORTEX]]},
- {t:"sol",x:`<table><tr><td>Inizio e fine</td><td>1/9/2022 – 30/9/2025</td></tr><tr><td>Contributo UE</td><td>7.997.197,25 €</td></tr><tr><td>Costo totale</td><td>8.787.512,50 €</td></tr><tr><td>Coordinatore</td><td>DFKI, Germania</td></tr><tr><td>Tipo di azione</td><td>IA</td></tr><tr><td>Organizzazioni</td><td>10</td></tr></table>Scheda CORDIS letta il 22/11/2026.`}]},
+ {t:"lead",x:"Il report della Deep Research è pronto. Prima di usarlo, controlliamo i numeri."},
+ P("Prompt",`Dal report elenca i 5 numeri più importanti. Per ognuno: fonte, anno, link e la frase esatta della fonte tra virgolette. Se non la trovi, scrivi "non verificato".`),
+ {t:"note",x:"Poi aprite due link a caso. ==Dicono davvero quello?=="}]},
 {ch:4,eye:"Metodo",title:"Verificare prima di decidere",b:[
  {t:"vprompts",items:[
   ["La frase della fonte",`Per ogni numero e ogni data: fonte con link, data e la frase esatta tra virgolette.`],
@@ -536,30 +535,35 @@ Se un'informazione non è nel testo, scrivi "non indicato".
   ["Un revisore nuovo",null,"La stessa domanda in una chat nuova. Se due risposte non coincidono, quel dato va verificato."]]},
  {t:"note",x:"Il report è un input. ==La decisione e la firma restano vostre.=="}]},
 
-{ch:5,lay:"sect",img:"peaks",title:"Il caso completo",sub:"Il suo primo lavoro vero, dall'inizio alla fine."},
-{ch:5,eye:"Caso",title:"Il bando e un progetto da cui ripartire",b:[
- {t:"cards",cols:4,q:1,items:[
-  ["Il bando","Collaborazione persona-IA nella produzione avanzata. RIA, da TRL 4-5 a TRL 6, almeno 2 ambiti su 3."],
-  ["Il progetto","CORTEX2, concluso a settembre 2025: telepresenza in realtà estesa, tre pilot."],
-  ["Perché proprio questo","Il bando invita a partire dai progetti sulla realtà estesa del 2021."],
-  ["La domanda","==Se ripartissimo da qui, cosa coprirebbe e cosa mancherebbe?=="]]},
- {t:"links",items:[["Topic su CORDIS",TOPIC],["CORTEX2 su CORDIS",CORTEX]]}]},
-{ch:5,lay:"demo",eye:"Demo",title:"La gap analysis",b:[
- P("Template di gap analysis",`Confronta CORTEX2 con il bando, usando solo le fonti del notebook.
+{ch:5,lay:"sect",img:"peaks",title:"Tre casi",sub:"Lo stesso metodo, in tre lavori diversi."},
+{ch:5,lay:"demo",eye:"Ricerca di mercato",title:"Dal report alla nota",b:[
+ P("Prompt",`Dal report scrivi una nota di una pagina per la direzione: vale la pena approfondire [tema]? Massimo 5 punti: stato della tecnologia, attori, opportunità per il territorio, rischi, prossimi passi con scadenze. Tono asciutto, solo fatti con fonte.`),
+ {t:"txt",x:"Accanto: la vostra prima risposta di stamattina."},
+ {t:"note",x:"Stesso modello, stessa domanda. Il collaboratore è lo stesso: ==è cambiato quello che gli abbiamo dato.=="}]},
+{ch:5,lay:"demo",eye:"Demo",title:"Amministrazione: da un PDF a una tabella",b:[
+ {t:"lead",x:"Fatture, moduli, contratti: i dati escono in una tabella che si controlla riga per riga."},
+ P("Prompt",`Ecco [una fattura, un modulo, un contratto] in PDF. Estrai in una tabella: [fornitore, data, numero, imponibile, IVA, totale, scadenza]. Una riga per documento. Se un campo manca o non si legge, scrivi "non leggibile", non indovinare. Alla fine elenca i campi su cui hai dubbi.`),
+ {t:"note",x:`Poi "Esporta in Fogli". ==Giallo nel semaforo: solo nell'account aziendale.==`}]},
+{ch:5,lay:"demo",eye:"Progetti finanziati",logo:"gemini",title:"Un bando in Gemini Notebook",b:[
+ {t:"lead",x:"Nel notebook: il testo del bando e la scheda di un progetto o di un'idea. Risponde solo da lì, con citazioni."},
+ P("Template di gap analysis",`Confronta [il progetto o l'idea] con il bando, usando solo le fonti del notebook.
 
 Obiettivo: capire se è un buon punto di partenza per una proposta.
 
 Fatto quando:
-- tabella: requisito del bando, cosa offre CORTEX2, copertura (piena, parziale, assente), citazione
+- tabella: requisito del bando, cosa offre il progetto, copertura (piena, parziale, assente), citazione
 - le 3 lacune più gravi e cosa servirebbe per colmarle
 - fatti citati separati dalle tue valutazioni
 
-Se un dato non c'è, scrivi "non risulta".`),
- {t:"note",x:"Nessuna riga sul ruolo: ==l'incarico basta==."}]},
-{ch:5,lay:"demo",eye:"Demo",title:"Prima e dopo",b:[
- P("Prompt",`Scrivi una nota di una pagina per la direzione: vale la pena approfondire? Massimo 5 punti: copertura, lacune, condizioni, rischi, prossimi passi con scadenze. Tono asciutto, solo fatti delle fonti.`),
- {t:"txt",x:"Accanto: la vostra prima risposta di stamattina."},
- {t:"note",x:"Stesso modello, stesso bando. Il collaboratore è lo stesso: ==è cambiato quello che gli abbiamo dato.=="}]},
+Se un dato non c'è, scrivi "non risulta".`,{sm:1}),
+ {t:"links",items:[["Esempio: topic Horizon su CORDIS",TOPIC],["Esempio: progetto CORTEX2",CORTEX]]}]},
+{ch:5,lay:"demo",eye:"Agente",title:"Un digest ogni lunedì",b:[
+ {t:"lead",x:"Un tema che seguite sempre: lo stesso prompt, con un orario. È il quarto livello: lasciarlo lavorare."},
+ P("Prompt programmato",`Cerca le novità degli ultimi 7 giorni su [agritech, biotech, automotive]: bandi, round di investimento, brevetti, nuove norme UE. Massimo 8 voci. Per ognuna: una riga, fonte, data e link. Scarta ciò che non ha una fonte primaria. Se non c'è nulla di rilevante, scrivilo.`),
+ {t:"cards",cols:1,items:[
+  ["App Gemini","Azione programmata: il risultato arriva nella chat."],
+  ["Workspace Studio",`Avvio "On a schedule", poi "Notify me by email".`]]},
+ {t:"note",x:"Legge e prepara. ==Decidere resta a voi.=="}]},
 {ch:5,eye:"Sintesi",title:"Il modello e il resto",b:[
  {t:"lead",x:"Il modello da solo non vede, non ricorda, non controlla. Il resto lo avete costruito voi stamattina, e si porta da uno strumento all'altro."},
  {t:"big",x:"Ciò che deve succedere sempre non si affida al prompt: ==si decide con una regola.=="}]},
@@ -610,7 +614,7 @@ Se un dato non c'è, scrivi "non risulta".`),
   ["Strumento","La tabella compito e strumento, i quattro livelli."],
   ["Incarico","Obiettivo, contesto, fatto quando, controllabile. Prima il piano."],
   ["Contesto","L'intervista per il profilo e una skill da riusare."],
-  ["Metodo","I prompt di verifica e il template di gap analysis."]]},
+  ["Metodo","I prompt di verifica, la nota, la tabella dai PDF, il digest."]]},
  {t:"html",x:`<p data-a><button class="btn" data-act="lib">Apri tutti i prompt</button></p>`}]},
 {ch:7,eye:"Prossimi passi",title:"I vostri casi",b:[
  {t:"lead",x:"I post-it di stamattina: un compito che ripetete ogni settimana."},
